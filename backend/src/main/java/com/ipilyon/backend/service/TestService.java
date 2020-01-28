@@ -1,11 +1,10 @@
 package com.ipilyon.backend.service;
 
+import java.util.List;
+
 import com.ipilyon.backend.dto.TestDto;
 
-import org.springframework.stereotype.Service;
-
-@Service
 public interface TestService {
 
-	public TestDto test();
+	public List<TestDto> test();
 }
