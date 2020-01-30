@@ -1,0 +1,75 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Language Management REST API",
+    "version": "1.0-SNAPSHOT",
+    "title": "Spring Boot REST API",
+    "contact": {
+      "name": "Swathi Prasad",
+      "url": "www.techshard.com",
+      "email": "techshard08@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "test-controller",
+      "description": "Test Controller"
+    }
+  ],
+  "paths": {
+    "/test/test": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "summary": "Test api operation au dessus controller",
+        "operationId": "testUsingGET",
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/TestDto"
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "TestDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "test": {
+          "type": "string"
+        }
+      },
+      "title": "TestDto"
+    }
+  }
+}
