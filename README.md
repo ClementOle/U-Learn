@@ -1,20 +1,64 @@
 # U-Learn
 U'Lean projet for IPI Lyon MESI
 
-Pour installer le projet 
+## Pour installer le projet 
 
-1 - clic droit sur les trois pom.xml -> Add as maven project
+## Liste des plugins à installer 
 
-Ctrl+Alt+S -> Settings -> Editor -> Code Style 
-Cocher "Enable formatter markers in comments"
-Clicker sur le petit + en dessous
-Clicker sur le petit plus en haut en gauche.
-Local 
-Lui donner le nom "remote"
-Dans pattern écrire : file[frontend]:src/remote/*
+- Lombok (Permet d'utiliser Lombok)
+- MapStruct Support (Permet d'utiliser mapstruct qui permet de générer des mapper pour transformer les objet du package model en object du package DTO)
+- SonarLint (Permet de faire des analyse de code pour détecter d'éventuelle mauvaise pratique ou erreur que l'IDE ne signalerait pas déjà)
+- Git Flow Integration (Permet de simplifier l'utilisation de GIT)
 
-In the Settings/Preferences dialog Ctrl+Alt+S, go to Editor | Code Style.
+### Maven
+- Clic droit sur les trois pom.xml -> `Add as maven project`
 
-On the Formatter Control tab, select the Enable formatter markers in comments checkbox. The Scope area becomes active
+### Base de données
 
-In the Scope area, click the Add icon to add a scope where you can specify files that you want to exclude from reformatting.
+- Créer la base de données dans [phpMyAdmin](http://localhost/phpmyadmin)
+- Définir l'username de phpMyAdmin à `root`
+- Définir le mot de passe de phpMyAdmin à `root`
+
+### Autre
+- Ctrl+Alt+S -> Settings -> Editor -> Code Style 
+- Cocher `Enable formatter markers in comments`.
+
+- Clicker sur le petit `+` en dessous.
+
+- Clicker sur le petit plus en haut en gauche.
+- Choisir `Local` 
+
+- Lui donner le nom `remote`
+
+- Dans pattern écrire : `file[frontend]:src/remote/*`
+
+Puis valider
+
+## Démarche pour créer une nouvelle feature
+
+###  Partie Backend
+- Créer votre nouvelle branche grâce on plugin git flow qui est présent en bas à droite de l'IDE
+
+- Créer les models nécessaires dans le package model de `backend` 
+
+- Créer les DTO dans le package dto
+
+- Créer les mapper dans package mapper ([doc mapstruct](https://mapstruct.org/documentation/stable/reference/html/))
+
+- Créer votre service dans le package service et son implémentation(Y mettre toute la logique)
+
+- Créer le controller
+
+- Créer les test unitaires correspondant dans le package test
+
+- Lancer le projet spring boot 
+
+- Ouvrir le terminal en base de l'IDE
+
+- Positionner vous dans le dossier `frontend`
+
+- Executer `codegen.cmd`
+
+- Développer la partie front
+
+
