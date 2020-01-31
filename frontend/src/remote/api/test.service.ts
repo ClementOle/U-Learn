@@ -25,9 +25,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class TestService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -46,10 +46,6 @@ export class TestService {
      * @param reportProgress flag to report request and response progress.
      */
     public testUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<TestDto>>;
-
-    public testUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TestDto>>>;
-
-    public testUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TestDto>>>;
 
     public testUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
@@ -76,6 +72,9 @@ export class TestService {
             }
         );
     }
+
+    public testUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TestDto>>>;
+    public testUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TestDto>>>;
 
     /**
      * @param consumes string[] mime-types

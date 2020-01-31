@@ -4,7 +4,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {TestComponent} from './modules/test/test.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ApiModule} from '../remote';
+import {ApiModule, BASE_PATH} from '../remote';
+import {environment} from '../environments/environment';
 
 @NgModule({
     declarations: [
@@ -16,7 +17,7 @@ import {ApiModule} from '../remote';
         AppRoutingModule,
         BrowserModule
     ],
-    providers: [],
+    providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
     bootstrap: [AppComponent]
 })
 export class AppModule {
