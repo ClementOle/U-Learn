@@ -19,5 +19,6 @@ export class TestComponent implements OnInit {
         this.testService.testUsingGET().subscribe(value => console.log(value),
             error => console.error(error),
             () => console.log('done'));
+
     }
 }
