@@ -13,6 +13,8 @@ U'Lean projet for IPI Lyon MESI
 ### Maven
 - Clic droit sur les trois pom.xml -> `Add as maven project`
 
+### Node
+- Clic droit sur `frontend/package.json` -> `Run npm install`
 ### Base de données
 
 - Créer la base de données dans [phpMyAdmin](http://localhost/phpmyadmin)
