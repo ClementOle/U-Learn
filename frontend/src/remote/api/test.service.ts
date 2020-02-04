@@ -47,6 +47,10 @@ export class TestService {
      */
     public testUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<TestDto>>;
 
+    public testUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TestDto>>>;
+
+    public testUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TestDto>>>;
+
     public testUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -72,9 +76,6 @@ export class TestService {
             }
         );
     }
-
-    public testUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<TestDto>>>;
-    public testUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<TestDto>>>;
 
     /**
      * @param consumes string[] mime-types
