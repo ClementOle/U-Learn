@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TestService} from '../../../remote';
 
 @Component({
@@ -8,17 +9,29 @@ import {TestService} from '../../../remote';
 })
 export class TestComponent implements OnInit {
 
-    constructor(private testService: TestService) {
+    formGroup: FormGroup;
+
+    constructor(private testService: TestService,
+                public formBuilder: FormBuilder) {
+        this.formGroup = this.formBuilder.group({
+            content: [null, Validators.required]
+        });
+    }
+
+    /**
+     * Permet de sauvegarder le contenu de l'éditeur
+     */
+    save() {
+        console.log('Sauvegarde de ' + this.formGroup.get('content').value);
     }
 
     ngOnInit() {
     }
 
-
     getTest() {
-        this.testService.testUsingGET().subscribe(value => console.log(value),
+        this.testService.testUsingGET().subscribe(
+            value => console.log(value),
             error => console.error(error),
             () => console.log('done'));
-
     }
 }

@@ -6,6 +6,8 @@ import {TestComponent} from './modules/test/test.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ApiModule, BASE_PATH} from '../remote';
 import {environment} from '../environments/environment';
+import {CKEditorModule} from 'ng2-ckeditor';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,9 @@ import {environment} from '../environments/environment';
     imports: [
         ApiModule,
         AppRoutingModule,
-        BrowserModule
+        BrowserModule,
+        CKEditorModule,
+        ReactiveFormsModule
     ],
     providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
     bootstrap: [AppComponent]
