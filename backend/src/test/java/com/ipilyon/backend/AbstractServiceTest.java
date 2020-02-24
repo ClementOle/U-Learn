@@ -1,15 +1,15 @@
 package com.ipilyon.backend;
 
-import com.ipilyon.backend.dao.TestDao;
-import com.ipilyon.backend.service.TestService;
+import com.ipilyon.backend.dao.CoursDao;
+import com.ipilyon.backend.dao.UserDao;
 
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 
 public class AbstractServiceTest {
 	@MockBean
-	public TestDao testDao;
+	private UserDao userDao;
 
 	@MockBean
-	public TestService testService;
+	private CoursDao coursDao;
 }
