@@ -1,4 +1,4 @@
-export * from './uLEARN.service';
-import {ULEARNService} from './uLEARN.service';
+export * from './ulearn.service';
+import {UlearnService} from './ulearn.service';
 
-export const APIS = [ULEARNService];
+export const APIS = [UlearnService];

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CoursDto, ULEARNService} from '../../../remote';
+import {CoursDto, UlearnService} from '../../../remote';
 
 @Component({
     selector: 'app-test',
@@ -13,11 +13,10 @@ export class TestComponent implements OnInit {
 
     cours: CoursDto[];
 
-
     texte: string;
 
     constructor(public formBuilder: FormBuilder,
-                private uLEARNservice: ULEARNService) {
+                private uLEARNservice: UlearnService) {
         this.formGroup = this.formBuilder.group({
             content: [null, Validators.required]
         });
