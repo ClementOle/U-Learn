@@ -5,6 +5,7 @@ import java.util.List;
 import com.ipilyon.backend.dao.CoursDao;
 import com.ipilyon.backend.dto.CoursDto;
 import com.ipilyon.backend.mapper.CoursMapper;
+import com.ipilyon.backend.service.CoursService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

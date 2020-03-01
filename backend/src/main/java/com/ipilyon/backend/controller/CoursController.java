@@ -3,7 +3,7 @@ package com.ipilyon.backend.controller;
 import java.util.List;
 
 import com.ipilyon.backend.dto.CoursDto;
-import com.ipilyon.backend.service.impl.CoursService;
+import com.ipilyon.backend.service.CoursService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = "U'LEARN")
+@Api(tags = "u'learn")
 @RequestMapping(value = "/cours")
 public class CoursController {
 
