@@ -1,4 +1,4 @@
-export * from './test.service';
-import {TestService} from './test.service';
+export * from './uLEARN.service';
+import {ULEARNService} from './uLEARN.service';
 
-export const APIS = [TestService];
+export const APIS = [ULEARNService];

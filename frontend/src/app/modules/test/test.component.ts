@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TestService} from '../../../remote';
+import {CoursDto, ULEARNService} from '../../../remote';
 
 @Component({
     selector: 'app-test',
@@ -11,8 +11,13 @@ export class TestComponent implements OnInit {
 
     formGroup: FormGroup;
 
-    constructor(private testService: TestService,
-                public formBuilder: FormBuilder) {
+    cours: CoursDto[];
+
+
+    texte: string;
+
+    constructor(public formBuilder: FormBuilder,
+                private uLEARNservice: ULEARNService) {
         this.formGroup = this.formBuilder.group({
             content: [null, Validators.required]
         });
@@ -28,10 +33,32 @@ export class TestComponent implements OnInit {
     ngOnInit() {
     }
 
-    getTest() {
-        this.testService.testUsingGET().subscribe(
-            value => console.log(value),
+
+    //Fait une requete Http Post avec un cours dans le body
+    postCours() {
+        this.uLEARNservice.saveUsingPOST({image: null, progressions: null, texte: this.texte, titre: 'titre', video: null})
+            .subscribe(value => console.log(value), error => console.log(error), () => console.log('complete'));
+    }
+
+
+    //Fait une requete HttpGet qui renvoie une liste de Cours
+
+    getAll() {
+        this.uLEARNservice.getAllUsingGET().subscribe(
+            value => this.cours = value,
             error => console.error(error),
-            () => console.log('done'));
+            () => {
+
+                //Insertion dans la page des cours reçus
+                let doc = this.cours.map(value => document.getElementsByClassName('cours')[0]
+                    .insertAdjacentHTML('beforeend', value.texte));
+
+                console.log('Récupération terminé');
+            }
+        );
+    }
+
+    contentChanged(value) {
+        this.texte = value;
     }
 }

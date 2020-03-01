@@ -15,7 +15,7 @@ public class CoursDto {
 
 	private String titre;
 
-	private String text;
+	private String texte;
 
 	private String video;
 
