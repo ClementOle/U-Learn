@@ -20,6 +20,7 @@ U'Lean projet for IPI Lyon MESI
 - Créer la base de données dans [phpMyAdmin](http://localhost/phpmyadmin)
 - Définir l'username de phpMyAdmin à `root`
 - Définir le mot de passe de phpMyAdmin à `root`
+- Lancer le script qui est à la base du projet pour créer la base de données.
 
 ### Autre
 - Ctrl+Alt+S -> Settings -> Editor -> Code Style 

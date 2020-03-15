@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Configuration } from './configuration';
 
-import { TestService } from './api/test.service';
+import { UlearnService } from './api/ulearn.service';
 
 @NgModule({
   imports:      [ CommonModule, HttpClientModule ],
   declarations: [],
   exports:      [],
   providers: [
-    TestService ]
+    UlearnService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders {
