@@ -1,4 +1,5 @@
 {
   "useSSL": false,
-  "https": false
+  "https": false,
+  "routes-types": true
 }
