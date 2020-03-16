@@ -58,10 +58,7 @@
       "trace"
     ],
     "no-empty": false,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": false,
     "no-non-null-assertion": true,
     "no-redundant-jsdoc": false,
     "no-switch-case-fall-through": true,
@@ -77,13 +74,15 @@
     "no-input-rename": true,
     "no-inputs-metadata-property": true,
     "no-output-native": true,
-    "no-output-on-prefix": true,
+    "no-output-on-prefix": false,
     "no-output-rename": true,
     "no-outputs-metadata-property": true,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
-    "use-pipe-transform-interface": true
+    "use-pipe-transform-interface": true,
+    "comment-format": false,
+    "eofline": false
   },
   "rulesDirectory": [
     "codelyzer"
