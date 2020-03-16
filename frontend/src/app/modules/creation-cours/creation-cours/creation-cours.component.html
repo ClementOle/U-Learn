@@ -1,0 +1,29 @@
+<div class="card-header">
+    <h3>Création du cours</h3>
+</div>
+
+<div [formGroup]="formGroup">
+    <ckeditor (change)="contentChanged($event)"
+              [config]="ckeConfig"
+              [ngClass]="{'has-error':formGroup.controls.content.invalid}"
+              formControlName="content"
+              required>
+    </ckeditor>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <button class="btn btn-primary" data-target="#validationModalCenter"
+                data-toggle="modal">Enregistrer le cours
+        </button>
+    </div>
+</div>
+<!-- Partie modal -->
+
+<app-modal (onClickTwo)="postCours()"
+           [btnOneText]="'Annuler'"
+           [btnTwoText]="'Confirmer'"
+           [content]="'Veuillez confirmer.'"
+           [title]="'Titre'"></app-modal>
+
+<app-loader [hidden]="!showLoader"></app-loader>
