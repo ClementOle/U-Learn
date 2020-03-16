@@ -65,7 +65,7 @@ export class CreationCoursComponent implements OnInit {
         this.texte = value;
     }
 
-    // Fait une requete HttpGet qui renvoie une liste de Cours
+    // Fait une requete Http Get qui renvoie une liste de Cours
 
     getAll() {
         this.uLEARNservice.getAllUsingGET().subscribe(
