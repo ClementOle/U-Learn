@@ -8,11 +8,17 @@ import {ApiModule, BASE_PATH} from '../remote';
 import {environment} from '../environments/environment';
 import {CKEditorModule} from 'ng2-ckeditor';
 import {ReactiveFormsModule} from '@angular/forms';
+import {CreationCoursComponent} from './modules/creation-cours/creation-cours/creation-cours.component';
+import {LoaderComponent} from './component/loader/loader.component';
+import {ModalComponent} from './component/modal/modal.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        TestComponent
+        TestComponent,
+        CreationCoursComponent,
+        LoaderComponent,
+        ModalComponent
     ],
     imports: [
         ApiModule,
