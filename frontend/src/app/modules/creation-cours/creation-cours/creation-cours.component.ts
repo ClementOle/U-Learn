@@ -57,7 +57,13 @@ export class CreationCoursComponent implements OnInit {
      */
     postCours() {
         this.showLoader = true;
-        this.uLEARNservice.saveUsingPOST({image: null, progressions: null, texte: this.texte, titre: 'titre', video: null})
+        this.uLEARNservice.saveUsingPOST({
+            image: null,
+            progressions: null,
+            texte: this.texte,
+            titre: this.formGroup.get('title').value,
+            video: null
+        })
             .subscribe(value => console.log(value), error => console.log(error), () => this.showLoader = false);
     }
 
