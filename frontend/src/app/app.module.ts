@@ -8,11 +8,13 @@ import {ApiModule, BASE_PATH} from '../remote';
 import {environment} from '../environments/environment';
 import {CKEditorModule} from 'ng2-ckeditor';
 import {ReactiveFormsModule} from '@angular/forms';
+import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        TestComponent
+        TestComponent,
+        NavBarComponent
     ],
     imports: [
         ApiModule,
