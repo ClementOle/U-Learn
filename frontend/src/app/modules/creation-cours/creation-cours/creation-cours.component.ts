@@ -21,7 +21,8 @@ export class CreationCoursComponent implements OnInit {
     constructor(public formBuilder: FormBuilder,
                 private uLEARNservice: UlearnService) {
         this.formGroup = this.formBuilder.group({
-            content: [null, Validators.required]
+            content: [null, Validators.required],
+            title: [null, Validators.required]
         });
     }
 
