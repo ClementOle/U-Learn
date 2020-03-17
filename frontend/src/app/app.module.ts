@@ -41,7 +41,6 @@ const appRoutes: Routes = [
         AppRoutingModule,
         BrowserModule,
         FormsModule,
-        RouterModule.forRoot(appRoutes),
         CKEditorModule,
         ReactiveFormsModule
     ],
