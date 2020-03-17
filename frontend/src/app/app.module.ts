@@ -7,19 +7,41 @@ import {AppRoutingModule} from './app-routing.module';
 import {ApiModule, BASE_PATH} from '../remote';
 import {environment} from '../environments/environment';
 import {CKEditorModule} from 'ng2-ckeditor';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
+import { AccueilComponent } from './modules/accueil/accueil.component';
+import {RouterModule, Routes} from "@angular/router";
+import { BricolageComponent } from './modules/bricolage/bricolage.component';
+import {LanguesComponent} from "./modules/langues/langues.component";
+
+const appRoutes: Routes = [
+  { path: 'bricolage', component: BricolageComponent },
+  { path: 'langues',   component: LanguesComponent },
+  { path: '',          component: AccueilComponent},
+];
+
+//   { path: '',
+//     redirectTo: '/accueil',
+//     pathMatch: 'full'
+//   },
+//   { path: '**', component: AccueilComponent }
+// ];
 
 @NgModule({
     declarations: [
         AppComponent,
         TestComponent,
-        NavBarComponent
+        NavBarComponent,
+        AccueilComponent,
+        BricolageComponent,
+        LanguesComponent
     ],
     imports: [
         ApiModule,
         AppRoutingModule,
         BrowserModule,
+        FormsModule,
+        RouterModule.forRoot(appRoutes),
         CKEditorModule,
         ReactiveFormsModule
     ],

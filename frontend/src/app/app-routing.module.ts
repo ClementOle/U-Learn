@@ -1,15 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {TestComponent} from './modules/test/test.component';
+import {AccueilComponent} from "./modules/accueil/accueil.component";
 
 export const appRouteList: Routes = [
     {
-        path: 'test',
-        component: TestComponent
+        path: 'accueil',
+        component: AccueilComponent
     },
     {
         path: '**',
-        redirectTo: 'test'
+        redirectTo: 'accueil'
     }
 ];
 

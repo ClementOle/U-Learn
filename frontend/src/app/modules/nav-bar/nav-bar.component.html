@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Bricolage <span class="sr-only">(current)</span></a>
+        <a routerLink="/bricolage" routerLinkActive="active" class="nav-link" >Bricolage <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Langues</a>
+        <a routerLink="/langues" routerLinkActive="active" class="nav-link" >Langues</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Programmation</a>
@@ -18,7 +18,10 @@
         <a class="nav-link" href="#">Cuisine</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a routerLink="/test" routerLinkActive="active" class="nav-link" >Test</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" routerLinkActive="active" class="nav-link disabled" >Désactivé</a>
       </li>
     </ul>
   </div>
