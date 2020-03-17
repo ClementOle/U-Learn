@@ -11,6 +11,8 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {CreationCoursComponent} from './modules/creation-cours/creation-cours/creation-cours.component';
 import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {GlobalInterceptor} from './services/global-interceptor';
 
 @NgModule({
     declarations: [
@@ -27,7 +29,11 @@ import {ModalComponent} from './component/modal/modal.component';
         CKEditorModule,
         ReactiveFormsModule
     ],
-    providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
+    providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: GlobalInterceptor,
+        multi: true
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule {
