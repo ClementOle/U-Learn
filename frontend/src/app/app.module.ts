@@ -10,22 +10,10 @@ import {CKEditorModule} from 'ng2-ckeditor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
 import { AccueilComponent } from './modules/accueil/accueil.component';
-import {RouterModule, Routes} from "@angular/router";
 import { BricolageComponent } from './modules/bricolage/bricolage.component';
 import {LanguesComponent} from "./modules/langues/langues.component";
+import { ListeCoursComponent } from './modules/liste-cours/liste-cours.component';
 
-const appRoutes: Routes = [
-  { path: 'bricolage', component: BricolageComponent },
-  { path: 'langues',   component: LanguesComponent },
-  { path: '',          component: AccueilComponent},
-];
-
-//   { path: '',
-//     redirectTo: '/accueil',
-//     pathMatch: 'full'
-//   },
-//   { path: '**', component: AccueilComponent }
-// ];
 
 @NgModule({
     declarations: [
@@ -34,7 +22,8 @@ const appRoutes: Routes = [
         NavBarComponent,
         AccueilComponent,
         BricolageComponent,
-        LanguesComponent
+        LanguesComponent,
+        ListeCoursComponent
     ],
     imports: [
         ApiModule,
