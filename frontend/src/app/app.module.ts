@@ -8,11 +8,19 @@ import {ApiModule, BASE_PATH} from '../remote';
 import {environment} from '../environments/environment';
 import {CKEditorModule} from 'ng2-ckeditor';
 import {ReactiveFormsModule} from '@angular/forms';
+import {CreationCoursComponent} from './modules/creation-cours/creation-cours/creation-cours.component';
+import {LoaderComponent} from './component/loader/loader.component';
+import {ModalComponent} from './component/modal/modal.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {GlobalInterceptor} from './services/global-interceptor';
 
 @NgModule({
     declarations: [
         AppComponent,
-        TestComponent
+        TestComponent,
+        CreationCoursComponent,
+        LoaderComponent,
+        ModalComponent
     ],
     imports: [
         ApiModule,
@@ -21,7 +29,11 @@ import {ReactiveFormsModule} from '@angular/forms';
         CKEditorModule,
         ReactiveFormsModule
     ],
-    providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}],
+    providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}, {
+        provide: HTTP_INTERCEPTORS,
+        useClass: GlobalInterceptor,
+        multi: true
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule {

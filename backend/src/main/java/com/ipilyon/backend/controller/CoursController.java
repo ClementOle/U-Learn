@@ -30,7 +30,7 @@ public class CoursController {
 
 	@ApiOperation(value = "Renvoie tous les cours")
 	@GetMapping(value = "all")
-	public List<CoursDto> getAll() {
+	public List<CoursDto> getAllCours() {
 		return this.coursService.findAll();
 	}
 }

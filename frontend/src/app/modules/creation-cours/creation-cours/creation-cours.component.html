@@ -1,0 +1,49 @@
+<div class="container card-header">
+    <h3 class="card-title">Création du cours</h3>
+</div>
+
+<div [formGroup]="formGroup" class="container needs-validation card-body card">
+    <div class="form-row">
+        <label class="col-form-label col-md-2 text-right" for="categorieInput">Catégorie
+            du cours
+            : </label>
+        <select class="form-control col-md-6" formControlName="categorie"
+                id="categorieInput">
+            <option *ngFor="let categorie of categories">{{categorie?.titre}}</option>
+        </select>
+    </div>
+    <br/>
+    <div class="form-row">
+        <label class="col-form-label col-md-2 text-right" for="titleInput">Intitulé
+            du cours : </label>
+        <input autocomplete="false" class="form-control input-group col-md-6"
+               formControlName="title"
+               id="titleInput" required type="text"/>
+    </div>
+    <hr/>
+    <ckeditor (change)="contentChanged($event)"
+              [config]="ckeConfig"
+              [ngClass]="{'has-error':formGroup.controls.content.invalid}"
+              formControlName="content"
+              required>
+    </ckeditor>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <button [disabled]="!formGroup.valid" class="btn btn-primary"
+                    data-target="#validationModalCenter"
+                    data-toggle="modal" type="submit">Enregistrer le cours
+            </button>
+        </div>
+    </div>
+    <hr/>
+</div>
+
+<!-- Partie modal -->
+<app-modal (onClickTwo)="postCours()"
+           [btnOneText]="'Annuler'"
+           [btnTwoText]="'Confirmer'"
+           [content]="'Veuillez confirmer.'"
+           [title]="'Titre'"></app-modal>
+
+<app-loader [hidden]="!showLoader"></app-loader>
