@@ -31,7 +31,10 @@ export class CreationCoursComponent implements OnInit {
 
     ngOnInit() {
         // Récupère la liste des catégories stocker en base
-        this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => this.categories = value);
+        this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
+            this.categories = value;
+            this.formGroup.get('categorie').setValue(this.categories[0].titre);
+        });
 
         // Configure l'éditeur de texte
         this.ckeConfig = {

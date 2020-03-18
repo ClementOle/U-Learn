@@ -3,6 +3,7 @@ package com.ipilyon.backend.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,6 +22,6 @@ public class Categorie {
 
 	private String description;
 
-	@OneToMany(mappedBy = "categorie")
+	@OneToMany(mappedBy = "categorie", fetch = FetchType.LAZY)
 	private List<Cours> cours;
 }
