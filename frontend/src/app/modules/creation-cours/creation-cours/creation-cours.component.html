@@ -4,6 +4,15 @@
 
 <div [formGroup]="formGroup" class="container needs-validation card-body card">
     <div class="form-row">
+        <label class="col-form-label col-md-2" for="categorieInput">Catégorie du cours
+            : </label>
+        <select class="form-control col-md-6" formControlName="categorie"
+                id="categorieInput">
+            <option *ngFor="let categorie of categories">{{categorie?.titre}}</option>
+        </select>
+    </div>
+
+    <div class="form-row">
         <label class="col-form-label col-md-2" for="titleInput">Intitulé
             du cours : </label>
         <input autocomplete="false" class="form-control input-group col-md-6"

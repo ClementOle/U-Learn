@@ -25,20 +25,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `categorie`
+--
+DROP TABLE IF EXISTS `categorie`;
+CREATE TABLE IF NOT EXISTS `categorie`
+(
+    `categorie_id` smallint(5) UNSIGNED                 NOT NULL AUTO_INCREMENT,
+    `titre`        char(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+    `description`  char(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    PRIMARY KEY (`categorie_id`)
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 17
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `cours`
 --
 
 DROP TABLE IF EXISTS `cours`;
 CREATE TABLE IF NOT EXISTS `cours`
 (
-    `cours_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-    `users_id` int(10) UNSIGNED                        DEFAULT NULL,
-    `titre`    char(100) COLLATE utf8mb4_unicode_ci    DEFAULT NULL,
-    `texte`    longtext COLLATE utf8mb4_unicode_ci,
-    `video`    varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-    `image`    longblob,
+    `cours_id`     smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `users_id`     int(10) UNSIGNED                        DEFAULT NULL,
+    `titre`        char(100) COLLATE utf8mb4_unicode_ci    DEFAULT NULL,
+    `texte`        longtext COLLATE utf8mb4_unicode_ci,
+    `video`        varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+    `image`        longblob,
+    `categorie_id` smallint(5) UNSIGNED NOT NULL,
     PRIMARY KEY (`cours_id`),
-    KEY `fk_users_id` (`users_id`)
+    KEY `fk_users_id` (`users_id`),
+    KEY `fk_categorie_id` (`categorie_id`)
 ) ENGINE = InnoDB
   AUTO_INCREMENT = 17
   DEFAULT CHARSET = utf8mb4
