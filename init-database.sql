@@ -39,6 +39,16 @@ CREATE TABLE IF NOT EXISTS `categorie`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_unicode_ci;
 
+--
+-- Insertion des données de `categorie`
+--
+
+INSERT INTO `categorie` (`categorie_id`, `titre`, `description`)
+VALUES (1, 'Bricolage', 'Description de bricolage'),
+       (2, 'Langues', 'Description de bricolage'),
+       (3, 'Cuisine', 'Description de cuisine'),
+       (4, 'Programmation', 'Description de programmation');
+
 -- --------------------------------------------------------
 
 --

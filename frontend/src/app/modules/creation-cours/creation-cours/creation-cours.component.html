@@ -4,16 +4,17 @@
 
 <div [formGroup]="formGroup" class="container needs-validation card-body card">
     <div class="form-row">
-        <label class="col-form-label col-md-2" for="categorieInput">Catégorie du cours
+        <label class="col-form-label col-md-2 text-right" for="categorieInput">Catégorie
+            du cours
             : </label>
         <select class="form-control col-md-6" formControlName="categorie"
                 id="categorieInput">
             <option *ngFor="let categorie of categories">{{categorie?.titre}}</option>
         </select>
     </div>
-
+    <br/>
     <div class="form-row">
-        <label class="col-form-label col-md-2" for="titleInput">Intitulé
+        <label class="col-form-label col-md-2 text-right" for="titleInput">Intitulé
             du cours : </label>
         <input autocomplete="false" class="form-control input-group col-md-6"
                formControlName="title"
