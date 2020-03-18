@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {CoursDto, UlearnService} from '../../../../remote';
+import {CategorieDto, CoursDto, UlearnService} from '../../../../remote';
 
 @Component({
     selector: 'app-creation-cours',
@@ -14,18 +14,29 @@ export class CreationCoursComponent implements OnInit {
     texte: string;
 
     cours: CoursDto[];
-
+    categories: CategorieDto[];
     ckeConfig: any;
     showLoader: boolean = false;
 
     constructor(public formBuilder: FormBuilder,
                 private uLEARNservice: UlearnService) {
+
+        // Initialise le formulaire
         this.formGroup = this.formBuilder.group({
-            content: [null, Validators.required]
+            content: [null, Validators.required],
+            title: [null, Validators.required],
+            categorie: [null, Validators.required]
         });
     }
 
     ngOnInit() {
+        // Récupère la liste des catégories stocker en base
+        this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
+            this.categories = value;
+            this.formGroup.get('categorie').setValue(this.categories[0].titre);
+        });
+
+        // Configure l'éditeur de texte
         this.ckeConfig = {
             allowedContent: false,
             forcePasteAsPainText: true,
@@ -55,9 +66,23 @@ export class CreationCoursComponent implements OnInit {
      * Permet de sauvegarder le contenu de l'éditeur
      */
     postCours() {
-        this.showLoader = true;
-        this.uLEARNservice.saveUsingPOST({image: null, progressions: null, texte: this.texte, titre: 'titre', video: null})
-            .subscribe(value => console.log(value), error => console.log(error), () => this.showLoader = false);
+        let categories = this.categories.find(value => value.titre == this.formGroup.get('categorie').value);
+        let titre = this.formGroup.get('title').value;
+
+        if (categories != null && titre != null && titre.trim() != '' && this.texte != null && this.texte.trim() != '') {
+            this.showLoader = true;
+            this.uLEARNservice.saveUsingPOST({
+                image: null,
+                progressions: null,
+                texte: this.texte,
+                titre: titre,
+                video: null,
+                categorie: categories
+            })
+                .subscribe(value => console.log(value), error => console.log(error), () => this.showLoader = false);
+        } else {
+            // throw Error
+        }
     }
 
 
@@ -68,7 +93,7 @@ export class CreationCoursComponent implements OnInit {
     // Fait une requete Http Get qui renvoie une liste de Cours
 
     getAll() {
-        this.uLEARNservice.getAllUsingGET().subscribe(
+        this.uLEARNservice.getAllCoursUsingGET().subscribe(
             value => this.cours = value,
             error => console.error(error),
             () => {

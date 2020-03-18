@@ -16,6 +16,7 @@ import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/
 
 import {Observable} from 'rxjs/Observable';
 
+import {CategorieDto} from '../model/categorieDto';
 import {CoursDto} from '../model/coursDto';
 
 import {BASE_PATH} from '../variables';
@@ -25,9 +26,9 @@ import {Configuration} from '../configuration';
 @Injectable()
 export class UlearnService {
 
+    protected basePath = 'https://localhost:8080';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
-    protected basePath = 'https://localhost:8080';
 
     constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
@@ -40,18 +41,56 @@ export class UlearnService {
     }
 
     /**
+     * Renvoie toute les catégorie
+     *
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCategorieUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CategorieDto>>;
+
+    public getAllCategorieUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CategorieDto>>>;
+
+    public getAllCategorieUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CategorieDto>>>;
+
+    public getAllCategorieUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [];
+
+        return this.httpClient.get<Array<CategorieDto>>(`${this.basePath}/categorie/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Renvoie tous les cours
      *
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
 
-    public getAllUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
 
-    public getAllUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
 
-    public getAllUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
+    public getAllCoursUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
 
         let headers = this.defaultHeaders;
 
@@ -85,10 +124,6 @@ export class UlearnService {
      * @param reportProgress flag to report request and response progress.
      */
     public saveUsingPOST(coursDto: CoursDto, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
-
-    public saveUsingPOST(coursDto: CoursDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
-
-    public saveUsingPOST(coursDto: CoursDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
 
     public saveUsingPOST(coursDto: CoursDto, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
         if (coursDto === null || coursDto === undefined) {
@@ -125,6 +160,9 @@ export class UlearnService {
             }
         );
     }
+
+    public saveUsingPOST(coursDto: CoursDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
+    public saveUsingPOST(coursDto: CoursDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
 
     /**
      * @param consumes string[] mime-types
