@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CategorieDto, UlearnService} from "../../../remote";
 
 @Component({
     selector: 'app-nav-bar',
@@ -7,10 +8,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-    constructor() {
+    categories: CategorieDto[];
+
+    constructor(private uLEARNservice: UlearnService) {
     }
 
     ngOnInit() {
+      this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
+        this.categories = value;
+      });
     }
 
 }

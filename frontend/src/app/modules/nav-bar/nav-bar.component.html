@@ -33,4 +33,7 @@
             </li>
         </ul>
     </div>
-</nav>
+    <div *ngFor="let cours of categories">
+      <p>{{cours?.titre}}</p>
+    </div>
+  </nav>
