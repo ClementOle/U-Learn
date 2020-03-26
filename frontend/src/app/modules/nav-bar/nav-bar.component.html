@@ -6,34 +6,33 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+      <ul class="navbar-nav">
+        <div *ngFor="let theme of categories">
             <li class="nav-item active">
-                <a [routerLink]="['/liste_cours', 'Bricolage']" class="nav-link"
-                   routerLinkActive="active">Bricolage <span
+                <a [routerLink]="['/liste_cours', theme.titre]" class="nav-link"
+                   routerLinkActive="active">{{theme?.titre}} <span
                         class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a [routerLink]="['/liste_cours', 'Langues']" class="nav-link"
-                   routerLinkActive="active">Langues</a>
-            </li>
-            <li class="nav-item">
-                <a [routerLink]="['/liste_cours', 'Programmation']" class="nav-link"
-                   routerLinkActive="active">Programmation</a>
-            </li>
-            <li class="nav-item">
-                <a [routerLink]="['/liste_cours', 'Cuisine']" class="nav-link"
-                   routerLinkActive="active">Cuisine</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/test" routerLinkActive="active">Test</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#"
-                   routerLinkActive="active">Désactivé</a>
-            </li>
-        </ul>
-    </div>
-    <div *ngFor="let cours of categories">
-      <p>{{cours?.titre}}</p>
+            <!--<li class="nav-item">-->
+                <!--<a [routerLink]="['/liste_cours', 'Langues']" class="nav-link"-->
+                   <!--routerLinkActive="active">{{theme?.titre}}</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a [routerLink]="['/liste_cours', 'Programmation']" class="nav-link"-->
+                   <!--routerLinkActive="active">Programmation</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a [routerLink]="['/liste_cours', 'Cuisine']" class="nav-link"-->
+                   <!--routerLinkActive="active">Cuisine</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link" routerLink="/test" routerLinkActive="active">Test</a>-->
+            <!--</li>-->
+            <!--<li class="nav-item">-->
+                <!--<a class="nav-link disabled" href="#"-->
+                   <!--routerLinkActive="active">Désactivé</a>-->
+            <!--</li>-->
+        </div>
+      </ul>
     </div>
   </nav>

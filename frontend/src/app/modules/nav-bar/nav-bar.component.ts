@@ -14,6 +14,8 @@ export class NavBarComponent implements OnInit {
     }
 
     ngOnInit() {
+
+      //*** On récupère les catégories directement en base ***
       this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
         this.categories = value;
       });

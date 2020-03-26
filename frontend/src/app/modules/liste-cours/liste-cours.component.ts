@@ -44,35 +44,31 @@ export class ListeCoursComponent implements OnInit {
 
         // *** Récupère la liste de cours (codé en dur) ***
 
-        // this.Activatedroute.paramMap.subscribe(params => {
-        //     let libelle = params.get('paramChemin'); // recupere moi dans ta liste des parametres que possede ActivatedRoute le parametre qui s'appelle 'paramChemin'
-        //     console.log('paramChemin vaut : ' + libelle);
-        //     ;
-        //     console.log(params);
+        this.Activatedroute.paramMap.subscribe(params => {
+            let libelle = params.get('paramChemin'); // recupere moi dans ta liste des parametres que possede ActivatedRoute le parametre qui s'appelle 'paramChemin'
+            console.log('paramChemin vaut : ' + libelle);
+            ;
+            console.log(params);
             //params correspond à la liste complète de paramètres, on peut cumuler plusieurs paramètres, ici il n'y a que Bricolage (en dur)
 
-        //     if (libelle === 'Bricolage') {
-        //         this.maListeDeCoursAAfficher = this.maListeDeCoursBricolage;
-        //     }
-        //
-        //     if (libelle === 'Langues') {
-        //         this.maListeDeCoursAAfficher = this.maListeDeCoursLangues;
-        //     }
-        //
-        //     if (libelle === 'Programmation') {
-        //         this.maListeDeCoursAAfficher = this.maListeDeCoursProgrammation;
-        //     }
-        //
-        //     if (libelle === 'Cuisine') {
-        //         this.maListeDeCoursAAfficher = this.maListeDeCoursCuisine;
-        //     }
-        //
-        //
-        // });
+            if (libelle === 'Bricolage') {
+                this.maListeDeCoursAAfficher = this.maListeDeCoursBricolage;
+            }
+
+            if (libelle === 'Langues') {
+                this.maListeDeCoursAAfficher = this.maListeDeCoursLangues;
+            }
+
+            if (libelle === 'Programmation') {
+                this.maListeDeCoursAAfficher = this.maListeDeCoursProgrammation;
+            }
+
+            if (libelle === 'Cuisine') {
+                this.maListeDeCoursAAfficher = this.maListeDeCoursCuisine;
+            }
 
 
-        //***Récupère la liste de cours stockée en base ***
-
+        });
 
     }
 
