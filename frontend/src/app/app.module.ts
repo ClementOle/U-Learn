@@ -10,10 +10,7 @@ import {CKEditorModule} from 'ng2-ckeditor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NavBarComponent } from './modules/nav-bar/nav-bar.component';
 import { AccueilComponent } from './modules/accueil/accueil.component';
-import { BricolageComponent } from './modules/bricolage/bricolage.component';
-import {LanguesComponent} from "./modules/langues/langues.component";
 import { ListeCoursComponent } from './modules/liste-cours/liste-cours.component';
-import { ProgrammationComponent } from './modules/programmation/programmation.component';
 
 
 @NgModule({
@@ -22,10 +19,7 @@ import { ProgrammationComponent } from './modules/programmation/programmation.co
         TestComponent,
         NavBarComponent,
         AccueilComponent,
-        BricolageComponent,
-        LanguesComponent,
-        ListeCoursComponent,
-        ProgrammationComponent
+        ListeCoursComponent
     ],
     imports: [
         ApiModule,
