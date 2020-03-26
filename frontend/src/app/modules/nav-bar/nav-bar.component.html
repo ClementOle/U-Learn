@@ -7,32 +7,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <div *ngFor="let theme of categories">
-            <li class="nav-item active">
+            <li class="nav-item" *ngFor="let theme of categories">
                 <a [routerLink]="['/liste_cours', theme.titre]" class="nav-link"
                    routerLinkActive="active">{{theme?.titre}} <span
                         class="sr-only">(current)</span></a>
             </li>
-            <!--<li class="nav-item">-->
-                <!--<a [routerLink]="['/liste_cours', 'Langues']" class="nav-link"-->
-                   <!--routerLinkActive="active">{{theme?.titre}}</a>-->
-            <!--</li>-->
-            <!--<li class="nav-item">-->
-                <!--<a [routerLink]="['/liste_cours', 'Programmation']" class="nav-link"-->
-                   <!--routerLinkActive="active">Programmation</a>-->
-            <!--</li>-->
-            <!--<li class="nav-item">-->
-                <!--<a [routerLink]="['/liste_cours', 'Cuisine']" class="nav-link"-->
-                   <!--routerLinkActive="active">Cuisine</a>-->
-            <!--</li>-->
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link" routerLink="/test" routerLinkActive="active">Test</a>-->
-            <!--</li>-->
-            <!--<li class="nav-item">-->
-                <!--<a class="nav-link disabled" href="#"-->
-                   <!--routerLinkActive="active">Désactivé</a>-->
-            <!--</li>-->
-        </div>
       </ul>
     </div>
   </nav>
