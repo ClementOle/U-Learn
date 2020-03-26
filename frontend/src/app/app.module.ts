@@ -13,6 +13,7 @@ import { AccueilComponent } from './modules/accueil/accueil.component';
 import { BricolageComponent } from './modules/bricolage/bricolage.component';
 import {LanguesComponent} from "./modules/langues/langues.component";
 import { ListeCoursComponent } from './modules/liste-cours/liste-cours.component';
+import { ProgrammationComponent } from './modules/programmation/programmation.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ListeCoursComponent } from './modules/liste-cours/liste-cours.component
         AccueilComponent,
         BricolageComponent,
         LanguesComponent,
-        ListeCoursComponent
+        ListeCoursComponent,
+        ProgrammationComponent
     ],
     imports: [
         ApiModule,
