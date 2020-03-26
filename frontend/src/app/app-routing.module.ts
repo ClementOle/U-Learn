@@ -1,21 +1,29 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {TestComponent} from './modules/test/test.component';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
 import {CreationCoursComponent} from './modules/creation-cours/creation-cours/creation-cours.component';
+import {ListeCoursComponent} from './modules/liste-cours/liste-cours.component';
+import {AccueilComponent} from './modules/accueil/accueil.component';
 
 export const appRouteList: Routes = [
     {
-        path: 'test',
-        component: TestComponent
+        path: 'liste_cours/:paramChemin',
+        component: ListeCoursComponent
     },
+    // 'paramChemin' doit correspondre au terme passé en paramètre  du params.get('paramChemin') du liste-cours.component.ts
     {
         path: 'creation-cours',
         component: CreationCoursComponent
     },
     {
+        path: 'accueil',
+        component: AccueilComponent
+    },
+    {
         path: '**',
-        redirectTo: 'creation-cours'
-    }
+        redirectTo: 'accueil'
+    }  // Si aucun lien trouvé ci-dessus alors redirection vers l'accueil.
 ];
 
 @NgModule({
@@ -23,7 +31,9 @@ export const appRouteList: Routes = [
         RouterModule
     ],
     imports: [
-        RouterModule.forRoot(appRouteList)
+        BrowserModule,
+        FormsModule,
+        RouterModule.forRoot(appRouteList) // Méthode servant au routing. Prends en paramètres la liste de Routes
     ]
 })
 export class AppRoutingModule {

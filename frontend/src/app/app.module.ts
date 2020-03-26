@@ -7,7 +7,10 @@ import {AppRoutingModule} from './app-routing.module';
 import {ApiModule, BASE_PATH} from '../remote';
 import {environment} from '../environments/environment';
 import {CKEditorModule} from 'ng2-ckeditor';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NavBarComponent} from './modules/nav-bar/nav-bar.component';
+import {AccueilComponent} from './modules/accueil/accueil.component';
+import {ListeCoursComponent} from './modules/liste-cours/liste-cours.component';
 import {CreationCoursComponent} from './modules/creation-cours/creation-cours/creation-cours.component';
 import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
@@ -18,6 +21,9 @@ import {GlobalInterceptor} from './services/global-interceptor';
     declarations: [
         AppComponent,
         TestComponent,
+        NavBarComponent,
+        AccueilComponent,
+        ListeCoursComponent,
         CreationCoursComponent,
         LoaderComponent,
         ModalComponent
@@ -26,6 +32,7 @@ import {GlobalInterceptor} from './services/global-interceptor';
         ApiModule,
         AppRoutingModule,
         BrowserModule,
+        FormsModule,
         CKEditorModule,
         ReactiveFormsModule
     ],
