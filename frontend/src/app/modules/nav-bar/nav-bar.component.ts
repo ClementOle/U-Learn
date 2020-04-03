@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategorieDto, UlearnService} from "../../../remote";
+import {CategorieDto, CoursDto, UlearnService} from "../../../remote";
 
 @Component({
     selector: 'app-nav-bar',
@@ -9,6 +9,7 @@ import {CategorieDto, UlearnService} from "../../../remote";
 export class NavBarComponent implements OnInit {
 
     categories: CategorieDto[];
+    cours: CoursDto[];
 
     constructor(private uLEARNservice: UlearnService) {
     }
@@ -18,7 +19,18 @@ export class NavBarComponent implements OnInit {
       //*** On récupère les catégories directement en base ***
       this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
         this.categories = value;
+        console.log("Fonction getAllCategories déclenchée, value vaut : ");
+        console.log(value);
       });
+
+      this.uLEARNservice.getAllCoursUsingGET().subscribe(value => {
+        this.cours = value;
+        console.log("Fonction getAllCours déclenchée, value vaut : ");
+        console.log(value);
+      });
+
     }
+
+
 
 }

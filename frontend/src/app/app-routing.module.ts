@@ -8,9 +8,10 @@ import {AccueilComponent} from './modules/accueil/accueil.component';
 
 export const appRouteList: Routes = [
     {
-        path: 'liste_cours/:paramChemin',
+        path: 'liste-cours',
         component: ListeCoursComponent
     },
+
     // 'paramChemin' doit correspondre au terme passé en paramètre  du params.get('paramChemin') du liste-cours.component.ts
     {
         path: 'creation-cours',

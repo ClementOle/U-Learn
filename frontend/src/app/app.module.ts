@@ -16,6 +16,7 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
+import {ContenuCoursComponent} from "./modules/contenu-cours/contenu-cours.component";
 
 @NgModule({
     declarations: [
@@ -26,6 +27,7 @@ import {GlobalInterceptor} from './services/global-interceptor';
         ListeCoursComponent,
         CreationCoursComponent,
         LoaderComponent,
+        ContenuCoursComponent,
         ModalComponent
     ],
     imports: [

@@ -8,10 +8,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
             <li class="nav-item" *ngFor="let theme of categories">
-                <a [routerLink]="['/liste_cours', theme.titre]" class="nav-link"
+                <a [routerLink]="['/liste-cours', theme.titre]" class="nav-link"
                    routerLinkActive="active">{{theme?.titre}} <span
                         class="sr-only">(current)</span></a>
             </li>
+
+
+            <li class="nav-item" *ngFor="let monCours of cours">
+              <a [routerLink]="['/liste-cours', monCours.titre]" class="nav-link"
+                 routerLinkActive="active">{{monCours.titre}} <span
+                class="sr-only">(current)</span></a>
+            </li>
+
       </ul>
     </div>
   </nav>
