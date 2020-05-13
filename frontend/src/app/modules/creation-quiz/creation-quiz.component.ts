@@ -37,6 +37,11 @@ export class CreationQuizComponent implements OnInit {
     reset() {
         this.questions = [];
     }
+
+    changeCorrectResponse(questionIndex: number, responseIndex: number) {
+        this.questions[questionIndex].responses.map(value => value.etat = false);
+        this.questions[questionIndex].responses[responseIndex].etat = true;
+    }
 }
 
 export class QuestionDto {

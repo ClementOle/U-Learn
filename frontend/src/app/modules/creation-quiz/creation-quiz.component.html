@@ -4,9 +4,9 @@
             <h3>{{question.value}}</h3>
             <ul>
                 <li *ngFor="let response of question.responses; let i = index">
-                    <input class="form-check-input" type="radio" [name]="'radios' + i"
+                    <input class="form-check-input" type="radio" [name]="'radios' + j"
                            [id]="'radio' + i + j " [value]="'option' + i + j"
-                    [(ngModel)]="response.etat" required>
+                           (click)="changeCorrectResponse(j, i)" required>
 
                     <label class="form-check-label" [for]="'radio' + i + j">
                         <input [(ngModel)]="response.value"
@@ -22,17 +22,21 @@
                 une réponse
             </button>
         </div>
-        <input class="btn btn-primary" type="submit"
-               value="Enregistrer les modifications"/>
-        <input (click)="reset()" class="btn btn-secondary" type="button"
-               value="Annuler"/>
+        <button class="btn btn-secondary"
+                data-target="#creationQuestionModalCenter" data-toggle="modal">Ajouter une
+            question
+        </button>
+
+        <div class="row">
+            <div class=" col-md-12 text-center">
+            <input class="btn btn-primary" type="submit"
+                   value="Enregistrer les modifications"/>
+            <input (click)="reset()" class="btn btn-secondary" type="button"
+                   value="Annuler"/>
+            </div>
+        </div>
     </form>
 
-
-    <button class="btn btn-secondary"
-            data-target="#creationQuestionModalCenter" data-toggle="modal">Ajouter une
-        question
-    </button>
 
 </div>
 

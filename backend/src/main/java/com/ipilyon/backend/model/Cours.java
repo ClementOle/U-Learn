@@ -38,4 +38,7 @@ public class Cours {
 	@ManyToOne
 	@JoinColumn(name = "categorie_id")
 	private Categorie categorie;
+
+	@OneToMany(mappedBy = "cours")
+	private List<Question> questions;
 }
