@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn} from '@angular/forms';
-import {of} from 'rxjs';
 
 @Component({
     selector: 'app-creation-quiz',
@@ -9,70 +7,60 @@ import {of} from 'rxjs';
 })
 export class CreationQuizComponent implements OnInit {
 
-    form: FormGroup;
-    ordersData = [];
+    questions: QuestionDto[] = [];
 
-    constructor(private formBuilder: FormBuilder) {
+    constructor() {
 
-    }
-
-    getOrders() {
-        return [
-            {id: 100, name: 'order 1'},
-            {id: 200, name: 'order 2'},
-            {id: 300, name: 'order 3'},
-            {id: 400, name: 'order 4'}
-        ];
     }
 
     submit() {
-        const selectedOrderIds = this.form.value.orders
-            .map((v, i) => v ? this.ordersData[i].id : null)
-            .filter(v => v !== null);
-        console.log(selectedOrderIds);
+        console.log(this.questions);
     }
 
     ngOnInit(): void {
-        this.form = this.formBuilder.group({
-            orders: new FormArray([], minSelectedCheckboxes(1))
-        });
-
-        // async orders
-        of(this.getOrders()).subscribe(orders => {
-            this.ordersData = orders;
-            this.addCheckboxes();
-        });
-
-        // synchronous orders
-        // this.orders = this.getOrders();
-        // this.addCheckboxes();
-    }
-
-    clickAddResponse() {
-        const control = new FormControl(false); // if first item set to true, else false
-        (this.form.controls.orders as FormArray).push(control);
-    }
-
-    clickAddQuestion() {
 
     }
 
-    private addCheckboxes() {
-        this.ordersData.forEach((o, i) => {
-            const control = new FormControl(i === 0); // if first item set to true, else false
-            (this.form.controls.orders as FormArray).push(control);
-        });
+    clickAddReponse(currentQuestion: QuestionDto) {
+        currentQuestion.responses.push(new ReponseDto('', false));
+    }
+
+    addQuestion($event) {
+        this.questions.push(new QuestionDto($event, [new ReponseDto('', false)]));
+    }
+
+    isValide(): boolean {
+        //return this.responses.map(value => value.valeur != null && value.valeur.trim() == '').length == 0;
+        return;
+    }
+
+    reset() {
+        this.questions = [];
     }
 }
 
-function minSelectedCheckboxes(min = 1) {
-    const validator: ValidatorFn = (formArray: FormArray) => {
-        const totalSelected = formArray.controls
-            .map(control => control.value)
-            .reduce((prev, next) => next ? prev + next : prev, 0);
+export class QuestionDto {
+    value: string;
+    responses: ReponseDto[];
 
-        return totalSelected >= min ? null : {required: true};
-    };
 
-    return validator;
+    constructor(value: string, responses: ReponseDto[]) {
+        this.value = value;
+        if (responses == null) {
+            this.responses = [new ReponseDto('', false)];
+        } else {
+            this.responses = responses;
+        }
+    }
+}
+
+export class ReponseDto {
+    value: string;
+    etat: boolean;
+
+
+    constructor(value: string, etat: boolean) {
+        this.value = value;
+        this.etat = etat;
+    }
 }
