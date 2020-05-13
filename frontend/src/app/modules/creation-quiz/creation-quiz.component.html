@@ -4,7 +4,11 @@
             <h3>{{question.value}}</h3>
             <ul>
                 <li *ngFor="let response of question.responses; let i = index">
-                    <label>
+                    <input class="form-check-input" type="radio" [name]="'radios' + i"
+                           [id]="'radio' + i + j " [value]="'option' + i + j"
+                    [(ngModel)]="response.etat" required>
+
+                    <label class="form-check-label" [for]="'radio' + i + j">
                         <input [(ngModel)]="response.value"
                                [name]="question.value + i + j"
                                class="input-group-text"
