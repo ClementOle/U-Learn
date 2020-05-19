@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {QuestionDto, UlearnService} from '../../../../remote';
 
 @Component({
     selector: 'app-creation-quiz',
@@ -9,12 +10,16 @@ export class CreationQuizComponent implements OnInit {
 
     questions: QuestionDto[] = [];
 
-    constructor() {
+    constructor(private ulearnService: UlearnService) {
 
     }
 
     submit() {
         console.log(this.questions);
+        this.ulearnService.saveAllUsingPOST(this.questions).subscribe(
+            value => console.log(value),
+            error => console.error(error),
+            () => console.log('Done'));
     }
 
     ngOnInit(): void {
@@ -22,11 +27,11 @@ export class CreationQuizComponent implements OnInit {
     }
 
     clickAddReponse(currentQuestion: QuestionDto) {
-        currentQuestion.responses.push(new ReponseDto('', false));
+        currentQuestion.reponses.push({value: '', etat: false});
     }
 
     addQuestion($event) {
-        this.questions.push(new QuestionDto($event, [new ReponseDto('', false)]));
+        this.questions.push({value: $event, reponses: [{value: '', etat: false}]});
     }
 
     isValide(): boolean {
@@ -39,10 +44,12 @@ export class CreationQuizComponent implements OnInit {
     }
 
     changeCorrectResponse(questionIndex: number, responseIndex: number) {
-        this.questions[questionIndex].responses.map(value => value.etat = false);
-        this.questions[questionIndex].responses[responseIndex].etat = true;
+        this.questions[questionIndex].reponses.map(value => value.etat = false);
+        this.questions[questionIndex].reponses[responseIndex].etat = true;
     }
 }
+
+/*
 
 export class QuestionDto {
     value: string;
@@ -69,3 +76,4 @@ export class ReponseDto {
         this.etat = etat;
     }
 }
+*/

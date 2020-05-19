@@ -9,16 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import {Progression} from './progression';
+import { CoursDto } from './coursDto';
+import { ReponseDto } from './reponseDto';
 
 
-export interface User {
-    createur?: boolean;
-    email?: string;
-    nom?: string;
-    password?: string;
-    prenom?: string;
-    progressions?: Array<Progression>;
-    scoreGlobal?: number;
-    usersId?: number;
+export interface QuestionDto {
+    cours?: CoursDto;
+    id?: number;
+    reponses?: Array<ReponseDto>;
+    value?: string;
 }

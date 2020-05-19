@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategorieDto, CoursDto, UlearnService} from '../../../../remote';
+import {Router} from '@angular/router';
+import {ModalService} from '../../../component/modal/modal.service';
 
 @Component({
     selector: 'app-creation-cours',
@@ -18,8 +20,12 @@ export class CreationCoursComponent implements OnInit {
     ckeConfig: any;
     showLoader: boolean = false;
 
+    savedIdCours: number;
+
     constructor(public formBuilder: FormBuilder,
-                private uLEARNservice: UlearnService) {
+                private uLEARNservice: UlearnService,
+                private route: Router,
+                private modalService: ModalService) {
 
         // Initialise le formulaire
         this.formGroup = this.formBuilder.group({
@@ -79,7 +85,11 @@ export class CreationCoursComponent implements OnInit {
                 video: null,
                 categorie: categories
             })
-                .subscribe(value => console.log(value), error => console.log(error), () => this.showLoader = false);
+                .subscribe(value => this.savedIdCours = value.coursId, error => console.log(error), () => {
+                    this.showLoader = false;
+                    // Une fois l'enregistrement effectuer on navigue vers la page de création de quiz
+                    this.goToQuizzCreation();
+                });
         } else {
             // throw Error
         }
@@ -90,21 +100,8 @@ export class CreationCoursComponent implements OnInit {
         this.texte = value;
     }
 
-    // Fait une requete Http Get qui renvoie une liste de Cours
 
-    getAll() {
-        this.uLEARNservice.getAllCoursUsingGET().subscribe(
-            value => this.cours = value,
-            error => console.error(error),
-            () => {
-
-                //Insertion dans la page des cours reçus
-                let doc = this.cours.map(value => document.getElementsByClassName('cours')[0]
-                    .insertAdjacentHTML('beforeend', value.texte));
-
-                console.log('Récupération terminé');
-            }
-        );
+    goToQuizzCreation() {
+        this.route.navigate(['creation-quiz/' + this.savedIdCours]);
     }
-
 }

@@ -42,7 +42,7 @@ export class ListeCoursComponent implements OnInit {
         this.Activatedroute.paramMap.subscribe(params => {
             let libelle = params.get('paramChemin'); // recupere moi dans ta liste des parametres que possede ActivatedRoute le parametre qui s'appelle 'paramChemin'
             console.log('paramChemin vaut : ' + libelle);
-            ;
+
             console.log(params);
             //params correspond à la liste complète de paramètres, on peut cumuler plusieurs paramètres, ici il n'y a que Bricolage (en dur)
 

@@ -9,9 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { QuestionDto } from './questionDto';
 
 
-export interface ProgressionId {
-    coursId?: number;
-    usersId?: number;
+export interface ReponseDto {
+    etat?: boolean;
+    id?: number;
+    question?: QuestionDto;
+    value?: string;
 }

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ModalService} from './modal.service';
 
 @Component({
     selector: 'app-modal',
@@ -18,10 +19,11 @@ export class ModalComponent implements OnInit {
     @Output() onClickTwo: EventEmitter<any> = new EventEmitter<any>();
     inputValue: string;
 
-    constructor() {
+    constructor(private modalService: ModalService) {
     }
 
     ngOnInit() {
+        this.modalService.add({id: this.id});
     }
 
     propagateClickOne() {

@@ -16,7 +16,7 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
-import {CreationQuizComponent} from './modules/creation-quiz/creation-quiz.component';
+import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 
 @NgModule({
     declarations: [

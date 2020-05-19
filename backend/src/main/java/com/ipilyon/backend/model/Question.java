@@ -3,6 +3,8 @@ package com.ipilyon.backend.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 public class Question {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String value;
@@ -27,8 +30,7 @@ public class Question {
 	private List<Reponse> reponses;
 
 	@ManyToOne
-	@JoinColumn(name="cours_id")
+	@JoinColumn(name = "cours_id")
 	private Cours cours;
-
 
 }
