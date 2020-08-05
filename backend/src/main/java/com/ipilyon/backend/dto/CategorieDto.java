@@ -18,5 +18,5 @@ public class CategorieDto {
 
 	private String description;
 
-	private List<Cours> cours;
+	private List<CoursDto> cours;
 }
