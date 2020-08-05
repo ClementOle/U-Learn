@@ -8,7 +8,7 @@ import {AccueilComponent} from './modules/accueil/accueil.component';
 
 export const appRouteList: Routes = [
     {
-        path: 'liste-cours',
+        path: 'liste-cours/:paramChemin',
         component: ListeCoursComponent
     },
 

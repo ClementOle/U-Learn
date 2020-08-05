@@ -42,7 +42,15 @@ export class ListeCoursComponent implements OnInit {
     }
 
     ngOnInit() {
+      this.Activatedroute.paramMap.subscribe(params => {
+            let categorieId = params.get('paramChemin'); // recupere moi dans ta liste des parametres que possede ActivatedRoute le parametre qui s'appelle 'paramChemin'
+            this.uLEARNservice.getAllCoursByCategorieIdUsingGET(+categorieId).subscribe(value => {
+              console.log('value vaut : ');
+              console.log(value);
+              }
 
+            ); // + pour parser un String en Int
+      });
         // *** Récupère la liste de cours (codé en dur) ***
         //
         // this.Activatedroute.paramMap.subscribe(params => {
