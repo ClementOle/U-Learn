@@ -100,14 +100,12 @@ export class UlearnService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllCoursByCategorieIdUsingGET(categorieId?: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
-    public getAllCoursByCategorieIdUsingGET(categorieId?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
-    public getAllCoursByCategorieIdUsingGET(categorieId?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
-    public getAllCoursByCategorieIdUsingGET(categorieId?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
-        if (categorieId !== undefined) {
-            queryParameters = queryParameters.set('categorieId', <any>categorieId);
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (categorieId === null || categorieId === undefined) {
+            throw new Error('Required parameter categorieId was null or undefined when calling getAllCoursByCategorieIdUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -127,7 +125,6 @@ export class UlearnService {
 
         return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/${encodeURIComponent(String(categorieId))}`,
             {
-                params: queryParameters,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
                 observe: observe,
