@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UlearnService} from '../../../remote';
 
 @Component({
     selector: 'app-accueil',
@@ -7,10 +8,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AccueilComponent implements OnInit {
 
-    constructor() {
+    constructor(private ulearnService: UlearnService) {
     }
 
     ngOnInit() {
+        this.ulearnService.getAllCoursUsingGET().subscribe(value => console.log(value));
     }
 
 }

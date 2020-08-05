@@ -44,7 +44,7 @@ export class CreationQuizComponent implements OnInit {
     }
 
     changeCorrectResponse(questionIndex: number, responseIndex: number) {
-        this.questions[questionIndex].reponses.map(value => value.etat = false);
+        this.questions[questionIndex].reponses.forEach(value => value.etat = false);
         this.questions[questionIndex].reponses[responseIndex].etat = true;
     }
 }
