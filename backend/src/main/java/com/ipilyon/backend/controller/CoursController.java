@@ -30,7 +30,7 @@ public class CoursController {
 		return this.coursService.findAll();
 	}
 
-	@ApiOperation(value = "Renvoie tous les cours par categorieId")
+	@ApiOperation(value = "Renvoie tous les cours par categorieId") // Sert entre autre pour la documentation
 	@GetMapping(value = "/{categorieId}")
 	public List<CoursDto> getAllCoursByCategorieId(@PathVariable Integer categorieId) {
 		return this.coursService.findAllByCategorieId(categorieId);
