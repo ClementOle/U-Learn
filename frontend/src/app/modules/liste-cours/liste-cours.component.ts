@@ -11,6 +11,7 @@ export class ListeCoursComponent implements OnInit {
 
     categories: CategorieDto[];
     cours: CoursDto[];
+    coursParCategorieId: CoursDto[];
 
     maListeDeCoursBricolage: Array<{ id: number, libelle: string }> = [
         {id: 1, libelle: 'Peinture'},
@@ -45,11 +46,12 @@ export class ListeCoursComponent implements OnInit {
       this.Activatedroute.paramMap.subscribe(params => {
             let categorieId = params.get('paramChemin'); // recupere moi dans ta liste des parametres que possede ActivatedRoute le parametre qui s'appelle 'paramChemin'
             this.uLEARNservice.getAllCoursByCategorieIdUsingGET(+categorieId).subscribe(value => {
-              console.log('value vaut : ');
-              console.log(value);
+              this.coursParCategorieId = value;
+              console.log('coursParCategorieId vaut : ');
+              console.log(this.coursParCategorieId);
               }
 
-            ); // + pour parser un String en Int
+            ); // Astuce : utiliser "+" pour parser un String en Int
       });
         // *** Récupère la liste de cours (codé en dur) ***
         //
