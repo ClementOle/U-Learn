@@ -1,3 +1,8 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-center">Bienvenue sur le module de création de quizz</h3>
+    </div>
+</div>
 <div>
     <form (ngSubmit)="submit()">
         <div *ngFor="let question of questions; let j = index">
@@ -18,7 +23,8 @@
             </ul>
             <div *ngIf="isValide()">Invalide !</div>
             <br>
-            <button type="button" (click)="clickAddReponse(question)" class="btn btn-primary">Ajouter
+            <button type="button" (click)="clickAddReponse(question)"
+                    class="btn btn-primary">Ajouter
                 une réponse
             </button>
         </div>
@@ -29,10 +35,10 @@
 
         <div class="row">
             <div class=" col-md-12 text-center">
-            <input class="btn btn-primary" type="submit"
-                   value="Enregistrer les modifications"/>
-            <input (click)="reset()" class="btn btn-secondary" type="button"
-                   value="Annuler"/>
+                <input class="btn btn-primary" type="submit"
+                       value="Enregistrer les modifications"/>
+                <input (click)="reset()" class="btn btn-secondary" type="button"
+                       value="Annuler"/>
             </div>
         </div>
     </form>

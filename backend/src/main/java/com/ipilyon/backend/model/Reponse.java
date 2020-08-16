@@ -1,5 +1,6 @@
 package com.ipilyon.backend.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Reponse {
 
 	private Boolean etat;
 
-	@ManyToOne
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@ManyToOne(cascade =  CascadeType.PERSIST)
+	//@JoinColumn(name = "question_id", referencedColumnName = "id", insertable = false, updatable = false, nullable = false)
 	private Question question;
 }

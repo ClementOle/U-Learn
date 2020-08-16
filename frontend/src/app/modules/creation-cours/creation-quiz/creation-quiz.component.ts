@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {QuestionDto, UlearnService} from '../../../../remote';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'app-creation-quiz',
@@ -9,8 +10,10 @@ import {QuestionDto, UlearnService} from '../../../../remote';
 export class CreationQuizComponent implements OnInit {
 
     questions: QuestionDto[] = [];
+    coursId: number;
 
-    constructor(private ulearnService: UlearnService) {
+    constructor(private ulearnService: UlearnService,
+                private activatedRoute: ActivatedRoute) {
 
     }
 
@@ -22,8 +25,9 @@ export class CreationQuizComponent implements OnInit {
             () => console.log('Done'));
     }
 
-    ngOnInit(): void {
 
+    ngOnInit(): void {
+        this.activatedRoute.paramMap.subscribe(params => this.coursId = +params.get('idCours'));
     }
 
     clickAddReponse(currentQuestion: QuestionDto) {
@@ -31,7 +35,7 @@ export class CreationQuizComponent implements OnInit {
     }
 
     addQuestion($event) {
-        this.questions.push({value: $event, reponses: [{value: '', etat: false}]});
+        this.questions.push({value: $event, cours: {coursId: this.coursId}, reponses: [{value: '', etat: false}]});
     }
 
     isValide(): boolean {
@@ -48,32 +52,3 @@ export class CreationQuizComponent implements OnInit {
         this.questions[questionIndex].reponses[responseIndex].etat = true;
     }
 }
-
-/*
-
-export class QuestionDto {
-    value: string;
-    responses: ReponseDto[];
-
-
-    constructor(value: string, responses: ReponseDto[]) {
-        this.value = value;
-        if (responses == null) {
-            this.responses = [new ReponseDto('', false)];
-        } else {
-            this.responses = responses;
-        }
-    }
-}
-
-export class ReponseDto {
-    value: string;
-    etat: boolean;
-
-
-    constructor(value: string, etat: boolean) {
-        this.value = value;
-        this.etat = etat;
-    }
-}
-*/
