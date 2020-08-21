@@ -87,7 +87,7 @@ export class CreationCoursComponent implements OnInit {
             })
                 .subscribe(value => this.savedIdCours = value.coursId, error => console.log(error), () => {
                     this.showLoader = false;
-                    // Une fois l'enregistrement effectuer on navigue vers la page de création de quiz
+                    // Une fois l'enregistrement effectué on navigue vers la page de création de quiz
                     this.goToQuizzCreation();
                 });
         } else {

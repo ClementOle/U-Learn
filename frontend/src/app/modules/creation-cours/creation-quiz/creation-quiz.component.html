@@ -4,7 +4,7 @@
     </div>
 </div>
 <div>
-    <form (ngSubmit)="submit()">
+    <form>
         <div *ngFor="let question of questions; let j = index">
             <h3>{{question.value}}</h3>
             <ul>
@@ -36,6 +36,8 @@
         <div class="row">
             <div class=" col-md-12 text-center">
                 <input class="btn btn-primary" type="submit"
+                       data-target="#validationModalCenter"
+                       data-toggle="modal"
                        value="Enregistrer les modifications"/>
                 <input (click)="reset()" class="btn btn-secondary" type="button"
                        value="Annuler"/>
@@ -45,6 +47,7 @@
 
 
 </div>
+<!-- Partie modal -->
 
 <app-modal (onClickTwo)="addQuestion($event)"
            [btnOneText]="'Annuler'"
@@ -54,4 +57,14 @@
            [title]="'Création d\'une nouvelle question'"
            [withInput]="true"></app-modal>
 
+<app-modal (onClickTwo)="submit()"
+           [btnOneText]="'Annuler'"
+           [btnTwoText]="'Confirmer'"
+           [content]="'Valider l\'enregistrement de ce quizz ?'"
+           [id]="'validationModalCenter'"
+           [title]="'Enregistrement du quizz'"></app-modal>
+
+
+
+<app-loader [hidden]="!showLoader"></app-loader>
 
