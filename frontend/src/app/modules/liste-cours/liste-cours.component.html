@@ -4,6 +4,7 @@
       <li [ngClass]="{'list-group-item' : true}"
           *ngFor="let ligne of coursParCategorieId; let i = index;">
         <h4>{{ligne.titre}} - {{ligne.texte}}<a href="{{ligne.video}}" target="_blank"> ->Tuto vidéo {{ligne.titre}}</a></h4>
+        <img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image">
     </ul>
   </div>
 </div>
