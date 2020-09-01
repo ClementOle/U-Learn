@@ -17,6 +17,7 @@ export interface CoursDto {
     categorie?: CategorieDto;
     coursId?: number;
     image?: string;
+    lienMarchand?: string;
     progressions?: Array<ProgressionDto>;
     texte?: string;
     titre?: string;

@@ -24,4 +24,16 @@ public class CoursDto {
 	private List<ProgressionDto> progressions;
 
 	private CategorieDto categorie;
+
+	private String lienMarchand;
+
+	public CoursDto(Integer coursId, String titre, String texte, String video, byte[] image, List<ProgressionDto> progressions, CategorieDto categorie) {
+		this.coursId = coursId;
+		this.titre = titre;
+		this.texte = texte;
+		this.video = video;
+		this.image = image;
+		this.progressions = progressions;
+		this.categorie = categorie;
+	}
 }

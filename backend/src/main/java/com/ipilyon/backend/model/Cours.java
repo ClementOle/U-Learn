@@ -2,13 +2,7 @@ package com.ipilyon.backend.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,4 +32,17 @@ public class Cours {
 	@ManyToOne
 	@JoinColumn(name = "categorie_id")
 	private Categorie categorie;
+
+	private String lienMarchand;
+
+	public Cours(String titre, String texte, String video, byte[] image, List<Progression> progressions, Categorie categorie, String lienMarchand) {
+		this.titre = titre;
+		this.texte = texte;
+		this.video = video;
+		this.image = image;
+		this.progressions = progressions;
+		this.categorie = categorie;
+		this.lienMarchand = lienMarchand;
+	}
+
 }

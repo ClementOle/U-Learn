@@ -3,8 +3,18 @@
     <ul class="list-group">
       <li [ngClass]="{'list-group-item' : true}"
           *ngFor="let ligne of coursParCategorieId; let i = index;">
-        <h4>{{ligne.titre}} - {{ligne.texte}}<a href="{{ligne.video}}" target="_blank"> ->Tuto vidéo {{ligne.titre}}</a></h4>
-        <img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image">
+        <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
+        <!--<h4>{{ligne.titre}} - {{ligne.texte}}</h4>-->
+        <p>{{ligne.texte}}</p>
+        <h4><a href="{{ligne.video}}" target="_blank"> ->Tuto vidéo</a></h4>
+
+        <!--<p>Lien vers le site Commerce <a href="{{ligne.lienMarchand}}"-->
+                                         <!--target="_blank"-->
+        <!--&gt;<img src="assets/images/cart_logo.png" width="70" height="50" alt="image-shopping"></a>{{ligne.lienMarchand}}</p>-->
+
+        <p>Lien vers le site Commerce <a href="{{ligne.lienMarchand}}"
+                                         target="_blank"
+        >{{ligne.lienMarchand}}</a></p>
     </ul>
   </div>
 </div>
