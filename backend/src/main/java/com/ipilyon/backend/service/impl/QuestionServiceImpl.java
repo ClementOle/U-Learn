@@ -21,9 +21,6 @@ public class QuestionServiceImpl implements QuestionService {
 	private QuestionDao questionDao;
 
 	@Autowired
-	private ReponseDao reponseDao;
-
-	@Autowired
 	private QuestionMapper questionMapper;
 
 	@Override
