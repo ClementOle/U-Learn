@@ -1,5 +1,6 @@
 package com.ipilyon.backend.config;
 
+
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -11,28 +12,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.hateoas.client.LinkDiscoverer;
-import org.springframework.hateoas.server.LinkRelationProvider;
-import org.springframework.hateoas.server.core.EvoInflectorLinkRelationProvider;
-import org.springframework.http.MediaType;
-import org.springframework.plugin.core.OrderAwarePluginRegistry;
-import org.springframework.plugin.core.PluginRegistry;
 
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
-
-	@Bean
-	public PluginRegistry<LinkDiscoverer, MediaType> discoverers(
-			OrderAwarePluginRegistry<LinkDiscoverer, MediaType> relProviderPluginRegistry) {
-		return relProviderPluginRegistry;
-	}
-
-	@Bean
-	public LinkRelationProvider provider() {
-		return new EvoInflectorLinkRelationProvider();
-	}
 
 	@Bean
 	public Docket api() {
