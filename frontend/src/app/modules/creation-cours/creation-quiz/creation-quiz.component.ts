@@ -39,7 +39,15 @@ export class CreationQuizComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // Récupération de l'idCours passé dans l'url
-        this.activatedRoute.paramMap.subscribe(params => this.coursId = +params.get('idCours'));
+        this.activatedRoute.paramMap.subscribe(params => {
+            this.coursId = +params.get('idCours');
+            this.questions.push({
+                value: '', cours: {coursId: this.coursId}, reponses: [
+                    {value: '', etat: true},
+                    {value: '', etat: false}
+                ]
+            });
+        });
     }
 
     clickAddReponse(currentQuestion: QuestionDto) {
@@ -47,12 +55,27 @@ export class CreationQuizComponent implements OnInit, OnDestroy {
     }
 
     addQuestion($event) {
-        this.questions.push({value: $event, cours: {coursId: this.coursId}, reponses: [{value: '', etat: false}]});
+        this.questions.push({
+            value: $event, cours: {coursId: this.coursId}, reponses: [
+                {value: '', etat: false},
+                {value: '', etat: false}
+            ]
+        });
     }
 
     isValide(): boolean {
-        //return this.responses.map(value => value.valeur != null && value.valeur.trim() == '').length == 0;
-        return;
+        this.questions.forEach(question => {
+            if (question.value.trim() == '') {
+                return false;
+            }
+            question.reponses.forEach(value => {
+                console.log(value.value.trim() == '');
+                if (value.value.trim() == '') {
+                    return false;
+                }
+            });
+        });
+        return true;
     }
 
     reset() {
