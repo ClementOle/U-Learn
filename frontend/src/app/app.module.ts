@@ -15,6 +15,7 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
+import { FooterComponent } from './modules/footer/footer.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 
 @NgModule({
@@ -26,6 +27,7 @@ import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/crea
         CreationCoursComponent,
         LoaderComponent,
         ModalComponent,
+        FooterComponent,
         CreationQuizComponent
     ],
     imports: [
