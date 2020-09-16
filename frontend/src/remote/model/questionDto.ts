@@ -9,16 +9,13 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-
 import { CoursDto } from './coursDto';
+import { ReponseDto } from './reponseDto';
 
 
-
-
-export interface CategorieDto {
-    categorieId?: number;
-    cours?: Array<CoursDto>;
-
-    description?: string;
-    titre?: string;
+export interface QuestionDto {
+    cours?: CoursDto;
+    id?: number;
+    reponses?: Array<ReponseDto>;
+    value?: string;
 }

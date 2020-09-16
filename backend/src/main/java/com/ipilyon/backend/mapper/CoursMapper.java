@@ -6,12 +6,14 @@ import com.ipilyon.backend.dto.CoursDto;
 import com.ipilyon.backend.model.Cours;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 @Mapper
 public interface CoursMapper {
 
 	@Named("toDto")
+	@Mapping(target = "categorie", ignore = true)
 	CoursDto map(Cours cours);
 
 	Cours map(CoursDto coursDto);

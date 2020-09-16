@@ -21,6 +21,9 @@ import { Observable }                                        from 'rxjs/Observab
 import { CategorieDto } from '../model/categorieDto';
 import { CoursDto } from '../model/coursDto';
 
+import { QuestionDto } from '../model/questionDto';
+
+
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
@@ -159,7 +162,7 @@ export class UlearnService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

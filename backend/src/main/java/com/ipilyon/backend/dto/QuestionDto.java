@@ -9,13 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategorieDto {
+public class QuestionDto {
 
-	private Integer categorieId;
+	private Integer id;
 
-	private String titre;
+	private String value;
 
-	private String description;
+	private List<ReponseDto> reponses;
 
-	private List<CoursDto> cours;
+	private CoursDto cours;
+
+
 }
