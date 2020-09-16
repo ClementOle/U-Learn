@@ -9,16 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { Cours } from './cours';
+import { ProgressionId } from './progressionId';
+import { User } from './user';
 
-import { CoursDto } from './coursDto';
 
-
-
-
-export interface CategorieDto {
-    categorieId?: number;
-    cours?: Array<CoursDto>;
-
-    description?: string;
-    titre?: string;
+export interface Progression {
+    cours?: Cours;
+    id?: ProgressionId;
+    scoreParcours?: number;
+    user?: User;
 }

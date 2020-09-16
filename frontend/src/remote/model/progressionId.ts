@@ -10,15 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CoursDto } from './coursDto';
 
-
-
-
-export interface CategorieDto {
-    categorieId?: number;
-    cours?: Array<CoursDto>;
-
-    description?: string;
-    titre?: string;
+export interface ProgressionId {
+    coursId?: number;
+    usersId?: number;
 }
