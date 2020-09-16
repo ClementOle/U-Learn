@@ -16,6 +16,7 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
+import { FooterComponent } from './modules/footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {GlobalInterceptor} from './services/global-interceptor';
         ListeCoursComponent,
         CreationCoursComponent,
         LoaderComponent,
-        ModalComponent
+        ModalComponent,
+        FooterComponent
     ],
     imports: [
         ApiModule,
