@@ -1,44 +1,31 @@
 package com.ipilyon.backend.model;
 
-import java.util.List;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity(name = "reponse")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cours {
-
+public class Reponse {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer coursId;
+	private Integer id;
 
-	private String titre;
+	private String value;
 
-	private String texte;
+	private Boolean etat;
 
-	private String video;
-
-	private byte[] image;
-
-	@OneToMany(mappedBy = "cours")
-	private List<Progression> progressions;
-
-	@ManyToOne
-	@JoinColumn(name = "categorie_id")
-	private Categorie categorie;
-
-	@OneToMany(mappedBy = "cours")
-	private List<Question> questions;
+	@ManyToOne(cascade =  CascadeType.PERSIST)
+	//@JoinColumn(name = "question_id", referencedColumnName = "id", insertable = false, updatable = false, nullable = false)
+	private Question question;
 }

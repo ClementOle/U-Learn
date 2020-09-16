@@ -20,6 +20,7 @@ import { Observable }                                        from 'rxjs/Observab
 
 import { CategorieDto } from '../model/categorieDto';
 import { CoursDto } from '../model/coursDto';
+import { QuestionDto } from '../model/questionDto';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -132,6 +133,52 @@ export class UlearnService {
     /**
      * Sauvegarde un cours en base
      * 
+     * @param questionDtos questionDtos
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe?: 'body', reportProgress?: boolean): Observable<Array<QuestionDto>>;
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<QuestionDto>>>;
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<QuestionDto>>>;
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (questionDtos === null || questionDtos === undefined) {
+            throw new Error('Required parameter questionDtos was null or undefined when calling saveAllUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<Array<QuestionDto>>(`${this.basePath}/question/save`,
+            questionDtos,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Sauvegarde un cours en base
+     * 
      * @param coursDto coursDto
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -159,7 +206,7 @@ export class UlearnService {
         let consumes: string[] = [
             'application/json'
         ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
         if (httpContentTypeSelected != undefined) {
             headers = headers.set("Content-Type", httpContentTypeSelected);
         }

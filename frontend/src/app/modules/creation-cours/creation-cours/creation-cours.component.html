@@ -44,6 +44,15 @@
            [btnOneText]="'Annuler'"
            [btnTwoText]="'Confirmer'"
            [content]="'Veuillez confirmer.'"
+           [id]="'validationModalCenter'"
            [title]="'Titre'"></app-modal>
+
+<app-modal (onClickTwo)="goToQuizzCreation()"
+           [btnOneText]="'Non'"
+           [btnTwoText]="'Oui'"
+           [content]="'Voulez-vous ajouter un quiz à ce cours ? '"
+           [id]="'quizModalCenter'"
+           [title]="'Titre'"></app-modal>
+
 
 <app-loader [hidden]="!showLoader"></app-loader>

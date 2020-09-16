@@ -1,7 +1,5 @@
 package com.ipilyon.backend.dto;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,13 +7,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategorieDto {
+public class ReponseDto {
 
-	private Integer categorieId;
+	private Integer id;
 
-	private String titre;
+	private String value;
 
-	private String description;
+	private Boolean etat;
 
-	private List<CoursDto> cours;
+	private QuestionDto question;
+
 }

@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="validationModalCenterTitle" class="modal fade"
-     id="validationModalCenter" role="dialog" tabindex="-1">
+     [id]="id" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,8 +11,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                {{content}}
+
+                <label class="col-md-12">{{content}}
+                    <input *ngIf="withInput"
+                           [(ngModel)]="inputValue"
+                           aria-describedby="inputGroup-sizing-default"
+                           class="form-control" type="text">
+                </label>
             </div>
+
             <div class="modal-footer">
                 <button (click)="propagateClickOne()" class="btn btn-secondary"
                         data-dismiss="modal" type="button">{{btnOneText}}</button>

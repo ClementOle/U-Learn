@@ -9,12 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Cours } from './cours';
+import { CoursDto } from './coursDto';
 
 
 export interface CategorieDto {
     categorieId?: number;
-    cours?: Array<Cours>;
+    cours?: Array<CoursDto>;
     description?: string;
     titre?: string;
 }
