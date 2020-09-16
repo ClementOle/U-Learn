@@ -41,12 +41,6 @@ export class CreationQuizComponent implements OnInit, OnDestroy {
         // Récupération de l'idCours passé dans l'url
         this.activatedRoute.paramMap.subscribe(params => {
             this.coursId = +params.get('idCours');
-            this.questions.push({
-                value: '', cours: {coursId: this.coursId}, reponses: [
-                    {value: '', etat: true},
-                    {value: '', etat: false}
-                ]
-            });
         });
     }
 
