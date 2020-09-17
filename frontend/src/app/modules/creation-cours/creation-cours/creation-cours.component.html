@@ -43,9 +43,9 @@
 <app-modal (onClickTwo)="postCours()"
            [btnOneText]="'Annuler'"
            [btnTwoText]="'Confirmer'"
-           [content]="'Veuillez confirmer.'"
+           [content]="'Pour valider la création du cours : ' + this.formGroup.get('title').value + ', cliquez sur \'Confirmer\'.'"
            [id]="'validationModalCenter'"
-           [title]="'Titre'"></app-modal>
+           [title]="'Création du cours '"></app-modal>
 
 <app-modal (onClickTwo)="goToQuizzCreation()"
            [btnOneText]="'Non'"
