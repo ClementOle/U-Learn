@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategorieDto, CoursDto, UlearnService} from "../../../remote";
+import {ConnexionService} from "../../services/connexion.service";
 
 @Component({
     selector: 'app-nav-bar',
@@ -11,7 +12,8 @@ export class NavBarComponent implements OnInit {
     categories: CategorieDto[];
     cours: CoursDto[];
 
-    constructor(private uLEARNservice: UlearnService) {
+  constructor(private uLEARNservice: UlearnService, private connexionService: ConnexionService) {
+
     }
 
     ngOnInit() {
@@ -25,4 +27,7 @@ export class NavBarComponent implements OnInit {
 
     }
 
+  deconnect() {
+    this.connexionService.connecte = false;
+  }
 }
