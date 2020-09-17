@@ -25,13 +25,13 @@ export class ListeCoursComponent implements OnInit {
     ];
 
     arrayOfComments_2: Array<{ id: number, libelle: string }>= [
-      {id: 1, libelle: 'Merci pour les explications'},
-      {id: 2, libelle: 'Vivement d\'autres vidéos, merci'},
+      {id: 1, libelle: 'Merci pour les explications.'},
+      {id: 2, libelle: 'Vivement d\'autres vidéos, merci.'},
       {id: 3, libelle: ' Au top.'}
     ];
 
     arrayOfComments_3: Array<{ id: number, libelle: string }>= [
-      {id: 1, libelle: 'Bien expliqué, idéal quand on débute'},
+      {id: 1, libelle: 'Bien expliqué, idéal quand on débute.'},
       {id: 2, libelle: 'Vidéo claire et simple, parfait pour un débutant.'},
       {id: 3, libelle: ' Parfait, je recommande.'}
     ];

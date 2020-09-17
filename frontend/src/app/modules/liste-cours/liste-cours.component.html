@@ -18,21 +18,21 @@
 
         <form [formGroup]="loginForm">
           <div *ngIf="i == 0">
-            <h4>Commentaires : </h4>
+            <h5>Commentaires : </h5>
             <p>Tom : {{arrayOfComments_1[0].libelle}}</p>
             <p>Céline : {{arrayOfComments_1[1].libelle}}</p>
             <p>Marion :{{arrayOfComments_1[2].libelle}}</p>
           </div>
 
           <div *ngIf="i == 1">
-            <h4>Commentaires : </h4>
+            <h5>Commentaires : </h5>
             <p>Romain : {{arrayOfComments_2[0].libelle}}</p>
             <p>Bernard : {{arrayOfComments_2[1].libelle}}</p>
             <p>Julie :{{arrayOfComments_2[2].libelle}}</p>
           </div>
 
           <div *ngIf="i == 2">
-            <h4>Commentaires : </h4>
+            <h5>Commentaires : </h5>
             <p>Claude : {{arrayOfComments_3[0].libelle}}</p>
             <p>Marie : {{arrayOfComments_3[1].libelle}}</p>
             <p>Pauline :{{arrayOfComments_3[2].libelle}}</p>
@@ -43,9 +43,7 @@
                     rows="5" cols="33"
                     style="width:1000px; height: 200px;"
                     formControlName="sendComment"><br>
-          <!--<input type="text"-->
-                  <!--formControlName="sendComment">-->
-         <button (click)="sendComment()">Valider </button>
+         <button (click)="sendComment()" class="btn btn-success">Valider </button>
         </form>
 
 
