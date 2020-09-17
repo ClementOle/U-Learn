@@ -57,10 +57,11 @@ public class BasicAuthConfiguration extends WebSecurityConfigurerAdapter {
 				.invalidateHttpSession(true)
 				.and()
 				.authorizeRequests()
-				.antMatchers("/login").permitAll()
+				.antMatchers("/").permitAll()
+				/*.antMatchers("/login").permitAll()
 				.antMatchers("/logout").permitAll()
 				.antMatchers("/user").authenticated()
-				.anyRequest().permitAll();
+				.anyRequest().permitAll()*/;
 	}
 
 	@Bean
