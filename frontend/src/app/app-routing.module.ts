@@ -6,6 +6,7 @@ import {CreationCoursComponent} from './modules/creation-cours/creation-cours/cr
 import {ListeCoursComponent} from './modules/liste-cours/liste-cours.component';
 import {AccueilComponent} from './modules/accueil/accueil.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
+import {ConnexionComponent} from "./modules/connexion/connexion.component";
 
 export const appRouteList: Routes = [
     {
@@ -26,6 +27,10 @@ export const appRouteList: Routes = [
         path: 'accueil',
         component: AccueilComponent
     },
+  {
+    path: 'connexion',
+    component: ConnexionComponent
+  },
     {
         path: '**',
         redirectTo: 'accueil'

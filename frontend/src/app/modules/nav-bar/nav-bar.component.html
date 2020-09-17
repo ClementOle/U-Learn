@@ -16,6 +16,12 @@
         </li>
 
 
+        <li *ngIf="this.connexionService.connecte == false" class="nav-item pagination-right">
+          <a [routerLink]="['/connexion']" class="nav-link">Connexion</a>
+        </li>
+        <li *ngIf="this.connexionService.connecte == true" class="nav-item pagination-right">
+          <a (click)="deconnect()" [routerLink]="['/accueil']" class="nav-link">Deconnexion</a>
+        </li>
       </ul>
     </div>
   </nav>
