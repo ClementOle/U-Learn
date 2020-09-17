@@ -5,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {CreationCoursComponent} from './modules/creation-cours/creation-cours/creation-cours.component';
 import {ListeCoursComponent} from './modules/liste-cours/liste-cours.component';
 import {AccueilComponent} from './modules/accueil/accueil.component';
+import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 
 export const appRouteList: Routes = [
     {
@@ -16,6 +17,10 @@ export const appRouteList: Routes = [
     {
         path: 'creation-cours',
         component: CreationCoursComponent
+    },
+    {
+        path: 'creation-quiz/:idCours',
+        component: CreationQuizComponent
     },
     {
         path: 'accueil',

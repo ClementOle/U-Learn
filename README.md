@@ -40,7 +40,7 @@ Puis valider
 ## Démarche pour créer une nouvelle feature
 
 ###  Partie Backend
-- Créer votre nouvelle branche grâce on plugin git flow qui est présent en bas à droite de l'IDE
+- Créer votre nouvelle branche grâce au plugin git flow qui est présent en bas à droite de l'IDE (Create new Feature)
 
 - Créer les models nécessaires dans le package model de `backend` 
 
@@ -48,7 +48,7 @@ Puis valider
 
 - Créer les mapper dans package mapper ([doc mapstruct](https://mapstruct.org/documentation/stable/reference/html/))
 
-- Créer votre service dans le package service et son implémentation(Y mettre toute la logique)
+- Créer votre service dans le package service et son implémentation (Y mettre toute la logique)
 
 - Créer le controller
 
@@ -56,7 +56,7 @@ Puis valider
 
 - Lancer le projet spring boot 
 
-- Ouvrir le terminal en base de l'IDE
+- Ouvrir le terminal en bas de l'IDE
 
 - Positionner vous dans le dossier `frontend`
 

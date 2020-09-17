@@ -45,4 +45,7 @@ public class Cours {
 		this.lienMarchand = lienMarchand;
 	}
 
+	@OneToMany(mappedBy = "cours")
+	private List<Question> questions;
+
 }

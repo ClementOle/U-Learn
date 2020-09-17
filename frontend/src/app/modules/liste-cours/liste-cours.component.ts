@@ -118,6 +118,7 @@ export class ListeCoursComponent implements OnInit {
       // });
     }
 
+
     // Future méthode pour la gestion des commmentaires
     sendComment() {
 
