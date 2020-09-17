@@ -8,13 +8,33 @@
         <p>{{ligne.texte}}</p>
         <h4><a href="{{ligne.video}}" target="_blank"> ->Tuto vidéo</a></h4>
 
-        <!--<p>Lien vers le site Commerce <a href="{{ligne.lienMarchand}}"-->
-                                         <!--target="_blank"-->
-        <!--&gt;<img src="assets/images/cart_logo.png" width="70" height="50" alt="image-shopping"></a>{{ligne.lienMarchand}}</p>-->
-
         <p>Lien vers le site Commerce <a href="{{ligne.lienMarchand}}"
                                          target="_blank"
         >{{ligne.lienMarchand}}</a></p>
+
+
+        <!--<form [formGroup]="loginForm">-->
+          <!--<p><b>Laissez un commentaire : </b></p>-->
+          <!--<textarea id="commentaires" name="commentaires"-->
+                    <!--rows="5" cols="33"-->
+                    <!--style="width:1000px; height: 250px;"-->
+                    <!--formControlName="sendComment">-->
+          <!--</textarea><br>-->
+          <!--<input type="textarea" value="Valider" (click)="sendComment()">-->
+        <!--</form>-->
+
+        <form [formGroup]="loginForm">
+          <p><b>Laissez un commentaire : </b></p>
+          <!--<input    type="textarea" id="commentaires" name="commentaires"-->
+                    <!--rows="5" cols="33"-->
+                    <!--style="width:1000px; height: 250px;"-->
+                    <!--formControlName="sendComment"><br>-->
+          <input type="text"
+                  formControlName="sendComment">
+         <button (click)="sendComment()">Valider </button>
+        </form>
+
+
     </ul>
   </div>
 </div>

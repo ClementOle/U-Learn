@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CategorieDto, CoursDto, UlearnService} from "../../../remote";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'app-liste-cours',
@@ -12,6 +13,19 @@ export class ListeCoursComponent implements OnInit {
     categories: CategorieDto[];
     cours: CoursDto[];
     coursParCategorieId: CoursDto[];
+    loginForm: FormGroup;
+    tabComments : string [];
+    listComments : string [];
+
+
+    comments: string;
+
+  arrayOfComments: Array<{ id: number, libelle: string }>= [
+    {id: 1, libelle: 'Commentaire Brico 1'},
+    {id: 2, libelle: 'Commentaire Brico 2'},
+    {id: 3, libelle: 'Commentaire Brico 3'}
+  ];
+
 
     maListeDeCoursBricolage: Array<{ id: number, libelle: string }> = [
         {id: 1, libelle: 'Peinture'},
@@ -39,7 +53,7 @@ export class ListeCoursComponent implements OnInit {
     ];
 
 
-    constructor(private Activatedroute: ActivatedRoute, private uLEARNservice: UlearnService) {
+    constructor(private Activatedroute: ActivatedRoute, private uLEARNservice: UlearnService, private formBuilder: FormBuilder) {
 
     }
 
@@ -54,6 +68,10 @@ export class ListeCoursComponent implements OnInit {
 
             ); // Astuce : utiliser "+" pour parser un String en Int
       });
+      this.loginForm = this.formBuilder.group({
+        sendComment: []
+      })
+
         // *** Récupère la liste de cours (codé en dur) ***
         //
         // this.Activatedroute.paramMap.subscribe(params => {
@@ -86,6 +104,21 @@ export class ListeCoursComponent implements OnInit {
       //   console.log("mes cours : ");
       //   console.log(this.cours);
       // });
+    }
+
+    sendComment() {
+      this.comments = this.loginForm.value.sendComment;
+      // console.log('comments : ' + this.comments);
+      console.log('this.comment vaut ' + this.comments);
+      console.log('arrayOfComments vaut ');
+      console.log(this.arrayOfComments);
+      // this.uLEARNservice.postComments(this.comments);
+
+      // this.listComments.push(this.comments);
+      console.log('this.listComments vaut : ');
+      console.log(this.listComments);
+
+
     }
 
 }

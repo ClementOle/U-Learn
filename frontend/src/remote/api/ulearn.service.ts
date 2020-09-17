@@ -214,5 +214,8 @@ export class UlearnService {
             }
         );
     }
+    postComments(comments) {
+
+    }
 
 }
