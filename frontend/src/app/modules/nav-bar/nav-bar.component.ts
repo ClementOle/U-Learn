@@ -23,14 +23,6 @@ export class NavBarComponent implements OnInit {
         console.log(value);
       });
 
-      // this.uLEARNservice.getAllCoursUsingGET().subscribe(value => {
-      //   this.cours = value;
-      //   console.log("Fonction getAllCours déclenchée, value vaut : ");
-      //   console.log(value);
-      // });
-
     }
-
-
 
 }

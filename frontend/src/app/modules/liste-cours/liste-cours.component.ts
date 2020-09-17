@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {CategorieDto, CoursDto, UlearnService} from "../../../remote";
 import {FormBuilder, FormGroup} from "@angular/forms";
@@ -14,18 +14,30 @@ export class ListeCoursComponent implements OnInit {
     cours: CoursDto[];
     coursParCategorieId: CoursDto[];
     loginForm: FormGroup;
-    tabComments : string [];
-    listComments : string [];
 
 
-    comments: string;
+    // Commentaires codés en dur pour le moment
 
-  arrayOfComments: Array<{ id: number, libelle: string }>= [
-    {id: 1, libelle: 'Commentaire Brico 1'},
-    {id: 2, libelle: 'Commentaire Brico 2'},
-    {id: 3, libelle: 'Commentaire Brico 3'}
-  ];
+    arrayOfComments_1: Array<{ id: number, libelle: string }>= [
+      {id: 0, libelle: 'Super tuto, merci pour les conseils. Je me lance demain!'},
+      {id: 1, libelle: 'Vidéo claire et simple, parfait pour un débutant.'},
+      {id: 2, libelle: ' Parfait, je recommande.'}
+    ];
 
+    arrayOfComments_2: Array<{ id: number, libelle: string }>= [
+      {id: 1, libelle: 'Merci pour les explications'},
+      {id: 2, libelle: 'Vivement d\'autres vidéos, merci'},
+      {id: 3, libelle: ' Au top.'}
+    ];
+
+    arrayOfComments_3: Array<{ id: number, libelle: string }>= [
+      {id: 1, libelle: 'Bien expliqué, idéal quand on débute'},
+      {id: 2, libelle: 'Vidéo claire et simple, parfait pour un débutant.'},
+      {id: 3, libelle: ' Parfait, je recommande.'}
+    ];
+
+
+    // Essai d'intégration des catégories avec du code en dur :
 
     maListeDeCoursBricolage: Array<{ id: number, libelle: string }> = [
         {id: 1, libelle: 'Peinture'},
@@ -38,7 +50,7 @@ export class ListeCoursComponent implements OnInit {
         {id: 2, libelle: 'Français'},
         {id: 3, libelle: 'Italien'}
     ];
-//maListeDeCoursAAfficher va stocker le tableau d'objets à afficher.
+    //maListeDeCoursAAfficher va stocker le tableau d'objets à afficher.
     //son contenu dépendra de la valeur passée en paramètre dans le routing
 
     maListeDeCoursProgrammation: Array<{ id: number, libelle: string }> = [
@@ -106,18 +118,8 @@ export class ListeCoursComponent implements OnInit {
       // });
     }
 
+    // Future méthode pour la gestion des commmentaires
     sendComment() {
-      this.comments = this.loginForm.value.sendComment;
-      // console.log('comments : ' + this.comments);
-      console.log('this.comment vaut ' + this.comments);
-      console.log('arrayOfComments vaut ');
-      console.log(this.arrayOfComments);
-      // this.uLEARNservice.postComments(this.comments);
-
-      // this.listComments.push(this.comments);
-      console.log('this.listComments vaut : ');
-      console.log(this.listComments);
-
 
     }
 

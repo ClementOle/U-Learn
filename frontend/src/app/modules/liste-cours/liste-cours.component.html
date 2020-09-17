@@ -4,33 +4,47 @@
       <li [ngClass]="{'list-group-item' : true}"
           *ngFor="let ligne of coursParCategorieId; let i = index;">
         <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
-        <!--<h4>{{ligne.titre}} - {{ligne.texte}}</h4>-->
         <p>{{ligne.texte}}</p>
-        <h4><a href="{{ligne.video}}" target="_blank"> ->Tuto vidéo</a></h4>
-
-        <p>Lien vers le site Commerce <a href="{{ligne.lienMarchand}}"
+        <p>Lien vers le <b>tutoriel vidéo : </b><a href="{{ligne.video}}"
                                          target="_blank"
-        >{{ligne.lienMarchand}}</a></p>
+        > Cliquez ici</a></p>
+
+        <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
+                                         target="_blank"
+        >Cliquez ici</a></p>
 
 
-        <!--<form [formGroup]="loginForm">-->
-          <!--<p><b>Laissez un commentaire : </b></p>-->
-          <!--<textarea id="commentaires" name="commentaires"-->
-                    <!--rows="5" cols="33"-->
-                    <!--style="width:1000px; height: 250px;"-->
-                    <!--formControlName="sendComment">-->
-          <!--</textarea><br>-->
-          <!--<input type="textarea" value="Valider" (click)="sendComment()">-->
-        <!--</form>-->
+        <!--Commentaires codés en dur pour le moment : -->
 
         <form [formGroup]="loginForm">
+          <div *ngIf="i == 0">
+            <h4>Commentaires : </h4>
+            <p>Tom : {{arrayOfComments_1[0].libelle}}</p>
+            <p>Céline : {{arrayOfComments_1[1].libelle}}</p>
+            <p>Marion :{{arrayOfComments_1[2].libelle}}</p>
+          </div>
+
+          <div *ngIf="i == 1">
+            <h4>Commentaires : </h4>
+            <p>Romain : {{arrayOfComments_2[0].libelle}}</p>
+            <p>Bernard : {{arrayOfComments_2[1].libelle}}</p>
+            <p>Julie :{{arrayOfComments_2[2].libelle}}</p>
+          </div>
+
+          <div *ngIf="i == 2">
+            <h4>Commentaires : </h4>
+            <p>Claude : {{arrayOfComments_3[0].libelle}}</p>
+            <p>Marie : {{arrayOfComments_3[1].libelle}}</p>
+            <p>Pauline :{{arrayOfComments_3[2].libelle}}</p>
+          </div>
+
           <p><b>Laissez un commentaire : </b></p>
-          <!--<input    type="textarea" id="commentaires" name="commentaires"-->
-                    <!--rows="5" cols="33"-->
-                    <!--style="width:1000px; height: 250px;"-->
-                    <!--formControlName="sendComment"><br>-->
-          <input type="text"
-                  formControlName="sendComment">
+          <input    type="textarea" id="commentaires" name="commentaires"
+                    rows="5" cols="33"
+                    style="width:1000px; height: 200px;"
+                    formControlName="sendComment"><br>
+          <!--<input type="text"-->
+                  <!--formControlName="sendComment">-->
          <button (click)="sendComment()">Valider </button>
         </form>
 
