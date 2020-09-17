@@ -5,3 +5,4 @@ java -jar swagger-codegen-cli-2.3.1.jar generate -i http://localhost:8080/v2/api
 java -jar remoteEdit.jar %modelsDir% "Dto"
 del %modelsDir%models.ts
 rename %modelsDir%modelsTemp.ts models.ts
+

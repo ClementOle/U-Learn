@@ -9,9 +9,10 @@ import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/crea
 
 export const appRouteList: Routes = [
     {
-        path: 'liste_cours/:paramChemin',
+        path: 'liste-cours/:paramChemin',
         component: ListeCoursComponent
     },
+
     // 'paramChemin' doit correspondre au terme passé en paramètre  du params.get('paramChemin') du liste-cours.component.ts
     {
         path: 'creation-cours',

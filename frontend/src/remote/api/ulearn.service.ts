@@ -94,6 +94,47 @@ export class UlearnService {
         );
     }
 
+
+    /**
+     * Renvoie tous les cours par categorieId
+     * 
+     * @param categorieId categorieId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (categorieId === null || categorieId === undefined) {
+            throw new Error('Required parameter categorieId was null or undefined when calling getAllCoursByCategorieIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/${encodeURIComponent(String(categorieId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
     /**
      * Renvoie tous les cours
      * 
@@ -129,6 +170,7 @@ export class UlearnService {
             }
         );
     }
+
 
     /**
      * Sauvegarde un cours en base
@@ -220,6 +262,9 @@ export class UlearnService {
                 reportProgress: reportProgress
             }
         );
+    }
+    postComments(comments) {
+
     }
 
 }

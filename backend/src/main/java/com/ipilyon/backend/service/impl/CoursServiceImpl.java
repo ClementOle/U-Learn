@@ -28,4 +28,9 @@ public class CoursServiceImpl implements CoursService {
 	public List<CoursDto> findAll() {
 		return this.coursMapper.map(this.coursDao.findAll());
 	}
+
+	@Override
+	public List<CoursDto> findAllByCategorieId(Integer categorieId) {
+		return this.coursMapper.map(this.coursDao.findAllByCategorie_CategorieId(categorieId));
+	}
 }
