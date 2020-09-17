@@ -16,8 +16,9 @@ import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
 import {ContenuCoursComponent} from "./modules/contenu-cours/contenu-cours.component";
-import { FooterComponent } from './modules/footer/footer.component';
+import {FooterComponent} from './modules/footer/footer.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
+import {ConnexionComponent} from './modules/connexion/connexion.component';
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/crea
         ModalComponent,
         ModalComponent,
         FooterComponent,
-        CreationQuizComponent
+      CreationQuizComponent,
+      ConnexionComponent
     ],
     imports: [
         ApiModule,
