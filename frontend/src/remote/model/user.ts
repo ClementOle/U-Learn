@@ -9,22 +9,16 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { GrantedAuthority } from './grantedAuthority';
-import { ProgressionDto } from './progressionDto';
+import { Progression } from './progression';
 
 
-export interface UserDto {
-    accountNonExpired?: boolean;
-    accountNonLocked?: boolean;
-    authorities?: Array<GrantedAuthority>;
+export interface User {
     createur?: boolean;
-    credentialsNonExpired?: boolean;
     email?: string;
-    enabled?: boolean;
     nom?: string;
     password?: string;
     prenom?: string;
-    progressions?: Array<ProgressionDto>;
+    progressions?: Array<Progression>;
     scoreGlobal?: number;
     username?: string;
     usersId?: number;
