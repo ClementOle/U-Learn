@@ -94,7 +94,6 @@ export class UlearnService {
         );
     }
 
-
     /**
      * Renvoie tous les cours par categorieId
      * 
@@ -170,7 +169,6 @@ export class UlearnService {
             }
         );
     }
-
 
     /**
      * Sauvegarde un cours en base
@@ -262,9 +260,6 @@ export class UlearnService {
                 reportProgress: reportProgress
             }
         );
-    }
-    postComments(comments) {
-
     }
 
 }
