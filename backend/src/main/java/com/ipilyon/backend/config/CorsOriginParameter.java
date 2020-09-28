@@ -16,9 +16,6 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by a187838 on 06/04/2016.
- */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsOriginParameter implements Filter {
