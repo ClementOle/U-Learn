@@ -35,4 +35,22 @@ public class CoursController {
 	public List<CoursDto> getAllCoursByCategorieId(@PathVariable Integer categorieId) {
 		return this.coursService.findAllByCategorieId(categorieId);
 	}
+
+	@ApiOperation(value = "Renvoie tous les cours par difficulte")
+	@GetMapping(value = "/difficulte/{difficulte}")
+	public List<CoursDto> getAllCoursByDifficulte(@PathVariable Integer difficulte) {
+		System.out.println("passe dans getAllCoursByDifficulte()");
+		System.out.println("difficulte vaut : " + difficulte);
+		return this.coursService.findAllByDifficulte(difficulte);
+	}
+
+	@ApiOperation(value = "Renvoie tous les cours par difficulte et par categorieId")
+	@GetMapping(value = "/difficulte/{difficulte}/categorie/{categorieId}")
+	public List<CoursDto> getAllCoursByDifficulteAndCategorie(@PathVariable Integer difficulte, @PathVariable Integer categorieId) {
+		System.out.println("passe dans getAllCoursByDifficulteAndCategorie()");
+		System.out.println("categorieId vaut : " + categorieId);
+		System.out.println("difficulte vaut : " + difficulte);
+		return this.coursService.findByCategorieIdAndDifficulte(difficulte, categorieId);
+	}
+
 }

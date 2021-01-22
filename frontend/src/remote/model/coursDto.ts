@@ -16,6 +16,7 @@ import { ProgressionDto } from './progressionDto';
 export interface CoursDto {
     categorie?: CategorieDto;
     coursId?: number;
+    difficulte?: number;
     image?: string;
     lienMarchand?: string;
     progressions?: Array<ProgressionDto>;

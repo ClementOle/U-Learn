@@ -27,7 +27,9 @@ public class CoursDto {
 
 	private String lienMarchand;
 
-	public CoursDto(Integer coursId, String titre, String texte, String video, byte[] image, List<ProgressionDto> progressions, CategorieDto categorie) {
+	private Integer difficulte;
+
+	public CoursDto(Integer coursId, String titre, String texte, String video, byte[] image, List<ProgressionDto> progressions, CategorieDto categorie, Integer difficulte) {
 		this.coursId = coursId;
 		this.titre = titre;
 		this.texte = texte;
@@ -35,5 +37,6 @@ public class CoursDto {
 		this.image = image;
 		this.progressions = progressions;
 		this.categorie = categorie;
+		this.difficulte = difficulte;
 	}
 }

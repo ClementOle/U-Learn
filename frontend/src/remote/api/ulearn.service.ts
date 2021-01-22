@@ -135,6 +135,90 @@ export class UlearnService {
     }
 
     /**
+     * Renvoie tous les cours par difficulte et par categorieId
+     * 
+     * @param categorieId categorieId
+     * @param difficulte difficulte
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (categorieId === null || categorieId === undefined) {
+            throw new Error('Required parameter categorieId was null or undefined when calling getAllCoursByDifficulteAndCategorieUsingGET.');
+        }
+        if (difficulte === null || difficulte === undefined) {
+            throw new Error('Required parameter difficulte was null or undefined when calling getAllCoursByDifficulteAndCategorieUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/difficulte/${encodeURIComponent(String(difficulte))}/categorie/${encodeURIComponent(String(categorieId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les cours par difficulte
+     * 
+     * @param difficulte difficulte
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (difficulte === null || difficulte === undefined) {
+            throw new Error('Required parameter difficulte was null or undefined when calling getAllCoursByDifficulteUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/difficulte/${encodeURIComponent(String(difficulte))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Renvoie tous les cours
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

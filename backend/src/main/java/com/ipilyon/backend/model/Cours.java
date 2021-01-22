@@ -35,7 +35,10 @@ public class Cours {
 
 	private String lienMarchand;
 
-	public Cours(String titre, String texte, String video, byte[] image, List<Progression> progressions, Categorie categorie, String lienMarchand) {
+	private Integer difficulte;
+
+
+	public Cours(String titre, String texte, String video, byte[] image, List<Progression> progressions, Categorie categorie, String lienMarchand, Integer difficulte) {
 		this.titre = titre;
 		this.texte = texte;
 		this.video = video;
@@ -43,6 +46,7 @@ public class Cours {
 		this.progressions = progressions;
 		this.categorie = categorie;
 		this.lienMarchand = lienMarchand;
+		this.difficulte = difficulte;
 	}
 
 	@OneToMany(mappedBy = "cours")

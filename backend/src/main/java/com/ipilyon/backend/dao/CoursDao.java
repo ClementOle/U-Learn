@@ -10,10 +10,22 @@ import java.util.List;
 
 public interface CoursDao extends JpaRepository<Cours, Integer> {
 
-    // Fonction qui renvoie tous les cours en prenant pour référence la CategorieId qui se trouve dans la table Categorie.
+    // Renvoie tous les cours en prenant pour référence la CategorieId qui se trouve dans la table Categorie.
     List<Cours> findAllByCategorie_CategorieId(Integer categorieId);
-//    @Query(value="SELECT * FROM cours WHERE categorie_id = 1",nativeQuery=true)
-//    List<Cours> findAllByCategoridd(Integer categorieId );
+
+    // Renvoie tous les cours par type de catégorie et par difficulté.
+    @Query(
+            value = "SELECT * " +
+                    "FROM Cours c " +
+                    "join Categorie cat ON c.categorie_id = cat.categorie_id " +
+                    "WHERE c.difficulte = :difficulte AND c.categorie_id = :categorieId",
+            nativeQuery = true)
+    List<Cours> findAllByDifficulteAndCategorie_CategorieId(
+            @Param("difficulte") Integer difficulte,
+            @Param("categorieId") Integer categorieId);
+
+    // Renvoie tous les cours confondus par difficulté.
+    List<Cours> findAllByDifficulte(Integer difficulte);
 
 
 }

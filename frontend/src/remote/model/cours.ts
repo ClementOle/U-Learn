@@ -17,6 +17,7 @@ import { Question } from './question';
 export interface Cours {
     categorie?: Categorie;
     coursId?: number;
+    difficulte?: number;
     image?: string;
     lienMarchand?: string;
     progressions?: Array<Progression>;
