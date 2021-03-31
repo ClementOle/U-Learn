@@ -18,6 +18,7 @@ export class ListeCoursComponent implements OnInit {
     difficulteChoisie: boolean;
     categorieIdParam: number;
     categorieIdPrecedente: number;
+    // commentaireParCoursId: CommentaireDto[];
 
 
 
@@ -36,7 +37,12 @@ export class ListeCoursComponent implements OnInit {
               console.log('difficulte vaut : ' + this.difficulte);
               console.log('coursParCategorieId vaut : ');
               console.log(this.coursParCategorieId);
-              }
+            }
+
+            // this.uLEARNservice.getAllCommentairesByCoursIdUsingGET(+coursId).subscribe( value => {
+            //   this.commentaireParCoursId = value;
+            // })
+
 
             ); // Astuce : utiliser "+" pour parser un String en Int
       });
