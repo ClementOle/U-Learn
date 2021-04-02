@@ -15,8 +15,6 @@ public class CommentaireDto {
 
     private UserDto user;
 
-    private CategorieDto categorie;
-
     private CoursDto cours;
 
     private String titreCommentaire;
@@ -25,10 +23,9 @@ public class CommentaireDto {
 
     private String commentaireUtile;
 
-    public CommentaireDto(Integer commentaireId, UserDto user, CategorieDto categorie, CoursDto cours, String titreCommentaire, String texteCommentaire, String commentaireUtile) {
+    public CommentaireDto(Integer commentaireId, UserDto user, CoursDto cours, String titreCommentaire, String texteCommentaire, String commentaireUtile) {
         this.commentaireId = commentaireId;
         this.user = user;
-        this.categorie = categorie;
         this.cours = cours;
         this.titreCommentaire = titreCommentaire;
         this.texteCommentaire = texteCommentaire;
