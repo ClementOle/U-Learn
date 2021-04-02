@@ -24,12 +24,15 @@ public class CommentaireController {
     @ApiOperation(value = "Renvoie tous les commentaires")
     @GetMapping(value = "all")
     public List<CommentaireDto> getAllCommentaires() {
+        System.out.println("passe dans getAllCommentaires()");
         return this.commentaireService.findAll();
     }
 
     @ApiOperation(value = "Renvoie tous les commentaires par coursId") // Sert entre autre pour la documentation
     @GetMapping(value = "/{coursId}/commentaire")
-    public List<CommentaireDto> getAllCoursByCategorieId(@PathVariable Integer coursId) {
+    public List<CommentaireDto> getAllCommentairesByCoursId(@PathVariable Integer coursId) {
+        System.out.println("passe dans getAllCommentairesByCoursId()");
+        System.out.println("coursId vaut : " + coursId);
         return this.commentaireService.findAllCommentairesByCoursId(coursId);
     }
 }

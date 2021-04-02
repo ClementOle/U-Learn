@@ -1,6 +1,6 @@
 import {Component, DoCheck, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {CategorieDto, CoursDto, UlearnService} from "../../../remote";
+import {CategorieDto, CommentaireDto, CoursDto, UlearnService} from "../../../remote";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
@@ -18,7 +18,8 @@ export class ListeCoursComponent implements OnInit {
     difficulteChoisie: boolean;
     categorieIdParam: number;
     categorieIdPrecedente: number;
-    // commentaireParCoursId: CommentaireDto[];
+    commentaireParCoursId: CommentaireDto[];
+    allCommentaires: CommentaireDto[];
 
 
 
@@ -31,26 +32,43 @@ export class ListeCoursComponent implements OnInit {
     ngOnInit() {
       this.Activatedroute.paramMap.subscribe(params => {
             let categorieId = params.get('paramChemin'); // recupere moi dans ta liste des parametres que possede ActivatedRoute le parametre qui s'appelle 'paramChemin'
-            this.uLEARNservice.getAllCoursByCategorieIdUsingGET(+categorieId).subscribe(value => {
+            this.uLEARNservice.getAllCoursByCategorieIdUsingGET(+categorieId).subscribe(value => {     // Astuce : utiliser "+" pour parser un String en Int
               this.coursParCategorieId = value;
               this.difficulte = this.coursParCategorieId[0].difficulte;
               console.log('difficulte vaut : ' + this.difficulte);
               console.log('coursParCategorieId vaut : ');
               console.log(this.coursParCategorieId);
-            }
-
-            // this.uLEARNservice.getAllCommentairesByCoursIdUsingGET(+coursId).subscribe( value => {
-            //   this.commentaireParCoursId = value;
-            // })
-
-
-            ); // Astuce : utiliser "+" pour parser un String en Int
+            });
       });
+
+      this.uLEARNservice.getAllCommentairesByCoursIdUsingGET(24).subscribe( value => {
+        this.commentaireParCoursId = value;
+        console.log('commentaireParCoursId dans init : ');
+        console.log(this.commentaireParCoursId[0].texteCommentaire);
+      });
+
+      this.uLEARNservice.getAllCommentairesUsingGET().subscribe( value => {
+        this.allCommentaires = value;
+        console.log('this.allCommentaires dans init : ');
+        console.log(this.allCommentaires);
+      });
+
+
+
       this.loginForm = this.formBuilder.group({
         sendComment: []
       })
+
       console.log('difficultechoisie passe à false');
       this.difficulteChoisie = false;
+    }
+
+    testCommentaires(){
+      this.uLEARNservice.getAllCommentairesByCoursIdUsingGET(24).subscribe( value => {
+        this.commentaireParCoursId = value;
+        console.log('commentaireParCoursId : ');
+        console.log(this.commentaireParCoursId);
+      });
     }
 
 
@@ -76,7 +94,6 @@ export class ListeCoursComponent implements OnInit {
       }
     )
   }
-
 
 
 }

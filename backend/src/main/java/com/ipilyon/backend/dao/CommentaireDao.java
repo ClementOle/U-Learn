@@ -10,14 +10,13 @@ import java.util.List;
 
 public interface CommentaireDao extends JpaRepository<Commentaire, Integer> {
 
-//    List<CommentaireDto> findAll();
 //    List<CommentaireDto>findAllByCoursId(Integer commentaireId);
 
     // Renvoie tous les cours par type de catégorie et par difficulté.
     @Query(
             value = "SELECT * " +
                     "FROM Commentaire com " +
-                    "WHERE c.coursId = :coursId",
+                    "WHERE com.cours_Id = :coursId",
             nativeQuery = true)
     List<Commentaire> findAllCommentairesByCoursId(
             @Param("coursId") Integer coursId);

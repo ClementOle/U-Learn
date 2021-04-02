@@ -19,6 +19,7 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 import { Observable }                                        from 'rxjs/Observable';
 
 import { CategorieDto } from '../model/categorieDto';
+import { CommentaireDto } from '../model/commentaireDto';
 import { CoursDto } from '../model/coursDto';
 import { QuestionDto } from '../model/questionDto';
 
@@ -85,6 +86,82 @@ export class UlearnService {
         ];
 
         return this.httpClient.get<Array<CategorieDto>>(`${this.basePath}/categorie/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les commentaires par coursId
+     * 
+     * @param coursId coursId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CommentaireDto>>;
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CommentaireDto>>>;
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CommentaireDto>>>;
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursId === null || coursId === undefined) {
+            throw new Error('Required parameter coursId was null or undefined when calling getAllCommentairesByCoursIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CommentaireDto>>(`${this.basePath}/commentaire/${encodeURIComponent(String(coursId))}/commentaire`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les commentaires
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCommentairesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CommentaireDto>>;
+    public getAllCommentairesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CommentaireDto>>>;
+    public getAllCommentairesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CommentaireDto>>>;
+    public getAllCommentairesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CommentaireDto>>(`${this.basePath}/commentaire/all`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

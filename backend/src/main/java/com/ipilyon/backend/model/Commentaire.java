@@ -10,24 +10,25 @@ import java.util.List;
 
 @Entity
 @Data
-//@AllArgsConstructor
+@AllArgsConstructor
 @NoArgsConstructor
 public class Commentaire {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentaireId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "users_id")
-    private Integer usersId;
+    @OneToOne
+    @JoinColumn(name = "users_id")
+    private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "categorie_id")
-    private Integer categorieId;
+    @OneToOne
+    @JoinColumn(name = "categorie_id")
+    private Categorie categorie;
 
-//    @OneToOne
-//    @JoinColumn(name = "cours_id")
-    private Integer coursId;
+    @ManyToOne
+    @JoinColumn(name = "cours_id")
+    private Cours cours;
 
     private String titreCommentaire;
 
@@ -35,11 +36,10 @@ public class Commentaire {
 
     private Integer commentaireUtile;
 
-    public Commentaire(Integer commentaireId, Integer usersId, Integer categorieId, Integer coursId, String titreCommentaire, String texteCommentaire, Integer commentaireUtile) {
-        this.commentaireId = commentaireId;
-        this.usersId = usersId;
-        this.categorieId = categorieId;
-        this.coursId = coursId;
+    public Commentaire(User user, Categorie categorie, Cours cours, String titreCommentaire, String texteCommentaire, Integer commentaireUtile) {
+        this.user = user;
+        this.categorie = categorie;
+        this.cours = cours;
         this.titreCommentaire = titreCommentaire;
         this.texteCommentaire = texteCommentaire;
         this.commentaireUtile = commentaireUtile;

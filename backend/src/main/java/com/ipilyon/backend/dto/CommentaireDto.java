@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 public class CommentaireDto {
 
     private Integer commentaireId;
 
-    private Integer usersId;
+    private UserDto user;
 
-    private Integer categorieId;
+    private CategorieDto categorie;
 
-    private Integer coursId;
+    private CoursDto cours;
 
     private String titreCommentaire;
 
@@ -25,13 +25,13 @@ public class CommentaireDto {
 
     private String commentaireUtile;
 
-//    public CommentaireDto(Integer commentaireId, Integer usersId, Integer categorieId, Integer coursId, String titreCommentaire, String texteCommentaire, String commentaireUtile) {
-//        this.commentaireId = commentaireId;
-//        this.usersId = usersId;
-//        this.categorieId = categorieId;
-//        this.coursId = coursId;
-//        this.titreCommentaire = titreCommentaire;
-//        this.texteCommentaire = texteCommentaire;
-//        this.commentaireUtile = commentaireUtile;
-//    }
+    public CommentaireDto(Integer commentaireId, UserDto user, CategorieDto categorie, CoursDto cours, String titreCommentaire, String texteCommentaire, String commentaireUtile) {
+        this.commentaireId = commentaireId;
+        this.user = user;
+        this.categorie = categorie;
+        this.cours = cours;
+        this.titreCommentaire = titreCommentaire;
+        this.texteCommentaire = texteCommentaire;
+        this.commentaireUtile = commentaireUtile;
+    }
 }

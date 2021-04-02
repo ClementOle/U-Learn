@@ -13,12 +13,13 @@ import org.mapstruct.Named;
 public interface CommentaireMapper {
 
     @Named("toDto")
-    @Mapping(target = "commentaireId", ignore = true)
+    @Mapping(target = "cours", ignore = true)
+
     CommentaireDto map(Commentaire commentaire);
 
     Commentaire map(CommentaireDto commentaireDto);
 
     @IterableMapping(qualifiedByName = "toDto")
-    List<CommentaireDto> map(List<Commentaire> commentaires);
+    List<CommentaireDto> map(List<Commentaire> commentaire);
 
 }
