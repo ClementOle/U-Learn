@@ -31,7 +31,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 
     @Override
     public List<CommentaireDto> findAllCommentairesByCoursId(Integer coursId) {
-        System.out.println("passe dans findAllCommentairesByCoursId()");
+        System.out.println("passe dans findAllByCoursCoursId()");
         return this.commentaireMapper.map(this.commentaireDao.findAllByCoursCoursId(coursId));
     }
 }

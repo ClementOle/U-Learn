@@ -34,6 +34,8 @@
         <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
                                          target="_blank"
         >Cliquez ici</a></p>
+        <br>
+        <br>
 
     </ul>
   </div>
@@ -45,7 +47,7 @@
   <div class="col-xs-12">
     <ul class="list-group">
       <li [ngClass]="{'list-group-item' : true}"
-          *ngFor="let ligne of coursParDifficulteEtCategorie; let i = index;">
+          *ngFor="let ligne of coursParDifficulteEtCategorie; let i = index">
         <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
         <p>{{ligne.texte}}</p>
         <p>Niveau difficulte : {{ligne.difficulte}}</p>
@@ -58,7 +60,19 @@
                                                   target="_blank"
         >Cliquez ici</a></p>
 
-      <button (click)="testCommentaires()">test commentaire</button>
+      <!--<li *ngFor="let ligne of coursParDifficulteEtCategorie"></li>-->
+
+      <button (click)="rechercheCom()">{{libelleBoutonCom}}</button>
+        <div *ngIf="afficheBlocCom == true">
+          <div *ngFor="let com of test; let j = index">
+            <div *ngIf="ligne.coursId == test[j].cours.coursId">
+
+              <h5>Titre : {{test[j].titreCommentaire}}</h5>
+              <p>Commentaire : {{test[j].texteCommentaire}}</p>
+            </div>
+
+        </div>
+      </div>
     </ul>
   </div>
 </div>
