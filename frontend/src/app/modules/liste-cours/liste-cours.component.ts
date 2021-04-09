@@ -71,14 +71,14 @@ export class ListeCoursComponent implements OnInit {
     }
 
     rechercheCom() {
-      if (this.libelleBoutonCom == 'Afficher les commentaires')  {
-        this.libelleBoutonCom = 'Masquer les commentaires';
-        this.afficheBlocCom = false;
-      } else {
-        this.libelleBoutonCom = 'Afficher les commentaires';
-        this.afficheBlocCom = true;
-
-      }
+      // if (this.libelleBoutonCom == 'Afficher les commentaires')  {
+      //   this.libelleBoutonCom = 'Masquer les commentaires';
+      //   this.afficheBlocCom = false;
+      // } else {
+      //   this.libelleBoutonCom = 'Afficher les commentaires';
+      //   this.afficheBlocCom = true;
+      //
+      // }
       this.test = [];
       let i = 0;
       console.log('test au début vaut : ');
