@@ -14,6 +14,7 @@ import { UserDto } from './userDto';
 
 
 export interface CommentaireDto {
+    afficheBooleen?: boolean;
     commentaireId?: number;
     commentaireUtile?: string;
     cours?: CoursDto;

@@ -23,12 +23,15 @@ public class CommentaireDto {
 
     private String commentaireUtile;
 
-    public CommentaireDto(Integer commentaireId, UserDto user, CoursDto cours, String titreCommentaire, String texteCommentaire, String commentaireUtile) {
+    private Boolean afficheBooleen;
+
+    public CommentaireDto(Integer commentaireId, UserDto user, CoursDto cours, String titreCommentaire, String texteCommentaire, String commentaireUtile, Boolean afficheBooleen) {
         this.commentaireId = commentaireId;
         this.user = user;
         this.cours = cours;
         this.titreCommentaire = titreCommentaire;
         this.texteCommentaire = texteCommentaire;
         this.commentaireUtile = commentaireUtile;
+        this.afficheBooleen = afficheBooleen;
     }
 }

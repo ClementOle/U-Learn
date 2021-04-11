@@ -32,11 +32,14 @@ public class Commentaire {
 
     private Integer commentaireUtile;
 
-    public Commentaire(User user, Cours cours, String titreCommentaire, String texteCommentaire, Integer commentaireUtile) {
+    private Boolean afficheBooleen;
+
+    public Commentaire(User user, Cours cours, String titreCommentaire, String texteCommentaire, Integer commentaireUtile, Boolean afficheBooleen) {
         this.user = user;
         this.cours = cours;
         this.titreCommentaire = titreCommentaire;
         this.texteCommentaire = texteCommentaire;
         this.commentaireUtile = commentaireUtile;
+        this.afficheBooleen = afficheBooleen;
     }
 }

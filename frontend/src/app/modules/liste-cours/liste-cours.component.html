@@ -60,19 +60,19 @@
                                                   target="_blank"
         >Cliquez ici</a></p>
 
-      <!--<li *ngFor="let ligne of coursParDifficulteEtCategorie"></li>-->
+      <button (click)="rechercheCom(i)">{{tabBoutons[i].msgAffiche}}</button>
 
-      <button (click)="rechercheCom()">{{libelleBoutonCom}}</button>
-        <div *ngIf="afficheBlocCom == true">
+      <!--<button *ngIf="tabBoutons[i].display == true"-->
+              <!--(click)="rechercheCom(i)">{{tabBoutons[i].msgMasque}}</button>-->
+
           <div *ngFor="let com of test; let j = index">
-            <div *ngIf="ligne.coursId == test[j].cours.coursId">
+            <div *ngIf="ligne.coursId == test[j].cours.coursId && i == current && tabBoutons[i].display == true">
 
               <h5>Titre : {{test[j].titreCommentaire}}</h5>
               <p>Commentaire : {{test[j].texteCommentaire}}</p>
+              <p>{{test[j].commentaireUtile}} personnes ont trouvé ce commentaire utile.</p>
             </div>
-
-        </div>
-      </div>
+          </div>
     </ul>
   </div>
 </div>

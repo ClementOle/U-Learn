@@ -29,9 +29,12 @@ export class ListeCoursComponent implements OnInit {
     total = new Array();
     test = new Array();
     testGlobal = new Array();
-    ajout: number;
-    objet: {titre: string, texte: string};
-    objetBis = new Object();
+    displayCom: boolean;
+    current: number;
+    tabIndices = new Array();
+    tabBoutons = [{id: 0, msgAffiche: "Afficher les commentaires", msgMasque:"Masquer les commentaires", display: true}];
+
+
 
     c: CommentaireDto;
 
@@ -70,19 +73,45 @@ export class ListeCoursComponent implements OnInit {
       this.difficulteChoisie = false;
     }
 
-    rechercheCom() {
-      // if (this.libelleBoutonCom == 'Afficher les commentaires')  {
-      //   this.libelleBoutonCom = 'Masquer les commentaires';
-      //   this.afficheBlocCom = false;
-      // } else {
-      //   this.libelleBoutonCom = 'Afficher les commentaires';
-      //   this.afficheBlocCom = true;
-      //
-      // }
+
+
+    rechercheCom(indice) {
+        let bool: boolean;
+        let msg: string;
+        if (this.tabBoutons[indice].display == true) {
+          bool = false;
+          msg = this.tabBoutons[indice].msgAffiche = 'Afficher les coms';
+        } else {
+          bool = true;
+          msg = this.tabBoutons[indice].msgAffiche = 'Masquer les coms';
+
+      }
+
+      this.tabBoutons[indice] = {id: indice, msgAffiche: msg, msgMasque: 'Masque cours 2', display:bool};
+      this.tabBoutons[indice+1] = {id: indice+1, msgAffiche: msg, msgMasque: 'Masque cours 2', display:bool};
+
+      if (this.libelleBoutonCom == "Afficher les commentaires") {
+        this.libelleBoutonCom = "Masquer les commentaires";
+        const index: number = this.tabIndices.indexOf(indice);
+        if (index !== -1) {
+          this.tabIndices.splice(index, 1);
+        }
+
+      } else {
+        this.libelleBoutonCom = "Afficher les commentaires";
+        this.tabIndices.push(indice);
+
+      }
+      console.log('i vaut : ' + indice);
+      console.log('tabIndices vaut : ' );
+      console.log(this.tabIndices);
+      console.log('tabBoutons vaut : ' );
+      console.log(this.tabBoutons);
+      this.current = indice;
       this.test = [];
       let i = 0;
-      console.log('test au début vaut : ');
-      console.log(this.test);
+      // console.log('test au début vaut : ');
+      // console.log(this.test);
 
       for (let ligne of this.coursParDifficulteEtCategorie) {
         // console.log('ligne : ');
@@ -95,13 +124,8 @@ export class ListeCoursComponent implements OnInit {
             console.log('on recup le commentaire dto ');
             console.log( this.allCommentaires[j] );
 
-            // this.commentairesFiltres.fill(this.allCommentaires[j]);
             this.test.push(this.allCommentaires[j]);
 
-            // this.test.push(this.allCommentaires[j].titreCommentaire);
-            // this.test.push(this.allCommentaires[j].texteCommentaire);
-            // console.log('test vaut : ');
-            // console.log(test);
           }
         }
         i++;
@@ -110,8 +134,8 @@ export class ListeCoursComponent implements OnInit {
 
       console.log('this.test : ');
       console.log(this.test);
-      console.log('this.testGlobal : ');
-      console.log(this.testGlobal);
+      // console.log('this.testGlobal : ');
+      // console.log(this.testGlobal);
       // console.log('this.commentairesFiltres : ');
       // console.log(this.commentairesFiltres);
 
