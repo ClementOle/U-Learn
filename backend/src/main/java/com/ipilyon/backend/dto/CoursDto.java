@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor // Genere automatiquement le constructor avec tous les arguments
+@NoArgsConstructor // Genere un constructor vide
 public class CoursDto {
 
 	private Integer coursId;
@@ -29,14 +29,8 @@ public class CoursDto {
 
 	private Integer difficulte;
 
-	public CoursDto(Integer coursId, String titre, String texte, String video, byte[] image, List<ProgressionDto> progressions, CategorieDto categorie, Integer difficulte) {
-		this.coursId = coursId;
-		this.titre = titre;
-		this.texte = texte;
-		this.video = video;
-		this.image = image;
-		this.progressions = progressions;
-		this.categorie = categorie;
-		this.difficulte = difficulte;
+	private List<CommentaireDto> commentaires;
+
+	public CoursDto(int i, Object o, Object o1, Object o2, Object o3, Object o4, Object o5, Object o6, Object o7) {
 	}
 }

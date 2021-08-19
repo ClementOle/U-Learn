@@ -21,6 +21,7 @@ export class ListeCoursComponent implements OnInit {
     commentaireParCoursId: CommentaireDto[];
     commentairesFiltres: CommentaireDto[];
     allCommentaires: CommentaireDto[];
+    coursId23: CoursDto;
     allCommentairesDejaRecup: CommentaireDto[];
     coursId: number;
     afficheBlocCom: boolean;
@@ -62,7 +63,6 @@ export class ListeCoursComponent implements OnInit {
         console.log('this.allCommentaires dans init : ');
         console.log(this.allCommentaires);
       });
-
 
 
       this.loginForm = this.formBuilder.group({
@@ -180,7 +180,7 @@ export class ListeCoursComponent implements OnInit {
     this.coursParDifficulteEtCategorie = null;
     this.uLEARNservice.getAllCoursByDifficulteAndCategorieUsingGET(this.categorieIdParam, difficulte).subscribe(value => {
         this.coursParDifficulteEtCategorie = value;
-        console.log('coursParDifficulteEtCategorie vaut : ');
+        console.log(' ');
         console.log(this.coursParDifficulteEtCategorie);
         this.coursId = this.coursParDifficulteEtCategorie[0].coursId;
         console.log('coursId vaut : ');

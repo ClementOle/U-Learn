@@ -10,12 +10,14 @@
  * Do not edit the class manually.
  */
 import { Categorie } from './categorie';
+import { Commentaire } from './commentaire';
 import { Progression } from './progression';
 import { Question } from './question';
 
 
 export interface Cours {
     categorie?: Categorie;
+    commentaires?: Array<Commentaire>;
     coursId?: number;
     difficulte?: number;
     image?: string;

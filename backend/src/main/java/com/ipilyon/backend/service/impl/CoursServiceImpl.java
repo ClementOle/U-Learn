@@ -39,6 +39,7 @@ public class CoursServiceImpl implements CoursService {
 		return this.coursMapper.map(this.coursDao.findAllByDifficulte(difficulte));
 	}
 
+
 	@Override
 	public  List<CoursDto> findByCategorieIdAndDifficulte (Integer difficulte, Integer categorieId) {
 		System.out.println("Lance findByCategorieIdAndDifficulte()");

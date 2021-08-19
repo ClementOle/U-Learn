@@ -1,5 +1,6 @@
 export * from './categorie';
 export * from './categorieDto';
+export * from './commentaire';
 export * from './commentaireDto';
 export * from './cours';
 export * from './coursDto';

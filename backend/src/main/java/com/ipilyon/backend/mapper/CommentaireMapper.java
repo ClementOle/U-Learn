@@ -16,6 +16,7 @@ public interface CommentaireMapper {
     @Mapping(target = "cours.categorie.cours", ignore = true)
     @Mapping(target = "cours.progressions", ignore = true)
     @Mapping(target = "user.progressions", ignore = true)
+    @Mapping(target = "cours.commentaires", ignore = true)
     CommentaireDto map(Commentaire commentaire);
 
     Commentaire map(CommentaireDto commentaireDto);

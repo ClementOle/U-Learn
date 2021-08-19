@@ -14,8 +14,10 @@ public interface CategorieMapper {
 
 	@Named("toDto")
 	@Mapping(target = "cours", ignore = true)
+//	@Mapping(target = "cours")
 	CategorieDto map(Categorie categorie);
 
+	Categorie map(CategorieDto categorieDto);
 
 	@IterableMapping(qualifiedByName = "toDto")
 	List<CategorieDto> mapDtos(List<Categorie> categorie);

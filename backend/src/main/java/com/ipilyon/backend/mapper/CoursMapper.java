@@ -1,23 +1,37 @@
 package com.ipilyon.backend.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.ipilyon.backend.dto.CommentaireDto;
 import com.ipilyon.backend.dto.CoursDto;
 import com.ipilyon.backend.model.Cours;
-import org.mapstruct.IterableMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Mapper
-public interface CoursMapper {
+public abstract class CoursMapper {
+
+	@Autowired
+	private CommentaireMapper commentaireMapper;
 
 	@Named("toDto")
-	@Mapping(target = "categorie", ignore = true)
-	CoursDto map(Cours cours);
+	@Mapping(target = "categorie.cours", ignore = true)
+	@Mapping(target = "commentaires", ignore = true)
+	public abstract CoursDto map(Cours cours);
 
-	Cours map(CoursDto coursDto);
+	public abstract Cours map(CoursDto coursDto);
 
 	@IterableMapping(qualifiedByName = "toDto")
-	List<CoursDto> map(List<Cours> cours);
+	public abstract List<CoursDto> map(List<Cours> cours);
+
+	@AfterMapping
+	public void afterMap(@MappingTarget CoursDto target, Cours source) {
+		List<CommentaireDto> commentairesMappes = new ArrayList<>();
+		source.getCommentaires().forEach(commentaire -> {
+			commentaire.setCours(null);
+			commentairesMappes.add(this.commentaireMapper.map(commentaire));
+		});
+		target.setCommentaires(commentairesMappes);
+	}
 }
