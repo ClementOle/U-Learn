@@ -24,6 +24,14 @@ public class CoursController {
 		return this.coursService.saveCours(coursDto);
 	}
 
+	@ApiOperation(value = "Mets à jour le cours")
+	@PutMapping(value = "/miseajour", produces = "application/json", consumes = "application/json")
+	public CoursDto putCoursByCoursId(@RequestBody CoursDto coursDto) {
+		System.out.println("passe dans putCoursByCoursId()");
+		System.out.println("coursDto à mettre à jour vaut : " + coursDto);
+		return this.coursService.saveCours(coursDto);
+	}
+
 	@ApiOperation(value = "Renvoie tous les cours")
 	@GetMapping(value = "all")
 	public List<CoursDto> getAllCours() {
@@ -53,5 +61,15 @@ public class CoursController {
 		System.out.println("difficulte vaut : " + difficulte);
 		return this.coursService.findByCategorieIdAndDifficulte(difficulte, categorieId);
 	}
+
+	@ApiOperation(value = "Renvoie un cours en fonction de son id")
+	@GetMapping(value = "/coursId/{coursId}")
+	public CoursDto getCoursByCoursId(@PathVariable Integer coursId) {
+		System.out.println("passe dans getCoursByCoursId()");
+		System.out.println("coursId vaut : " + coursId);
+		return this.coursService.findCoursByCoursId(coursId);
+	}
+
+
 
 }

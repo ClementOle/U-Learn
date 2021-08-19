@@ -29,7 +29,7 @@ public class CoursControllerTest extends AbstractControllerTest {
 
 	@Test
 	public void testFindAll() throws Exception {
-		Mockito.when(this.coursService.findAll()).thenReturn(Collections.singletonList(new CoursDto(1, null, null, null, null, null, null, null,null)));
+		Mockito.when(this.coursService.findAll()).thenReturn(Collections.singletonList(new CoursDto(1, null, null, null, null, null, null, null,null, null, null)));
 
 		mvc.perform(
 				MockMvcRequestBuilders
@@ -41,14 +41,14 @@ public class CoursControllerTest extends AbstractControllerTest {
 
 	@Test
 	public void testPost() throws Exception {
-		Mockito.when(this.coursService.saveCours(new CoursDto(1, null, null, null, null, null, null, null, null))
-		).thenReturn(new CoursDto(1, null, null, null, null, null, null, null, null));
+		Mockito.when(this.coursService.saveCours(new CoursDto(1, null, null, null, null, null, null, null, null, null, null))
+		).thenReturn(new CoursDto(1, null, null, null, null, null, null, null, null, null, null));
 
 		MvcResult result = mvc.perform(
 				MockMvcRequestBuilders
 						.post("/cours/save")
 						.contentType(MediaType.APPLICATION_JSON)
-						.content(new ObjectMapper().writeValueAsString(new CoursDto(1, null, null, null, null, null, null, null, null))))
+						.content(new ObjectMapper().writeValueAsString(new CoursDto(1, null, null, null, null, null, null, null, null, null, null))))
 				.andExpect(status().isOk()).andReturn();
 
 		//assertEquals(, result.getResponse().getContentAsString());

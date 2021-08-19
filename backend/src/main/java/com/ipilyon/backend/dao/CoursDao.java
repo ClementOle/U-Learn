@@ -27,5 +27,6 @@ public interface CoursDao extends JpaRepository<Cours, Integer> {
     // Renvoie tous les cours confondus par difficulté.
     List<Cours> findAllByDifficulte(Integer difficulte);
 
+    Cours findCoursByCoursId (Integer coursId);
 
 }

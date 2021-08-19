@@ -4,6 +4,7 @@ package com.ipilyon.backend.service.impl;
 import com.ipilyon.backend.dao.CommentaireDao;
 import com.ipilyon.backend.dto.CommentaireDto;
 import com.ipilyon.backend.mapper.CommentaireMapper;
+import com.ipilyon.backend.model.Commentaire;
 import com.ipilyon.backend.service.CommentaireService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,7 @@ public class CommentaireServiceImpl implements CommentaireService {
         System.out.println("passe dans findAllByCoursCoursId()");
         return this.commentaireMapper.map(this.commentaireDao.findAllByCoursCoursId(coursId));
     }
+
 }
 
 

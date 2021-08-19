@@ -15,6 +15,7 @@ import { ProgressionDto } from './progressionDto';
 
 
 export interface CoursDto {
+    afficheCommentaires?: number;
     categorie?: CategorieDto;
     commentaires?: Array<CommentaireDto>;
     coursId?: number;

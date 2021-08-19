@@ -16,6 +16,7 @@ import { Question } from './question';
 
 
 export interface Cours {
+    afficheCommentaires?: number;
     categorie?: Categorie;
     commentaires?: Array<Commentaire>;
     coursId?: number;

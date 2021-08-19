@@ -35,10 +35,16 @@ public class CoursServiceImpl implements CoursService {
 	}
 
 	@Override
-	public  List<CoursDto> findAllByDifficulte (Integer difficulte) {
+	public List<CoursDto> findAllByDifficulte (Integer difficulte) {
 		return this.coursMapper.map(this.coursDao.findAllByDifficulte(difficulte));
 	}
 
+	@Override
+	public CoursDto findCoursByCoursId(Integer coursId) {
+		System.out.println("Passe dans findCoursByCoursId du ServiceImpl");
+
+		return this.coursMapper.map(this.coursDao.findCoursByCoursId(coursId));
+	}
 
 	@Override
 	public  List<CoursDto> findByCategorieIdAndDifficulte (Integer difficulte, Integer categorieId) {
@@ -48,3 +54,23 @@ public class CoursServiceImpl implements CoursService {
 		return this.coursMapper.map(this.coursDao.findAllByDifficulteAndCategorie_CategorieId(difficulte, categorieId));
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

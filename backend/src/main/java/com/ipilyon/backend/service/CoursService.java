@@ -16,4 +16,6 @@ public interface CoursService {
 
 	List<CoursDto> findByCategorieIdAndDifficulte(Integer difficulte, Integer categorieId);
 
+	CoursDto findCoursByCoursId (Integer coursId);
+
 }

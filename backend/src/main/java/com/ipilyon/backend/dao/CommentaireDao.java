@@ -13,5 +13,8 @@ public interface CommentaireDao extends JpaRepository<Commentaire, Integer> {
         // Renvoie tous les cours par type de catégorie et par difficulté.
         List<Commentaire> findAllByCoursCoursId(Integer coursId);
 
+        // Renvoie tous les commentaires correspondant à un coursId
+        List<Commentaire> findCommentaireByCours_CoursId(Integer coursId);
+
     }
 

@@ -60,20 +60,35 @@
                                                   target="_blank"
         >Cliquez ici</a></p>
 
-      <!--<button (click)="rechercheCom(i)">{{tabBoutons[i].msgAffiche}}</button>-->
-      <button (click)="rechercheCom(i)">Afficher les commentaires</button>
+        <p>ligne.coursId vaut {{ligne.coursId}}</p>
+        <p>ligne.afficheCommentaires vaut {{ligne.afficheCommentaires}}</p>
 
-      <!--<button *ngIf="tabBoutons[i].display == true"-->
-              <!--(click)="rechercheCom(i)">{{tabBoutons[i].msgMasque}}</button>-->
-
-          <div *ngFor="let com of test; let j = index">
-            <div *ngIf="ligne.coursId == test[j].cours.coursId && i == current && tabBoutons[i].display == true">
-
-              <h5>Titre : {{test[j].titreCommentaire}}</h5>
-              <p>Commentaire : {{test[j].texteCommentaire}}</p>
-              <p>{{test[j].commentaireUtile}} personnes ont trouvé ce commentaire utile.</p>
-            </div>
+        <!--<div *ngIf="ligne.afficheCommentaires == 0">-->
+          <!--<button (click)="onDisplayCommentsButton(ligne.coursId)">Afficher les commentaires</button>-->
+          <!--<button (click)="onDisplayCommentsButton(ligne.coursId)">Recup le cours</button>-->
+        <div *ngIf="ligne.afficheCommentaires != 0 || ligne.afficheCommentaires != 1  ">
+          <button (click)="chainSubscribe(ligne)">Message par defaut</button>
+        </div>
+        <div *ngIf="ligne.afficheCommentaires == 0 || ligne.afficheCommentaires == 1  ">
+          <button (click)="chainSubscribe(ligne)">{{message.toString()}}</button>
+        </div>
+        <div *ngIf="ligne.afficheCommentaires == 1">
+          <button (click)="onDisplayCommentsButton(ligne.coursId)">Masquer les commentaires</button>
+          <div *ngFor="let ligneCom of ligne.commentaires; let nbCom = index;">
+            <p><b>Commentaire numéro {{nbCom + 1}}</b></p>
+            <p>{{ligneCom.titreCommentaire}}</p>
+            <p>{{ligneCom.texteCommentaire}}</p>
           </div>
+        </div>
+
+      <!--<button (click)="afficheCommentaires(ligne.coursId)">Afficher commentaires par afficheCommentaires()</button>-->
+      <!--&lt;!&ndash;<button (click)="rechercheCom(i)">Afficher les commentaires</button>&ndash;&gt;-->
+
+        <!--<div *ngFor="let commentaire of commentaireParCoursId; let numCom = index">-->
+          <!--<p>Commentaire numéro {{numCom + 1}}</p>-->
+          <!--<p>{{commentaire.titreCommentaire}}</p>-->
+          <!--<p>{{commentaire.texteCommentaire}}</p>-->
+        <!--</div>-->
     </ul>
   </div>
 </div>
