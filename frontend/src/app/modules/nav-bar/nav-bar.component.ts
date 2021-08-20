@@ -21,8 +21,6 @@ export class NavBarComponent implements OnInit {
       //*** On récupère les catégories directement en base ***
       this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
         this.categories = value;
-        console.log("Fonction getAllCategories déclenchée, value vaut : ");
-        console.log(value);
       });
 
     }
