@@ -6,31 +6,35 @@ import {CreationCoursComponent} from './modules/creation-cours/creation-cours/cr
 import {ListeCoursComponent} from './modules/liste-cours/liste-cours.component';
 import {AccueilComponent} from './modules/accueil/accueil.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
-import {ConnexionComponent} from "./modules/connexion/connexion.component";
+import {ConnexionComponent} from './modules/connexion/connexion.component';
+import {AuthGuard} from './guards/auth.guard';
 
 export const appRouteList: Routes = [
     {
         path: 'liste-cours/:paramChemin',
+        canActivate: [AuthGuard],
         component: ListeCoursComponent
     },
 
     // 'paramChemin' doit correspondre au terme passé en paramètre  du params.get('paramChemin') du liste-cours.component.ts
     {
         path: 'creation-cours',
+        canActivate: [AuthGuard],
         component: CreationCoursComponent
     },
     {
         path: 'creation-quiz/:idCours',
+        canActivate: [AuthGuard],
         component: CreationQuizComponent
     },
     {
         path: 'accueil',
         component: AccueilComponent
     },
-  {
-    path: 'connexion',
-    component: ConnexionComponent
-  },
+    {
+        path: 'connexion',
+        component: ConnexionComponent
+    },
     {
         path: '**',
         redirectTo: 'accueil'

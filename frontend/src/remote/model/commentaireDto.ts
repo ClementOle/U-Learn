@@ -9,14 +9,17 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import {CategorieDto} from './categorieDto';
+import {CoursDto} from './coursDto';
+import {UserDto} from './userDto';
 
 
 export interface CommentaireDto {
-    categorieId?: number;
+    categorie?: CategorieDto;
     commentaireId?: number;
     commentaireUtile?: string;
-    coursId?: number;
+    cours?: CoursDto;
     texteCommentaire?: string;
     titreCommentaire?: string;
-    usersId?: number;
+    user?: UserDto;
 }

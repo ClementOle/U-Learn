@@ -15,10 +15,11 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
-import {ContenuCoursComponent} from "./modules/contenu-cours/contenu-cours.component";
+import {ContenuCoursComponent} from './modules/contenu-cours/contenu-cours.component';
 import {FooterComponent} from './modules/footer/footer.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 import {ConnexionComponent} from './modules/connexion/connexion.component';
+import {AuthGuard} from './guards/auth.guard';
 
 @NgModule({
     declarations: [
@@ -32,8 +33,8 @@ import {ConnexionComponent} from './modules/connexion/connexion.component';
         ModalComponent,
         ModalComponent,
         FooterComponent,
-      CreationQuizComponent,
-      ConnexionComponent
+        CreationQuizComponent,
+        ConnexionComponent
     ],
     imports: [
         ApiModule,
@@ -47,7 +48,7 @@ import {ConnexionComponent} from './modules/connexion/connexion.component';
         provide: HTTP_INTERCEPTORS,
         useClass: GlobalInterceptor,
         multi: true
-    }],
+    }, AuthGuard],
     bootstrap: [AppComponent]
 })
 export class AppModule {

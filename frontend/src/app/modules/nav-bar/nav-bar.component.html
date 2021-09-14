@@ -7,21 +7,22 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+        <ul class="navbar-nav">
 
-        <li class="nav-item" *ngFor="let theme of categories">
-          <a [routerLink]="['/liste-cours', theme.categorieId]" class="nav-link"
-             routerLinkActive="active">{{theme?.titre}} <span
-            class="sr-only">(current)</span></a>
-        </li>
+            <ng-container *ngIf="isConnected">
+                <li class="nav-item" *ngFor="let theme of categories">
+                    <a [routerLink]="['/liste-cours', theme.categorieId]" class="nav-link"
+                       routerLinkActive="active">{{theme?.titre}} <span
+                            class="sr-only">(current)</span></a>
+                </li>
+            </ng-container>
 
-
-        <li *ngIf="this.connexionService.connecte == false" class="nav-item pagination-right">
-          <a [routerLink]="['/connexion']" class="nav-link">Connexion</a>
-        </li>
-        <li *ngIf="this.connexionService.connecte == true" class="nav-item pagination-right">
-          <a (click)="deconnect()" [routerLink]="['/accueil']" class="nav-link">Deconnexion</a>
-        </li>
-      </ul>
+            <li *ngIf="!isConnected" class="nav-item pagination-right">
+                <a [routerLink]="['/connexion']" class="nav-link">Connexion</a>
+            </li>
+            <li *ngIf="isConnected" class="nav-item pagination-right">
+                <a (click)="logout()" class="nav-link">Déconnexion</a>
+            </li>
+        </ul>
     </div>
-  </nav>
+</nav>

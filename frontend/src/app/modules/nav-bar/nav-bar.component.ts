@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {CategorieDto, CoursDto, UlearnService} from "../../../remote";
-import {ConnexionService} from "../../services/connexion.service";
+import {CategorieDto, CoursDto, UlearnService} from '../../../remote';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-nav-bar',
@@ -9,25 +10,31 @@ import {ConnexionService} from "../../services/connexion.service";
 })
 export class NavBarComponent implements OnInit {
 
+    isConnected: boolean = false;
+
     categories: CategorieDto[];
     cours: CoursDto[];
 
-  constructor(private uLEARNservice: UlearnService, private connexionService: ConnexionService) {
+    constructor(private uLEARNservice: UlearnService,
+                public authService: AuthService,
+                private router: Router) {
 
     }
 
     ngOnInit() {
 
-      //*** On récupère les catégories directement en base ***
-      this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
-        this.categories = value;
-        console.log("Fonction getAllCategories déclenchée, value vaut : ");
-        console.log(value);
-      });
+        this.authService.isConnected.subscribe((next) => this.isConnected = next);
+
+        //*** On récupère les catégories directement en base ***
+        this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
+            this.categories = value;
+        });
 
     }
 
-  deconnect() {
-    this.connexionService.connecte = false;
-  }
+    logout() {
+        this.authService.logout()
+            .then(() => this.router.navigateByUrl('/'))
+            .catch((err) => console.error('Une erreur est survenue.', err));
+    }
 }
