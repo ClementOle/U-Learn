@@ -22,7 +22,7 @@
   <div class="col-xs-12">
     <ul class="list-group">
       <li [ngClass]="{'list-group-item' : true}"
-          *ngFor="let ligne of coursParCategorieId; let i = index;">
+          *ngFor="let ligne of coursParCategorieId;">
         <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
         <p>{{ligne.texte}}</p>
         <p>Niveau difficulte : {{ligne.difficulte}}</p>
@@ -34,6 +34,8 @@
         <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
                                          target="_blank"
         >Cliquez ici</a></p>
+        <br>
+        <br>
 
     </ul>
   </div>
@@ -45,7 +47,7 @@
   <div class="col-xs-12">
     <ul class="list-group">
       <li [ngClass]="{'list-group-item' : true}"
-          *ngFor="let ligne of coursParDifficulteEtCategorie; let i = index;">
+          *ngFor="let ligne of coursParDifficulteEtCategorie;">
         <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
         <p>{{ligne.texte}}</p>
         <p>Niveau difficulte : {{ligne.difficulte}}</p>
@@ -58,7 +60,19 @@
                                                   target="_blank"
         >Cliquez ici</a></p>
 
-      <button (click)="testCommentaires()">test commentaire</button>
+        <!--Changement libellé bouton commentaire et affichage des commentaires-->
+        <div *ngIf="ligne.afficheCommentaires == 0">
+          <button (click)="majCom(ligne)">{{message0}}</button>
+        </div>
+        <div *ngIf="ligne.afficheCommentaires == 1">
+          <button (click)="majCom(ligne)">{{message1}}</button>
+          <div *ngFor="let ligneCom of ligne.commentaires; let nbCom = index;">
+            <p><b>Commentaire numéro {{nbCom + 1}}</b></p>
+            <p>{{ligneCom.titreCommentaire}}</p>
+            <p>{{ligneCom.texteCommentaire}}</p>
+          </div>
+        </div>
+
     </ul>
   </div>
 </div>

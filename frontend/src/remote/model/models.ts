@@ -1,4 +1,5 @@
 export * from './categorieDto';
+export * from './commentaire';
 export * from './commentaireDto';
 export * from './coursDto';
 export * from './grantedAuthority';

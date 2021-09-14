@@ -22,13 +22,13 @@ export class NavBarComponent implements OnInit {
     }
 
     ngOnInit() {
-
         this.authService.isConnected.subscribe((next) => this.isConnected = next);
 
         //*** On récupère les catégories directement en base ***
         this.uLEARNservice.getAllCategorieUsingGET().subscribe(value => {
             this.categories = value;
         });
+
 
     }
 

@@ -10,11 +10,14 @@
  * Do not edit the class manually.
  */
 import { CategorieDto } from './categorieDto';
+import { CommentaireDto } from './commentaireDto';
 import { ProgressionDto } from './progressionDto';
 
 
 export interface CoursDto {
+    afficheCommentaires?: number;
     categorie?: CategorieDto;
+    commentaires?: Array<CommentaireDto>;
     coursId?: number;
     difficulte?: number;
     image?: string;

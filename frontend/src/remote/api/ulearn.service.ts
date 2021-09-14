@@ -332,6 +332,92 @@ export class UlearnService {
     }
 
     /**
+     * Renvoie un cours en fonction de son id
+     * 
+     * @param coursId coursId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCoursByCoursIdUsingGET(coursId: number, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
+    public getCoursByCoursIdUsingGET(coursId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
+    public getCoursByCoursIdUsingGET(coursId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
+    public getCoursByCoursIdUsingGET(coursId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursId === null || coursId === undefined) {
+            throw new Error('Required parameter coursId was null or undefined when calling getCoursByCoursIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<CoursDto>(`${this.basePath}/cours/coursId/${encodeURIComponent(String(coursId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Mets à jour le cours
+     * 
+     * @param coursDto coursDto
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursDto === null || coursDto === undefined) {
+            throw new Error('Required parameter coursDto was null or undefined when calling putCoursByCoursIdUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<CoursDto>(`${this.basePath}/cours/miseajour`,
+            coursDto,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Sauvegarde un cours en base
      * 
      * @param questionDtos questionDtos

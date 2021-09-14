@@ -22,10 +22,6 @@ public class Commentaire {
     @JoinColumn(name = "users_id")
     private User user;
 
-    @OneToOne
-    @JoinColumn(name = "categorie_id")
-    private Categorie categorie;
-
     @ManyToOne
     @JoinColumn(name = "cours_id")
     private Cours cours;
@@ -36,12 +32,14 @@ public class Commentaire {
 
     private Integer commentaireUtile;
 
-    public Commentaire(User user, Categorie categorie, Cours cours, String titreCommentaire, String texteCommentaire, Integer commentaireUtile) {
+    private Boolean afficheBooleen;
+
+    public Commentaire(User user, Cours cours, String titreCommentaire, String texteCommentaire, Integer commentaireUtile, Boolean afficheBooleen) {
         this.user = user;
-        this.categorie = categorie;
         this.cours = cours;
         this.titreCommentaire = titreCommentaire;
         this.texteCommentaire = texteCommentaire;
         this.commentaireUtile = commentaireUtile;
+        this.afficheBooleen = afficheBooleen;
     }
 }

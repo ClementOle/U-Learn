@@ -29,7 +29,7 @@ public class Cours {
 	@OneToMany(mappedBy = "cours")
 	private List<Progression> progressions;
 
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.MERGE , fetch = FetchType.EAGER)
 	@JoinColumn(name = "categorie_id")
 	private Categorie categorie;
 
@@ -37,8 +37,13 @@ public class Cours {
 
 	private Integer difficulte;
 
+	 @OneToMany (mappedBy = "cours")
+	private List<Commentaire> commentaires;
 
-	public Cours(String titre, String texte, String video, byte[] image, List<Progression> progressions, Categorie categorie, String lienMarchand, Integer difficulte) {
+ 	private Integer afficheCommentaires;
+
+
+	public Cours(String titre, String texte, String video, byte[] image, List<Progression> progressions, Categorie categorie, String lienMarchand, Integer difficulte, List<Commentaire> commentaires, Integer afficheCommentaires, List<Question> questions) {
 		this.titre = titre;
 		this.texte = texte;
 		this.video = video;
@@ -47,6 +52,9 @@ public class Cours {
 		this.categorie = categorie;
 		this.lienMarchand = lienMarchand;
 		this.difficulte = difficulte;
+		this.commentaires = commentaires;
+		this.afficheCommentaires = afficheCommentaires;
+		this.questions = questions;
 	}
 
 	@OneToMany(mappedBy = "cours")

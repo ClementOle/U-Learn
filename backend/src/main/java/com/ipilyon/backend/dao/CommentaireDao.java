@@ -10,17 +10,11 @@ import java.util.List;
 
 public interface CommentaireDao extends JpaRepository<Commentaire, Integer> {
 
-//    List<CommentaireDto>findAllByCoursId(Integer commentaireId);
+        // Renvoie tous les cours par type de catégorie et par difficulté.
+        List<Commentaire> findAllByCoursCoursId(Integer coursId);
 
-    // Renvoie tous les cours par type de catégorie et par difficulté.
-    @Query(
-            value = "SELECT * " +
-                    "FROM Commentaire com " +
-                    "WHERE com.cours_Id = :coursId",
-            nativeQuery = true)
-    List<Commentaire> findAllCommentairesByCoursId(
-            @Param("coursId") Integer coursId);
+        // Renvoie tous les commentaires correspondant à un coursId
+        List<Commentaire> findCommentaireByCours_CoursId(Integer coursId);
 
+    }
 
-//    List<Commentaire> findAllCommentairesByCoursId(Integer coursId);
-}
