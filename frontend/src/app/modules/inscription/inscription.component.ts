@@ -1,5 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UlearnService, UserDto} from '../../../remote';
+import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
     selector: 'app-inscription',
@@ -11,7 +14,14 @@ export class InscriptionComponent implements OnInit, OnDestroy {
     form: FormGroup;
     passwordError: string;
 
-    constructor(private fb: FormBuilder) {
+    submitError: string;
+
+    subscriptionOnPassword: Subscription;
+    subscriptionOnPasswordVerif: Subscription;
+
+    constructor(private fb: FormBuilder,
+                private uLearnService: UlearnService,
+                private router: Router) {
     }
 
     ngOnInit() {
@@ -19,7 +29,9 @@ export class InscriptionComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-
+        //Supprime les subscription lorsque l'on quitte le composent pour éviter les fuites de mémoires
+        this.subscriptionOnPassword.unsubscribe();
+        this.subscriptionOnPasswordVerif.unsubscribe();
     }
 
     initForm() {
@@ -32,10 +44,10 @@ export class InscriptionComponent implements OnInit, OnDestroy {
             lastname: ['', [Validators.required]]
         });
 
-        this.form.get('passwordVerif').valueChanges.subscribe((next) => {
+        this.subscriptionOnPassword = this.form.get('passwordVerif').valueChanges.subscribe((next) => {
             this.passwordChange();
         });
-        this.form.get('password').valueChanges.subscribe((next) => {
+        this.subscriptionOnPasswordVerif = this.form.get('password').valueChanges.subscribe((next) => {
             this.passwordChange();
         });
     }
@@ -45,13 +57,29 @@ export class InscriptionComponent implements OnInit, OnDestroy {
         let passwordVerif = this.form.get('passwordVerif').value;
 
         if (password !== passwordVerif) {
-            this.passwordError = "Les mots de passe sont différents";
+            this.passwordError = 'Les mots de passe sont différents';
         } else {
             this.passwordError = null;
         }
     }
 
     submit() {
+        let userToSave: UserDto = {
+            username: this.getFormValue('username'),
+            password: this.getFormValue('password'),
+            email: this.getFormValue('email'),
+            prenom: this.getFormValue('firstname'),
+            nom: this.getFormValue('lastname'),
+        };
+
+        this.uLearnService.signInUsingPOST(userToSave).subscribe(() => {
+            this.submitError = null;
+            this.router.navigate(['connexion']);
+        }, (err) => {
+            console.log(err);
+            return this.submitError = err.error.message;
+        });
+
         console.log({
             username: this.getFormValue('username'),
             password: this.getFormValue('password'),

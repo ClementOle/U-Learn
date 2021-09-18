@@ -1,10 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
+            <div *ngIf="submitError"
+                 class="alert alert-danger mt-1">Une erreur est survenue lors de l'inscription : {{submitError}}</div>
             <form (ngSubmit)="submit()" [formGroup]="form">
                 <div class="card shadow my-5">
                     <div class="card-header">
-                        <h4 class="card-title text-center">Connexion</h4>
+                        <h4 class="card-title text-center">Inscription</h4>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
@@ -65,7 +67,7 @@
                             <div *ngIf="(form.controls.passwordVerif.dirty || form.controls.passwordVerif.touched) && passwordError"
                                  class="alert alert-danger mt-1">{{passwordError}}</div>
 
-                            <input [disabled]="form.invalid" type="submit" class="btn btn-success" value="Valider"/>
+                            <input [disabled]="form.invalid" type="submit" class="btn btn-primary" value="Valider"/>
                         </div>
                     </div>
                 </div>

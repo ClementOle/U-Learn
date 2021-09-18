@@ -30,7 +30,7 @@ public class AppAuthProvider extends DaoAuthenticationProvider {
 
 		UserDetails user = userDetailsService.loadUserByUsername(name);
 
-		if (user == null || Objects.equals(user.getPassword(), password)) {
+		if (user == null || !Objects.equals(user.getPassword(), password)) {
 			throw new BadCredentialsException("Username/Password does not match for " + auth.getPrincipal());
 		}
 
