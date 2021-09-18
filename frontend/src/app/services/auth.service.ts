@@ -30,7 +30,7 @@ export class AuthService {
                         res();
                     }, error => {
                         this.isConnected.next(false);
-                        rej(error);
+                        rej("Identifiants incorrectes !");
                     });
             }
         );

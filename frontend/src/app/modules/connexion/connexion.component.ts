@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-connexion',
@@ -9,19 +10,32 @@ import {AuthService} from '../../services/auth.service';
 })
 export class ConnexionComponent implements OnInit {
 
-    username: string;
-    password: string;
+    form: FormGroup;
+    errorMsg: string;
 
-    constructor(private authService: AuthService, private router: Router) {
+    constructor(private authService: AuthService,
+                private router: Router,
+                private fb: FormBuilder) {
     }
 
     ngOnInit() {
+        this.initForm();
+    }
+
+    initForm() {
+        this.form = this.fb.group({
+            username: ['', [Validators.required]],
+            password: ['', [Validators.required]]
+        });
     }
 
     submit() {
-        this.authService.login(this.username, this.password)
+        let username = this.form.get('username').value;
+        let password = this.form.get('password').value;
+
+        this.authService.login(username, password)
             .then(() => this.router.navigateByUrl('/'))
-            .catch(err => console.error('Une erreur est survenue.', err));
+            .catch(err => this.errorMsg = err);
     }
 
 }
