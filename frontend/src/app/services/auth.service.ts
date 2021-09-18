@@ -22,7 +22,7 @@ export class AuthService {
                 let formData = new FormData();
 
                 formData.append('username', username);
-                formData.append('username', password);
+                formData.append('password', password);
 
                 this.http.post(AuthService.API_URL + 'login', formData)
                     .subscribe(() => {
