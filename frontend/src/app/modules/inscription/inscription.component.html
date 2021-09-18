@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-7 mx-auto">
+            <form (ngSubmit)="submit()" [formGroup]="form">
+                <div class="card shadow my-5">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Connexion</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="input-group-prepend"
+                                   for="username">Nom d'utilisateur</label>
+                            <input class="input-group form-control"
+                                   formControlName="username"
+                                   id="username" type="text"/>
+                            <app-errors-form [control]="form.controls.username"
+                                             controlLabel="Nom d'utilisateur"></app-errors-form>
+                            <br>
+
+                            <label class="input-group-prepend"
+                                   for="email">Email</label>
+                            <input class="input-group form-control"
+                                   formControlName="email"
+                                   id="email" type="email"/>
+                            <app-errors-form [control]="form.controls.email"
+                                             controlLabel="Adresse email"></app-errors-form>
+                            <br>
+
+                            <label class="input-group-prepend"
+                                   for="firstname">Prénom</label>
+                            <input class="input-group form-control"
+                                   formControlName="firstname"
+                                   id="firstname" type="text"/>
+                            <app-errors-form [control]="form.controls.firstname"
+                                             controlLabel="Prénom"></app-errors-form>
+                            <br>
+
+                            <label class="input-group-prepend"
+                                   for="lastname">Nom de famille</label>
+                            <input class="input-group form-control"
+                                   formControlName="lastname"
+                                   id="lastname" type="text"/>
+                            <app-errors-form [control]="form.controls.lastname"
+                                             controlLabel="Nom de famille"></app-errors-form>
+                            <br>
+
+                            <label class="input-group-prepend"
+                                   for="password">Mot de passe</label>
+                            <input class="input-group form-control"
+                                   formControlName="password"
+                                   id="password" type="password"/>
+                            <app-errors-form [control]="form.controls.password"
+                                             controlLabel="Mot de passe"></app-errors-form>
+                            <br>
+
+                            <label class="input-group-prepend"
+                                   for="passwordVerif">Vérification du mot de
+                                passe</label>
+                            <input class="input-group form-control"
+                                   formControlName="passwordVerif"
+                                   id="passwordVerif" type="password"/>
+                            <app-errors-form [control]="form.controls.passwordVerif"
+                                             controlLabel="Vérification du mot de passe"></app-errors-form>
+                            <br>
+                            <div *ngIf="(form.controls.passwordVerif.dirty || form.controls.passwordVerif.touched) && passwordError"
+                                 class="alert alert-danger mt-1">{{passwordError}}</div>
+
+                            <input [disabled]="form.invalid" type="submit" class="btn btn-success" value="Valider"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -16,12 +16,18 @@
                             class="sr-only">(current)</span></a>
                 </li>
             </ng-container>
-
-            <li *ngIf="!isConnected" class="nav-item pagination-right">
-                <a [routerLink]="['/connexion']" class="nav-link">Connexion</a>
-            </li>
+            <ng-container *ngIf="!isConnected">
+                <li class="nav-item pagination-right">
+                    <a [routerLink]="['/connexion']" class="nav-link"
+                       routerLinkActive="active">Connexion</a>
+                </li>
+                <li class="nav-item pagination-right">
+                    <a [routerLink]="['/inscription']" class="nav-link"
+                       routerLinkActive="active">Inscription</a>
+                </li>
+            </ng-container>
             <li *ngIf="isConnected" class="nav-item pagination-right">
-                <a (click)="logout()" class="nav-link">Déconnexion</a>
+                <a (click)="logout()" class="nav-link" routerLinkActive="active">Déconnexion</a>
             </li>
         </ul>
     </div>

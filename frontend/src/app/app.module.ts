@@ -20,6 +20,8 @@ import {FooterComponent} from './modules/footer/footer.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 import {ConnexionComponent} from './modules/connexion/connexion.component';
 import {AuthGuard} from './guards/auth.guard';
+import { InscriptionComponent } from './modules/inscription/inscription.component';
+import {ErrorsFormComponent} from './component/errors-form/errors-form.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +36,9 @@ import {AuthGuard} from './guards/auth.guard';
         ModalComponent,
         FooterComponent,
         CreationQuizComponent,
-        ConnexionComponent
+        ConnexionComponent,
+        InscriptionComponent,
+        ErrorsFormComponent
     ],
     imports: [
         ApiModule,

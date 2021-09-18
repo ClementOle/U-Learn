@@ -8,6 +8,7 @@ import {AccueilComponent} from './modules/accueil/accueil.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 import {ConnexionComponent} from './modules/connexion/connexion.component';
 import {AuthGuard} from './guards/auth.guard';
+import {InscriptionComponent} from './modules/inscription/inscription.component';
 
 export const appRouteList: Routes = [
     {
@@ -34,6 +35,10 @@ export const appRouteList: Routes = [
     {
         path: 'connexion',
         component: ConnexionComponent
+    },
+    {
+        path: 'inscription',
+        component: InscriptionComponent
     },
     {
         path: '**',
