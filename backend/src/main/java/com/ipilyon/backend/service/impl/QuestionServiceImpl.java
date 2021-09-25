@@ -32,5 +32,10 @@ public class QuestionServiceImpl implements QuestionService {
 		questionsSaved.forEach(question -> question.getReponses().forEach(reponse -> reponse.setQuestion(null)));
 		return questionMapper.mapAll(questionsSaved);
 	}
+
+	@Override
+	public List<QuestionDto> getQuizByCoursId(Integer coursId) {
+		return questionMapper.mapAll(questionDao.findAllByCoursCoursId(coursId));
+	}
 }
 
