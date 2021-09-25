@@ -9,4 +9,6 @@ public interface CommentaireService {
     List<CommentaireDto> findAllCommentairesByCoursId(Integer coursId);
 
     List<CommentaireDto> findAll();
+
+    CommentaireDto saveCommentaire(CommentaireDto commentaireDto);
 }

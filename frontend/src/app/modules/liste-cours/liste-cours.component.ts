@@ -1,6 +1,6 @@
 import {Component, DoCheck, Input, OnChanges, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {CategorieDto, CommentaireDto, CoursDto, ProgressionDto, UlearnService} from "../../../remote";
+import {CategorieDto, CommentaireDto, CoursDto, ProgressionDto, UlearnService, UserDto} from "../../../remote";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
@@ -20,10 +20,16 @@ export class ListeCoursComponent implements OnInit {
     categorieIdPrecedente: number;
     test = new Array();
     current: number;
+    affEcritureCom: boolean;
+    recupCours: CoursDto;
+    titreNouveauCom: string;
+    texteNouveauCom: string;
 
     coursAMettreAJour: CoursDto;
     message0: string;
     message1: string;
+
+    nouveauCommentaire: CommentaireDto;
 
 
     c: CommentaireDto;
@@ -49,7 +55,8 @@ export class ListeCoursComponent implements OnInit {
       this.message1 = "Masquer les commentaires";
 
       this.loginForm = this.formBuilder.group({
-        sendComment: []
+        texteNouveauCom: [],
+        titreNouveauCom: []
       })
 
       this.difficulteChoisie = false;
@@ -94,6 +101,43 @@ export class ListeCoursComponent implements OnInit {
         this.categorieIdPrecedente = this.categorieIdParam;
       }
     )
+  }
+
+  onValiderCom(cours) {
+      console.log('sendComment vaut : ' + this.loginForm.value.texteNouveauCom);
+      console.log('titreNouveauCom vaut : ' + this.loginForm.value.titreNouveauCom);
+      console.log('cours vaut : ');
+      console.log(cours);
+      // this.titreNouveauCom = this.loginForm.value.titreNouveauCom;
+      // this.texteNouveauCom = this.loginForm.value.texteNouveauCom;
+
+      this.recupCours = cours;
+    console.log('recupCours vaut : ');
+    console.log(this.recupCours);
+
+      const nouveauCommentaire: CommentaireDto = {
+        commentaireId: 0,
+        user: null,
+        cours: this.recupCours,
+        titreCommentaire: this.loginForm.value.titreNouveauCom,
+        texteCommentaire: this.loginForm.value.texteNouveauCom,
+        commentaireUtile: '10',
+        afficheBooleen: true
+        };
+
+      console.log('nouveauCommentaire vaut : ');
+      console.log(nouveauCommentaire);
+
+      this.uLEARNservice.saveCommentsUsingPOST(nouveauCommentaire).subscribe();
+      this.affEcritureCom = false;
+      this.majCom(cours);
+
+  }
+  ecrireCom() {
+    this.affEcritureCom = true;
+  }
+  onAnnulerCom() {
+    this.affEcritureCom = false;
   }
 
 

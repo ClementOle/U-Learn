@@ -464,6 +464,52 @@ export class UlearnService {
     }
 
     /**
+     * Sauvegarde un commentaire en base
+     * 
+     * @param commentaireDto commentaireDto
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe?: 'body', reportProgress?: boolean): Observable<CommentaireDto>;
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentaireDto>>;
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentaireDto>>;
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (commentaireDto === null || commentaireDto === undefined) {
+            throw new Error('Required parameter commentaireDto was null or undefined when calling saveCommentsUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<CommentaireDto>(`${this.basePath}/commentaire/save`,
+            commentaireDto,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Sauvegarde un cours en base
      * 
      * @param coursDto coursDto

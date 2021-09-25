@@ -1,6 +1,6 @@
 <!--Menu déroulant des difficultés-->
 
-<div class="maDiv">
+<div class="maDiv" xmlns:display="http://www.w3.org/1999/xhtml" xmlns:display="http://www.w3.org/1999/xhtml">
   <ul class="niveau1">
   <li>
     Choisissez votre difficulté :
@@ -72,6 +72,20 @@
             <p>{{ligneCom.texteCommentaire}}</p>
           </div>
         </div>
+        <br>
+        <button (click)="ecrireCom()">Écrire un commentaire</button>
+        <div *ngIf="affEcritureCom == true" [formGroup]="loginForm">
+          <label for="titreCom">Titre du commentaire</label>
+          <br>
+          <input type="text" formControlName="titreNouveauCom">
+          <br>
+          <label for="texteCom">Votre commentaire ...</label>
+          <br>
+          <textarea name="ecritureCom" id="ecrCom" cols="30" rows="10" class="form-control" formControlName="texteNouveauCom"></textarea>
+          <br>
+          <button (click)="onValiderCom(ligne)" class="btn-success mr-2">Valider mon commentaire</button>
+          <button (click)="onAnnulerCom()" class="btn-danger">Annuler mon commentaire</button>
+      </div>
 
     </ul>
   </div>
