@@ -3,6 +3,7 @@ package com.ipilyon.backend.service.impl;
 import com.ipilyon.backend.dao.UserDao;
 import com.ipilyon.backend.dto.UserDto;
 import com.ipilyon.backend.mapper.UserMapper;
+import com.ipilyon.backend.model.User;
 import com.ipilyon.backend.service.SessionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,11 @@ public class SessionServiceImpl implements SessionService {
 		}
 
 		return this.userMapper.map(this.userDao.save(this.userMapper.map(userDto)));
+	}
+
+	@Override
+	public UserDto findUserByUserName(String userName) {
+		System.out.println("Passe dans findUserByUserName()");
+		return this.userMapper.map(this.userDao.findUserByUsername(userName));
 	}
 }

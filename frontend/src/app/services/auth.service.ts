@@ -11,6 +11,8 @@ export class AuthService {
 
     public isConnected: BehaviorSubject<boolean>;
 
+    userNameConnected: string;
+
     constructor(private http: HttpClient) {
         this.isConnected = new BehaviorSubject<boolean>(false);
     }
@@ -48,5 +50,10 @@ export class AuthService {
 
             }
         );
+    }
+
+    public getUserIdConnected(userName) {
+      this.userNameConnected = userName;
+      console.log('Dans authService.ts, userNameConnected vaut ' + this.userNameConnected);
     }
 }

@@ -6,10 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "u'learn")
@@ -24,4 +21,12 @@ public class SessionController {
 	public UserDto signIn(@RequestBody UserDto userDto) {
 		return this.sessionService.signIn(userDto);
 	}
+
+	@ApiOperation(value = "Récupère l'utilisateur connecté")
+	@GetMapping(value = "/{userName}")
+	public UserDto getUserByUserName(@PathVariable String userName) {
+		System.out.println("passe dans le SessionController, méthode getUserByUserName");
+		return this.sessionService.findUserByUserName(userName);
+	}
+
 }

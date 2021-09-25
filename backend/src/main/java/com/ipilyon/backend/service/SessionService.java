@@ -10,4 +10,6 @@ public interface SessionService {
 	 * @return Le UserDto sauvegarder
 	 */
 	UserDto signIn(UserDto userDto);
+
+	UserDto findUserByUserName(String userName);
 }

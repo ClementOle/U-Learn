@@ -373,6 +373,46 @@ export class UlearnService {
     }
 
     /**
+     * Récupère l&#39;utilisateur connecté
+     * 
+     * @param userName userName
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserByUserNameUsingGET(userName: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public getUserByUserNameUsingGET(userName: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public getUserByUserNameUsingGET(userName: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public getUserByUserNameUsingGET(userName: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByUserNameUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<UserDto>(`${this.basePath}/session/${encodeURIComponent(String(userName))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Mets à jour le cours
      * 
      * @param coursDto coursDto

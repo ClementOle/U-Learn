@@ -12,6 +12,7 @@ export class ConnexionComponent implements OnInit {
 
     form: FormGroup;
     errorMsg: string;
+    usernameConnected: string;
 
     constructor(private authService: AuthService,
                 private router: Router,
@@ -32,10 +33,18 @@ export class ConnexionComponent implements OnInit {
     submit() {
         let username = this.form.get('username').value;
         let password = this.form.get('password').value;
+        this.usernameConnected = username;
 
         this.authService.login(username, password)
             .then(() => this.router.navigateByUrl('/'))
             .catch(err => this.errorMsg = err);
+        this.getUserIdConnnected();
+    }
+
+    getUserIdConnnected() {
+      console.log('Dans connexion.component.ts on lance la méthode getUserIdConnected()');
+      console.log('usernameConnected vaut ' + this.usernameConnected);
+      this.authService.getUserIdConnected(this.usernameConnected);
     }
 
 }

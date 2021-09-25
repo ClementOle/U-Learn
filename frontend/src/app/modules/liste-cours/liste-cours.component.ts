@@ -1,7 +1,8 @@
 import {Component, DoCheck, Input, OnChanges, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CategorieDto, CommentaireDto, CoursDto, ProgressionDto, UlearnService, UserDto} from "../../../remote";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-liste-cours',
@@ -21,22 +22,21 @@ export class ListeCoursComponent implements OnInit {
     test = new Array();
     current: number;
     affEcritureCom: boolean;
-    recupCours: CoursDto;
     titreNouveauCom: string;
     texteNouveauCom: string;
 
     coursAMettreAJour: CoursDto;
     message0: string;
     message1: string;
-
-    nouveauCommentaire: CommentaireDto;
-
+    userConnected: UserDto;
 
     c: CommentaireDto;
 
     constructor(private Activatedroute: ActivatedRoute,
                 private uLEARNservice: UlearnService,
-                private formBuilder: FormBuilder) {
+                private formBuilder: FormBuilder,
+                private authService: AuthService,
+                private route: Router) {
 
     }
 
@@ -58,8 +58,12 @@ export class ListeCoursComponent implements OnInit {
         texteNouveauCom: [],
         titreNouveauCom: []
       })
-
       this.difficulteChoisie = false;
+
+      // Recherche de l'utilisateur connecté
+      this.uLEARNservice.getUserByUserNameUsingGET(this.authService.userNameConnected).subscribe(value => {
+        this.userConnected = value;
+      });
     }
 
     // Mise à jour du libellé du bouton commentaire et affichage ou non des commentaires
@@ -104,29 +108,16 @@ export class ListeCoursComponent implements OnInit {
   }
 
   onValiderCom(cours) {
-      console.log('sendComment vaut : ' + this.loginForm.value.texteNouveauCom);
-      console.log('titreNouveauCom vaut : ' + this.loginForm.value.titreNouveauCom);
-      console.log('cours vaut : ');
-      console.log(cours);
-      // this.titreNouveauCom = this.loginForm.value.titreNouveauCom;
-      // this.texteNouveauCom = this.loginForm.value.texteNouveauCom;
-
-      this.recupCours = cours;
-    console.log('recupCours vaut : ');
-    console.log(this.recupCours);
 
       const nouveauCommentaire: CommentaireDto = {
         commentaireId: 0,
-        user: null,
-        cours: this.recupCours,
+        user: this.userConnected,
+        cours: cours,
         titreCommentaire: this.loginForm.value.titreNouveauCom,
         texteCommentaire: this.loginForm.value.texteNouveauCom,
         commentaireUtile: '10',
         afficheBooleen: true
         };
-
-      console.log('nouveauCommentaire vaut : ');
-      console.log(nouveauCommentaire);
 
       // Sauvegarde du commentaire
       this.uLEARNservice.saveCommentsUsingPOST(nouveauCommentaire).subscribe();
