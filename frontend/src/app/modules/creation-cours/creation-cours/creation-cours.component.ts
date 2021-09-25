@@ -83,7 +83,8 @@ export class CreationCoursComponent implements OnInit {
                 texte: this.texte,
                 titre: titre,
                 video: null,
-                categorie: categories
+                categorie: categories,
+                afficheCommentaires: 1
             })
                 .subscribe(value => this.savedIdCours = value.coursId, error => console.log(error), () => {
                     this.showLoader = false;

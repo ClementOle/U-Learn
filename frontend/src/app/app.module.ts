@@ -23,6 +23,7 @@ import {InscriptionComponent} from './modules/inscription/inscription.component'
 import {ErrorsFormComponent} from './component/errors-form/errors-form.component';
 import {AuthService} from './services/auth.service';
 import { CoursComponent } from './modules/cours/cours.component';
+import {QuizComponent} from './modules/quiz/quiz.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { CoursComponent } from './modules/cours/cours.component';
         ConnexionComponent,
         InscriptionComponent,
         ErrorsFormComponent,
-        CoursComponent
+        CoursComponent,
+        QuizComponent
     ],
     imports: [
         ApiModule,

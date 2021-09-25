@@ -5,17 +5,30 @@
 
                 <div class="card-header">
                     <h4 class="card-title text-center"><img
+                            *ngIf="cours.image"
                             src="data:image/png;base64,{{cours.image}}"
                             class="rounded-circle" width="70" height="70"
                             alt="mon-image"> {{cours.titre}}</h4>
                 </div>
 
                 <div class="card-body">
-                    <p>{{cours.texte}}</p>
+                    <p [innerHTML]="cours.texte"></p>
                     <hr>
                     <ng-container *ngIf="cours.commentaires">
-                        <button (click)="majCom()" type="button" class="btn btn-primary m-1" data-toggle="collapse"
-                                data-target="#collapse" aria-expanded="false" aria-controls="collapse">{{commentaireBtnLabel()}}</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button (click)="majCom()" type="button"
+                                        class="btn btn-primary m-1" data-toggle="collapse"
+                                        data-target="#collapse" aria-expanded="false"
+                                        aria-controls="collapse">{{commentaireBtnLabel()}}</button>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button class="btn btn-primary m-1"
+                                        [routerLink]="['/cours', this.cours.coursId, '/quiz']">
+                                    Aller au quiz
+                                </button>
+                            </div>
+                        </div>
                         <div class="collapse" id="collapse">
                             <div class="card"
                                  *ngFor="let commentaire of cours.commentaires">

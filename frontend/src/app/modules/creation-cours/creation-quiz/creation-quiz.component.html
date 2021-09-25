@@ -41,7 +41,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <button type="button" class="btn btn-secondary"
+                        <button type="button" class="btn btn-secondary m-1"
                                 data-target="#creationQuestionModalCenter"
                                 data-toggle="modal">
                             Ajouter une
@@ -52,12 +52,12 @@
 
                 <div class="row">
                     <div class=" col-md-12 text-center">
-                        <input  *ngIf="isValide()" class="btn btn-primary" type="submit"
+                        <input  *ngIf="isValide()" class="btn btn-primary m-1" type="submit"
                                data-target="#validationModalCenter"
                                data-toggle="modal"
                                value="Enregistrer les modifications" [disabled]="!isValide()"
                        />
-                        <input (click)="reset()" class="btn btn-secondary" type="button"
+                        <input (click)="reset()" class="btn btn-secondary m-1" type="button"
                                value="Annuler"/>
                     </div>
                 </div>

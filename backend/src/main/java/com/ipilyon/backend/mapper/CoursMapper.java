@@ -28,10 +28,12 @@ public abstract class CoursMapper {
 	@AfterMapping
 	public void afterMap(@MappingTarget CoursDto target, Cours source) {
 		List<CommentaireDto> commentairesMappes = new ArrayList<>();
-		source.getCommentaires().forEach(commentaire -> {
-			commentaire.setCours(null);
-			commentairesMappes.add(this.commentaireMapper.map(commentaire));
-		});
-		target.setCommentaires(commentairesMappes);
+		if(source.getCommentaires() != null) {
+			source.getCommentaires().forEach(commentaire -> {
+				commentaire.setCours(null);
+				commentairesMappes.add(this.commentaireMapper.map(commentaire));
+			});
+			target.setCommentaires(commentairesMappes);
+		}
 	}
 }
