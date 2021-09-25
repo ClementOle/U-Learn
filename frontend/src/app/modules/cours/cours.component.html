@@ -19,12 +19,12 @@
                             <div class="col-md-6">
                                 <button (click)="majCom()" type="button"
                                         class="btn btn-primary m-1" data-toggle="collapse"
-                                        data-target="#collapse" aria-expanded="false"
+                                        data-target="#collapse" [attr.aria-expanded]="cours.afficheCommentaires == 1"
                                         aria-controls="collapse">{{commentaireBtnLabel()}}</button>
                             </div>
-                            <div class="col-md-6 text-right">
+                            <div *ngIf="cours" class="col-md-6 text-right">
                                 <button class="btn btn-primary m-1"
-                                        [routerLink]="['/cours', this.cours.coursId, '/quiz']">
+                                        [routerLink]="['/cours', this.cours.coursId, 'quiz']">
                                     Aller au quiz
                                 </button>
                             </div>

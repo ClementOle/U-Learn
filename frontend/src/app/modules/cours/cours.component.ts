@@ -36,6 +36,6 @@ export class CoursComponent implements OnInit {
     }
 
     commentaireBtnLabel() {
-        return this.cours.afficheCommentaires === 1 ? "Masquer les commentaires" : "Afficher les commentaires";
+        return this.cours.afficheCommentaires === 1 ? "Afficher les commentaires" : "Masquer les commentaires";
     }
 }
