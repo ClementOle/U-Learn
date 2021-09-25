@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
-import {ApiModule, BASE_PATH} from '../remote';
+import {ApiModule, BASE_PATH, UlearnService} from '../remote';
 import {environment} from '../environments/environment';
 import {CKEditorModule} from 'ng2-ckeditor';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -15,13 +15,14 @@ import {LoaderComponent} from './component/loader/loader.component';
 import {ModalComponent} from './component/modal/modal.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {GlobalInterceptor} from './services/global-interceptor';
-import {ContenuCoursComponent} from './modules/contenu-cours/contenu-cours.component';
 import {FooterComponent} from './modules/footer/footer.component';
 import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/creation-quiz.component';
 import {ConnexionComponent} from './modules/connexion/connexion.component';
 import {AuthGuard} from './guards/auth.guard';
-import { InscriptionComponent } from './modules/inscription/inscription.component';
+import {InscriptionComponent} from './modules/inscription/inscription.component';
 import {ErrorsFormComponent} from './component/errors-form/errors-form.component';
+import {AuthService} from './services/auth.service';
+import { CoursComponent } from './modules/cours/cours.component';
 
 @NgModule({
     declarations: [
@@ -31,14 +32,14 @@ import {ErrorsFormComponent} from './component/errors-form/errors-form.component
         ListeCoursComponent,
         CreationCoursComponent,
         LoaderComponent,
-        ContenuCoursComponent,
         ModalComponent,
         ModalComponent,
         FooterComponent,
         CreationQuizComponent,
         ConnexionComponent,
         InscriptionComponent,
-        ErrorsFormComponent
+        ErrorsFormComponent,
+        CoursComponent
     ],
     imports: [
         ApiModule,
@@ -48,11 +49,16 @@ import {ErrorsFormComponent} from './component/errors-form/errors-form.component
         CKEditorModule,
         ReactiveFormsModule
     ],
-    providers: [{provide: BASE_PATH, useValue: environment.API_BASE_PATH}, {
-        provide: HTTP_INTERCEPTORS,
-        useClass: GlobalInterceptor,
-        multi: true
-    }, AuthGuard],
+    providers: [
+        {
+            provide: BASE_PATH, useValue: environment.API_BASE_PATH
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: GlobalInterceptor,
+            multi: true
+        },
+        AuthService, AuthGuard, UlearnService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

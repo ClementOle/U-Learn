@@ -23,6 +23,7 @@
     <ul class="list-group">
       <li [ngClass]="{'list-group-item' : true}"
           *ngFor="let ligne of coursParCategorieId;">
+          <button [routerLink]="['/cours', ligne.coursId]">Détails du cours</button>
         <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
         <p>{{ligne.texte}}</p>
         <p>Niveau difficulte : {{ligne.difficulte}}</p>

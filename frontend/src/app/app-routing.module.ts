@@ -9,6 +9,7 @@ import {CreationQuizComponent} from './modules/creation-cours/creation-quiz/crea
 import {ConnexionComponent} from './modules/connexion/connexion.component';
 import {AuthGuard} from './guards/auth.guard';
 import {InscriptionComponent} from './modules/inscription/inscription.component';
+import {CoursComponent} from './modules/cours/cours.component';
 
 export const appRouteList: Routes = [
     {
@@ -27,6 +28,11 @@ export const appRouteList: Routes = [
         path: 'creation-quiz/:idCours',
         canActivate: [AuthGuard],
         component: CreationQuizComponent
+    },
+    {
+        path: 'cours/:id',
+        canActivate: [AuthGuard],
+        component: CoursComponent
     },
     {
         path: 'accueil',
