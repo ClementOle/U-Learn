@@ -1,29 +1,41 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ConnexionService} from "../../services/connexion.service";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-connexion',
-  templateUrl: './connexion.component.html',
-  styleUrls: ['./connexion.component.scss']
+    selector: 'app-connexion',
+    templateUrl: './connexion.component.html',
+    styleUrls: ['./connexion.component.scss']
 })
 export class ConnexionComponent implements OnInit {
 
-  username: string;
-  password: string;
+    form: FormGroup;
+    errorMsg: string;
 
-  constructor(private httpClient: HttpClient, private connexionService: ConnexionService, private router: Router) {
-  }
+    constructor(private authService: AuthService,
+                private router: Router,
+                private fb: FormBuilder) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+        this.initForm();
+    }
 
-  submit() {
-    this.connexionService.connecte = true;
-    this.router.navigate(["/accueil"]);
-    /*this.httpClient.post<any>('http://localhost:8080/login',
-      {username: this.username, password: this.password}).subscribe(value => console.log(value));*/
-  }
+    initForm() {
+        this.form = this.fb.group({
+            username: ['', [Validators.required]],
+            password: ['', [Validators.required]]
+        });
+    }
+
+    submit() {
+        let username = this.form.get('username').value;
+        let password = this.form.get('password').value;
+
+        this.authService.login(username, password)
+            .then(() => this.router.navigateByUrl('/'))
+            .catch(err => this.errorMsg = err);
+    }
 
 }
