@@ -128,6 +128,7 @@ export class ListeCoursComponent implements OnInit {
       console.log('nouveauCommentaire vaut : ');
       console.log(nouveauCommentaire);
 
+      // Sauvegarde du commentaire
       this.uLEARNservice.saveCommentsUsingPOST(nouveauCommentaire).subscribe();
       this.affEcritureCom = false;
       this.majCom(cours);
