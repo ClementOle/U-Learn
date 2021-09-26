@@ -55,7 +55,7 @@ export class QuizComponent implements OnInit {
     }
 
     redoQuiz() {
-        this.router.navigate(['/cours', this.coursId, 'quiz']);
+        this.initForm();
     }
 
     goToCours() {
