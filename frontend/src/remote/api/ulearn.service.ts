@@ -11,16 +11,21 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import {Inject, Injectable, Optional} from '@angular/core';
-import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent }                           from '@angular/common/http';
+import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
-import {Observable} from 'rxjs/Observable';
+import { Observable }                                        from 'rxjs/Observable';
 
-import {CategorieDto} from '../model/categorieDto';
-import {CoursDto} from '../model/coursDto';
+import { CategorieDto } from '../model/categorieDto';
+import { CommentaireDto } from '../model/commentaireDto';
+import { CoursDto } from '../model/coursDto';
+import { QuestionDto } from '../model/questionDto';
+import { UserDto } from '../model/userDto';
 
-import {BASE_PATH} from '../variables';
-import {Configuration} from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
@@ -30,7 +35,7 @@ export class UlearnService {
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (basePath) {
             this.basePath = basePath;
         }
@@ -39,130 +44,6 @@ export class UlearnService {
             this.basePath = basePath || configuration.basePath || this.basePath;
         }
     }
-
-    /**
-     * Renvoie toute les catégorie
-     *
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllCategorieUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CategorieDto>>;
-
-    public getAllCategorieUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CategorieDto>>>;
-
-    public getAllCategorieUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CategorieDto>>>;
-
-    public getAllCategorieUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [];
-
-        return this.httpClient.get<Array<CategorieDto>>(`${this.basePath}/categorie/all`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Renvoie tous les cours
-     *
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllCoursUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
-
-    public getAllCoursUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
-
-    public getAllCoursUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
-
-    public getAllCoursUsingGET(observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [];
-
-        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/all`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Sauvegarde un cours en base
-     *
-     * @param coursDto coursDto
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public saveUsingPOST(coursDto: CoursDto, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
-
-    public saveUsingPOST(coursDto: CoursDto, observe: any = 'body', reportProgress: boolean = false): Observable<any> {
-        if (coursDto === null || coursDto === undefined) {
-            throw new Error('Required parameter coursDto was null or undefined when calling saveUsingPOST.');
-        }
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            'application/json'
-        ];
-        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        let consumes: string[] = [
-            'application/json'
-        ];
-        let httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.post<CoursDto>(`${this.basePath}/cours/save`,
-            coursDto,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    public saveUsingPOST(coursDto: CoursDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
-    public saveUsingPOST(coursDto: CoursDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
 
     /**
      * @param consumes string[] mime-types
@@ -176,6 +57,635 @@ export class UlearnService {
             }
         }
         return false;
+    }
+
+
+    /**
+     * Renvoie toute les catégorie
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCategorieUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CategorieDto>>;
+    public getAllCategorieUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CategorieDto>>>;
+    public getAllCategorieUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CategorieDto>>>;
+    public getAllCategorieUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CategorieDto>>(`${this.basePath}/categorie/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les commentaires par coursId
+     * 
+     * @param coursId coursId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CommentaireDto>>;
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CommentaireDto>>>;
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CommentaireDto>>>;
+    public getAllCommentairesByCoursIdUsingGET(coursId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursId === null || coursId === undefined) {
+            throw new Error('Required parameter coursId was null or undefined when calling getAllCommentairesByCoursIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CommentaireDto>>(`${this.basePath}/commentaire/${encodeURIComponent(String(coursId))}/commentaire`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les commentaires
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCommentairesUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CommentaireDto>>;
+    public getAllCommentairesUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CommentaireDto>>>;
+    public getAllCommentairesUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CommentaireDto>>>;
+    public getAllCommentairesUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CommentaireDto>>(`${this.basePath}/commentaire/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les cours par categorieId
+     * 
+     * @param categorieId categorieId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByCategorieIdUsingGET(categorieId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (categorieId === null || categorieId === undefined) {
+            throw new Error('Required parameter categorieId was null or undefined when calling getAllCoursByCategorieIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/${encodeURIComponent(String(categorieId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les cours par difficulte et par categorieId
+     * 
+     * @param categorieId categorieId
+     * @param difficulte difficulte
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByDifficulteAndCategorieUsingGET(categorieId: number, difficulte: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (categorieId === null || categorieId === undefined) {
+            throw new Error('Required parameter categorieId was null or undefined when calling getAllCoursByDifficulteAndCategorieUsingGET.');
+        }
+        if (difficulte === null || difficulte === undefined) {
+            throw new Error('Required parameter difficulte was null or undefined when calling getAllCoursByDifficulteAndCategorieUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/difficulte/${encodeURIComponent(String(difficulte))}/categorie/${encodeURIComponent(String(categorieId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les cours par difficulte
+     * 
+     * @param difficulte difficulte
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursByDifficulteUsingGET(difficulte: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (difficulte === null || difficulte === undefined) {
+            throw new Error('Required parameter difficulte was null or undefined when calling getAllCoursByDifficulteUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/difficulte/${encodeURIComponent(String(difficulte))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie tous les cours
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllCoursUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CoursDto>>;
+    public getAllCoursUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CoursDto>>>;
+    public getAllCoursUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CoursDto>>>;
+    public getAllCoursUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<CoursDto>>(`${this.basePath}/cours/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Renvoie un cours en fonction de son id
+     * 
+     * @param coursId coursId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getCoursByCoursIdUsingGET(coursId: number, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
+    public getCoursByCoursIdUsingGET(coursId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
+    public getCoursByCoursIdUsingGET(coursId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
+    public getCoursByCoursIdUsingGET(coursId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursId === null || coursId === undefined) {
+            throw new Error('Required parameter coursId was null or undefined when calling getCoursByCoursIdUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<CoursDto>(`${this.basePath}/cours/coursId/${encodeURIComponent(String(coursId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Récupère un quiz
+     * 
+     * @param coursId coursId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getQuizByCoursIdUsingGET(coursId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<QuestionDto>>;
+    public getQuizByCoursIdUsingGET(coursId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<QuestionDto>>>;
+    public getQuizByCoursIdUsingGET(coursId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<QuestionDto>>>;
+    public getQuizByCoursIdUsingGET(coursId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursId === null || coursId === undefined) {
+            throw new Error('Required parameter coursId was null or undefined when calling getQuizByCoursIdUsingGET.');
+        }
+
+        let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
+        if (coursId !== undefined) {
+            queryParameters = queryParameters.set('coursId', <any>coursId);
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<Array<QuestionDto>>(`${this.basePath}/question/cours/${encodeURIComponent(String(coursId))}/quiz`,
+            {
+                params: queryParameters,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Récupère l&#39;utilisateur connecté
+     * 
+     * @param userName userName
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getUserByUserNameUsingGET(userName: string, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public getUserByUserNameUsingGET(userName: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public getUserByUserNameUsingGET(userName: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public getUserByUserNameUsingGET(userName: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByUserNameUsingGET.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+        ];
+
+        return this.httpClient.get<UserDto>(`${this.basePath}/session/${encodeURIComponent(String(userName))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Mets à jour le cours
+     * 
+     * @param coursDto coursDto
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
+    public putCoursByCoursIdUsingPUT(coursDto: CoursDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursDto === null || coursDto === undefined) {
+            throw new Error('Required parameter coursDto was null or undefined when calling putCoursByCoursIdUsingPUT.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.put<CoursDto>(`${this.basePath}/cours/miseajour`,
+            coursDto,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Sauvegarde un cours en base
+     * 
+     * @param questionDtos questionDtos
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe?: 'body', reportProgress?: boolean): Observable<Array<QuestionDto>>;
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<QuestionDto>>>;
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<QuestionDto>>>;
+    public saveAllUsingPOST(questionDtos: Array<QuestionDto>, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (questionDtos === null || questionDtos === undefined) {
+            throw new Error('Required parameter questionDtos was null or undefined when calling saveAllUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<Array<QuestionDto>>(`${this.basePath}/question/save`,
+            questionDtos,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Sauvegarde un commentaire en base
+     * 
+     * @param commentaireDto commentaireDto
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe?: 'body', reportProgress?: boolean): Observable<CommentaireDto>;
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CommentaireDto>>;
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CommentaireDto>>;
+    public saveCommentsUsingPOST(commentaireDto: CommentaireDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (commentaireDto === null || commentaireDto === undefined) {
+            throw new Error('Required parameter commentaireDto was null or undefined when calling saveCommentsUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<CommentaireDto>(`${this.basePath}/commentaire/save`,
+            commentaireDto,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Sauvegarde un cours en base
+     * 
+     * @param coursDto coursDto
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveUsingPOST(coursDto: CoursDto, observe?: 'body', reportProgress?: boolean): Observable<CoursDto>;
+    public saveUsingPOST(coursDto: CoursDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CoursDto>>;
+    public saveUsingPOST(coursDto: CoursDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CoursDto>>;
+    public saveUsingPOST(coursDto: CoursDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursDto === null || coursDto === undefined) {
+            throw new Error('Required parameter coursDto was null or undefined when calling saveUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<CoursDto>(`${this.basePath}/cours/save`,
+            coursDto,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Sauvegarde un utilisateur
+     * 
+     * @param userDto userDto
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public signInUsingPOST(userDto: UserDto, observe?: 'body', reportProgress?: boolean): Observable<UserDto>;
+    public signInUsingPOST(userDto: UserDto, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<UserDto>>;
+    public signInUsingPOST(userDto: UserDto, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<UserDto>>;
+    public signInUsingPOST(userDto: UserDto, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (userDto === null || userDto === undefined) {
+            throw new Error('Required parameter userDto was null or undefined when calling signInUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            'application/json'
+        ];
+        let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set("Accept", httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        let consumes: string[] = [
+            'application/json'
+        ];
+        let httpContentTypeSelected:string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set("Content-Type", httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<UserDto>(`${this.basePath}/session/signin`,
+            userDto,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
 }

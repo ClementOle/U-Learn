@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <img class="navbar-toggler-icon" src="assets/img/online-learning.png" alt="Accueil">
+    <a class="navbar-brand" [routerLink]="['/accueil']">ULEARN</a>
+    <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler" data-target="#navbarNav" data-toggle="collapse"
+            type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+            <ng-container *ngIf="isConnected">
+                <li class="nav-item" *ngFor="let theme of categories">
+                    <a [routerLink]="['/liste-cours', theme.categorieId]" class="nav-link"
+                       routerLinkActive="active">{{theme?.titre}} <span
+                            class="sr-only">(current)</span></a>
+                </li>
+            </ng-container>
+            <ng-container *ngIf="!isConnected">
+                <li class="nav-item pagination-right">
+                    <a [routerLink]="['/connexion']" class="nav-link"
+                       routerLinkActive="active">Connexion</a>
+                </li>
+                <li class="nav-item pagination-right">
+                    <a [routerLink]="['/inscription']" class="nav-link"
+                       routerLinkActive="active">Inscription</a>
+                </li>
+            </ng-container>
+            <li *ngIf="isConnected" class="nav-item pagination-right">
+                <a (click)="logout()" class="nav-link" routerLinkActive="active">Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+</nav>

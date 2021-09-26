@@ -28,4 +28,49 @@ public class CoursServiceImpl implements CoursService {
 	public List<CoursDto> findAll() {
 		return this.coursMapper.map(this.coursDao.findAll());
 	}
+
+	@Override
+	public List<CoursDto> findAllByCategorieId(Integer categorieId) {
+		return this.coursMapper.map(this.coursDao.findAllByCategorie_CategorieId(categorieId));
+	}
+
+	@Override
+	public List<CoursDto> findAllByDifficulte (Integer difficulte) {
+		return this.coursMapper.map(this.coursDao.findAllByDifficulte(difficulte));
+	}
+
+	@Override
+	public CoursDto findCoursByCoursId(Integer coursId) {
+		System.out.println("Passe dans findCoursByCoursId du ServiceImpl");
+
+		return this.coursMapper.map(this.coursDao.findCoursByCoursId(coursId));
+	}
+
+	@Override
+	public  List<CoursDto> findByCategorieIdAndDifficulte (Integer difficulte, Integer categorieId) {
+		System.out.println("Lance findByCategorieIdAndDifficulte()");
+		System.out.println("categorieId vaut : " + categorieId);
+		System.out.println("difficulte vaut : " + difficulte);
+		return this.coursMapper.map(this.coursDao.findAllByDifficulteAndCategorie_CategorieId(difficulte, categorieId));
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

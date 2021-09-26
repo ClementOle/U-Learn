@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <form (ngSubmit)="submit()" [formGroup]="form">
+                <div class="card shadow my-5">
+                    <div class="card-header">
+                        <h4 class="card-title text-center">Connexion</h4>
+                    </div>
+
+                    <div *ngIf="errorMsg" class="text-center text-danger m-1">{{errorMsg}}</div>
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="input-group-prepend"
+                                   for="username">Nom d'utilisateur</label>
+                            <input class="input-group form-control"
+                                   formControlName="username"
+                                   id="username" type="text"/>
+                            <div class="text-danger"
+                                 *ngIf="(form.controls.username.dirty || form.controls.username.touched)
+              && form.controls.username.invalid
+              && form.controls.username.errors?.required">
+                                Vous devez renseigner un nom d'utilisateur.
+                            </div>
+                            <br>
+                            <label class="input-group-prepend"
+                                   for="password">Mot de passe</label>
+                            <input class="input-group form-control"
+                                   formControlName="password"
+                                   id="password" type="password"/>
+                            <div class="text-danger"
+                                 *ngIf="(form.controls.password.dirty || form.controls.password.touched)
+              && form.controls.password.invalid
+              && form.controls.password.errors?.required">
+                                Vous devez renseigner un mot de passe.
+                            </div>
+                            <br>
+                            <input type="submit"
+                                   [disabled]="form.invalid && (form.dirty || form.touched)"
+                                   class="btn btn-primary" value="Valider"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+
+.niveau1 ul {display: none; position: absolute; left: 140px; top: 0px; margin: 0px; padding: 0px;}
+.maDiv li {list-style-type: none; position: relative; width: 140px; background-color: #E0E0E0}
+li:hover ul.niveau2, li li:hover ul.niveau3 {display: block}
+

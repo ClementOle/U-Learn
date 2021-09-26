@@ -2,7 +2,6 @@ package com.ipilyon.backend.dto;
 
 import java.util.List;
 
-import com.ipilyon.backend.model.Cours;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,5 +17,5 @@ public class CategorieDto {
 
 	private String description;
 
-	private List<Cours> cours;
+	private List<CoursDto> cours;
 }

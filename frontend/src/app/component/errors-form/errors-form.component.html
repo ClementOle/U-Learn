@@ -1,0 +1,17 @@
+<div *ngIf="control.invalid && (control.dirty || control.touched)"
+     class="alert alert-danger mt-1">
+  <div *ngIf="control.errors?.required">
+    * Le champ '{{controlLabel}}' est obligatoire.
+  </div>
+  <div *ngIf="control.errors?.pattern || control.errors?.email">
+    * Le champ '{{controlLabel}}' n'est pas au bon format.
+  </div>
+  <div *ngIf="control.errors?.minlength">
+    * Le champ '{{controlLabel}}' doit avoir au minimum {{control.errors?.minlength.requiredLength}}
+    {{control.errors?.minlength.requiredLength === 1 ? 'caractère' : 'caractères'}}.
+  </div>
+  <div *ngIf="control.errors?.maxlength">
+    * Le champ '{{controlLabel}}' doit avoir au maximum {{control.errors?.maxlength.requiredLength}}
+    {{control.errors?.maxlength.requiredLength === 1 ? 'caractère' : 'caractères'}}.
+  </div>
+</div>

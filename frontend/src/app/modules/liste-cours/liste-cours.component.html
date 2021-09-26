@@ -1,0 +1,98 @@
+<!--Menu déroulant des difficultés-->
+
+<div class="maDiv" xmlns:display="http://www.w3.org/1999/xhtml" xmlns:display="http://www.w3.org/1999/xhtml">
+  <ul class="niveau1">
+  <li>
+    Choisissez votre difficulté :
+    <ul class="niveau2">
+      <li class="baliseLi" ><button (click)="choixDifficulteEtCategorie(1)">Difficulté 1</button></li>
+      <li class="baliseLi" ><button (click)="choixDifficulteEtCategorie(2)">Difficulté 2</button></li>
+      <li class="baliseLi" ><button (click)="choixDifficulteEtCategorie(3)">Difficulté 3</button></li>
+    </ul>
+  </li>
+  </ul>
+</div>
+<br>
+<br>
+<br>
+
+<!-- Affichage de tous les cours de la catégorie de cours tant qu'aucune difficulté n'a été choisie -->
+
+<div *ngIf = "difficulteChoisie === false" class="row">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <li [ngClass]="{'list-group-item' : true}"
+          *ngFor="let ligne of coursParCategorieId;">
+          <button [routerLink]="['/cours', ligne.coursId]">Détails du cours</button>
+        <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
+        <p>{{ligne.texte}}</p>
+        <p>Niveau difficulte : {{ligne.difficulte}}</p>
+
+        <p>Lien vers le <b>tutoriel vidéo : </b><a href="{{ligne.video}}"
+                                         target="_blank"
+        > Cliquez ici</a></p>
+
+        <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
+                                         target="_blank"
+        >Cliquez ici</a></p>
+        <br>
+        <br>
+
+    </ul>
+  </div>
+</div>
+
+<!-- Affiche les cours en fonction de la  difficulté et de la catégorie de cours choisies -->
+
+<div *ngIf = "difficulteChoisie === true" class="row">
+  <div class="col-xs-12">
+    <ul class="list-group">
+      <li [ngClass]="{'list-group-item' : true}"
+          *ngFor="let ligne of coursParDifficulteEtCategorie;">
+        <h4><img src="data:image/png;base64,{{ligne.image}}" class="rounded-circle" width="70" height="70" alt="mon-image"> {{ligne.titre}}</h4>
+        <p>{{ligne.texte}}</p>
+        <p>Niveau difficulte : {{ligne.difficulte}}</p>
+
+        <p>Lien vers le <b>tutoriel vidéo : </b><a href="{{ligne.video}}"
+                                                   target="_blank"
+        > Cliquez ici</a></p>
+
+        <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
+                                                  target="_blank"
+        >Cliquez ici</a></p>
+
+        <!--Changement libellé bouton commentaire et affichage des commentaires-->
+        <div *ngIf="ligne.afficheCommentaires == 0">
+          <button (click)="majCom(ligne)">{{message0}}</button>
+        </div>
+        <div *ngIf="ligne.afficheCommentaires == 1">
+          <button (click)="majCom(ligne)">{{message1}}</button>
+          <div *ngFor="let ligneCom of ligne.commentaires; let nbCom = index;">
+            <p><b>Commentaire numéro {{nbCom + 1}}</b></p>
+            <p>{{ligneCom.titreCommentaire}}</p>
+            <p>{{ligneCom.texteCommentaire}}</p>
+          </div>
+        </div>
+        <br>
+        <button (click)="ecrireCom()" class="btn btn-primary">Écrire un commentaire</button>
+        <div *ngIf="affEcritureCom == true" [formGroup]="loginForm">
+          <label for="titreCom">Titre du commentaire</label>
+          <br>
+          <input type="text" formControlName="titreNouveauCom">
+          <br>
+          <label for="texteCom">Votre commentaire ...</label>
+          <br>
+          <textarea name="ecritureCom" id="ecrCom" cols="30" rows="10" class="form-control" formControlName="texteNouveauCom"></textarea>
+          <br>
+          <button (click)="onValiderCom(ligne)" class="btn btn-success mr-2">Valider mon commentaire</button>
+          <button (click)="onAnnulerCom()" class="btn btn-danger">Annuler mon commentaire</button>
+      </div>
+
+    </ul>
+  </div>
+</div>
+
+
+
+
+

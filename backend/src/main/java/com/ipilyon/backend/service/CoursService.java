@@ -9,4 +9,13 @@ public interface CoursService {
 	CoursDto saveCours(CoursDto coursDto);
 
 	List<CoursDto> findAll();
+
+	List<CoursDto> findAllByCategorieId(Integer categorieId);
+
+	List<CoursDto> findAllByDifficulte(Integer difficulte);
+
+	List<CoursDto> findByCategorieIdAndDifficulte(Integer difficulte, Integer categorieId);
+
+	CoursDto findCoursByCoursId (Integer coursId);
+
 }

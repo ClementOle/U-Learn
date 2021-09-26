@@ -8,11 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags = "u'learn")
@@ -28,9 +24,52 @@ public class CoursController {
 		return this.coursService.saveCours(coursDto);
 	}
 
+	@ApiOperation(value = "Mets à jour le cours")
+	@PutMapping(value = "/miseajour", produces = "application/json", consumes = "application/json")
+	public CoursDto putCoursByCoursId(@RequestBody CoursDto coursDto) {
+		System.out.println("passe dans putCoursByCoursId()");
+		System.out.println("coursDto à mettre à jour vaut : " + coursDto);
+		return this.coursService.saveCours(coursDto);
+	}
+
 	@ApiOperation(value = "Renvoie tous les cours")
 	@GetMapping(value = "all")
 	public List<CoursDto> getAllCours() {
 		return this.coursService.findAll();
 	}
+
+
+	@ApiOperation(value = "Renvoie tous les cours par categorieId") // Sert entre autre pour la documentation
+	@GetMapping(value = "/{categorieId}")
+	public List<CoursDto> getAllCoursByCategorieId(@PathVariable Integer categorieId) {
+		return this.coursService.findAllByCategorieId(categorieId);
+	}
+
+	@ApiOperation(value = "Renvoie tous les cours par difficulte")
+	@GetMapping(value = "/difficulte/{difficulte}")
+	public List<CoursDto> getAllCoursByDifficulte(@PathVariable Integer difficulte) {
+		System.out.println("passe dans getAllCoursByDifficulte()");
+		System.out.println("difficulte vaut : " + difficulte);
+		return this.coursService.findAllByDifficulte(difficulte);
+	}
+
+	@ApiOperation(value = "Renvoie tous les cours par difficulte et par categorieId")
+	@GetMapping(value = "/difficulte/{difficulte}/categorie/{categorieId}")
+	public List<CoursDto> getAllCoursByDifficulteAndCategorie(@PathVariable Integer difficulte, @PathVariable Integer categorieId) {
+		System.out.println("passe dans getAllCoursByDifficulteAndCategorie()");
+		System.out.println("categorieId vaut : " + categorieId);
+		System.out.println("difficulte vaut : " + difficulte);
+		return this.coursService.findByCategorieIdAndDifficulte(difficulte, categorieId);
+	}
+
+	@ApiOperation(value = "Renvoie un cours en fonction de son id")
+	@GetMapping(value = "/coursId/{coursId}")
+	public CoursDto getCoursByCoursId(@PathVariable Integer coursId) {
+		System.out.println("passe dans getCoursByCoursId()");
+		System.out.println("coursId vaut : " + coursId);
+		return this.coursService.findCoursByCoursId(coursId);
+	}
+
+
+
 }

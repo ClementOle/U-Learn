@@ -36,14 +36,23 @@
             </button>
         </div>
     </div>
-    <hr/>
+    <hr/>ne pourra posséder qu'une seul réponse valide.
 </div>
 
 <!-- Partie modal -->
 <app-modal (onClickTwo)="postCours()"
            [btnOneText]="'Annuler'"
            [btnTwoText]="'Confirmer'"
-           [content]="'Veuillez confirmer.'"
+           [content]="'Pour valider la création du cours : ' + this.formGroup.get('title').value + ', cliquez sur \'Confirmer\'.'"
+           [id]="'validationModalCenter'"
+           [title]="'Création du cours '"></app-modal>
+
+<app-modal (onClickTwo)="goToQuizzCreation()"
+           [btnOneText]="'Non'"
+           [btnTwoText]="'Oui'"
+           [content]="'Voulez-vous ajouter un quiz à ce cours ? '"
+           [id]="'quizModalCenter'"
            [title]="'Titre'"></app-modal>
+
 
 <app-loader [hidden]="!showLoader"></app-loader>

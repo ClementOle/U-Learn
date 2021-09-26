@@ -2,13 +2,7 @@ package com.ipilyon.backend.model;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,7 +29,35 @@ public class Cours {
 	@OneToMany(mappedBy = "cours")
 	private List<Progression> progressions;
 
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.MERGE , fetch = FetchType.EAGER)
 	@JoinColumn(name = "categorie_id")
 	private Categorie categorie;
+
+	private String lienMarchand;
+
+	private Integer difficulte;
+
+	 @OneToMany (mappedBy = "cours")
+	private List<Commentaire> commentaires;
+
+ 	private Integer afficheCommentaires;
+
+
+	public Cours(String titre, String texte, String video, byte[] image, List<Progression> progressions, Categorie categorie, String lienMarchand, Integer difficulte, List<Commentaire> commentaires, Integer afficheCommentaires, List<Question> questions) {
+		this.titre = titre;
+		this.texte = texte;
+		this.video = video;
+		this.image = image;
+		this.progressions = progressions;
+		this.categorie = categorie;
+		this.lienMarchand = lienMarchand;
+		this.difficulte = difficulte;
+		this.commentaires = commentaires;
+		this.afficheCommentaires = afficheCommentaires;
+		this.questions = questions;
+	}
+
+	@OneToMany(mappedBy = "cours")
+	private List<Question> questions;
+
 }

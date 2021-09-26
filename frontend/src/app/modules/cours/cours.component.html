@@ -1,0 +1,46 @@
+<div class="container" *ngIf="cours">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-10 mx-auto">
+            <div class="card shadow my-5">
+
+                <div class="card-header">
+                    <h4 class="card-title text-center"><img
+                            *ngIf="cours.image"
+                            src="data:image/png;base64,{{cours.image}}"
+                            class="rounded-circle" width="70" height="70"
+                            alt="mon-image"> {{cours.titre}}</h4>
+                </div>
+
+                <div class="card-body">
+                    <p [innerHTML]="cours.texte"></p>
+                    <hr>
+                    <ng-container *ngIf="cours.commentaires">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button (click)="majCom()" type="button"
+                                        class="btn btn-primary m-1" data-toggle="collapse"
+                                        data-target="#collapse" [attr.aria-expanded]="cours.afficheCommentaires == 1"
+                                        aria-controls="collapse">{{commentaireBtnLabel()}}</button>
+                            </div>
+                            <div *ngIf="cours" class="col-md-6 text-right">
+                                <button class="btn btn-primary m-1"
+                                        [routerLink]="['/cours', this.cours.coursId, 'quiz']">
+                                    Aller au quiz
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collapse" id="collapse">
+                            <div class="card"
+                                 *ngFor="let commentaire of cours.commentaires">
+                                <div class="card-body m-1">
+                                    <h6 class="card-title">{{commentaire.titreCommentaire}}</h6>
+                                    <p class="card-text">{{commentaire.texteCommentaire}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
