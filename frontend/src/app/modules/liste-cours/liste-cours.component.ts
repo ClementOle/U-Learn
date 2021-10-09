@@ -24,6 +24,12 @@ export class ListeCoursComponent implements OnInit {
     affEcritureCom: boolean;
     titreNouveauCom: string;
     texteNouveauCom: string;
+    nouveauComSauvegarde: CommentaireDto;
+
+    valeurCours: CoursDto;
+    coursIdComAMaj: number;
+    listeCommentairesParCoursId: CommentaireDto [];
+    commentaireId: number;
 
     coursAMettreAJour: CoursDto;
     message0: string;
@@ -64,11 +70,14 @@ export class ListeCoursComponent implements OnInit {
       this.uLEARNservice.getUserByUserNameUsingGET(this.authService.userNameConnected).subscribe(value => {
         this.userConnected = value;
       });
+
+
     }
 
     // Mise à jour du libellé du bouton commentaire et affichage ou non des commentaires
     // Mise à jour du booléen d'affichage de commentaires en BDD
     majCom(coursAUpdate) {
+      console.log('lance this.majCom()');
       this.coursAMettreAJour = coursAUpdate;
 
       if (this.coursAMettreAJour.afficheCommentaires == 1) {
@@ -84,6 +93,7 @@ export class ListeCoursComponent implements OnInit {
 
 
   choixDifficulteEtCategorie(difficulte) {
+      console.log('lance choixDifficulteEtCategorie');
     this.Activatedroute.paramMap.subscribe( params => {
       let categorieIdParam = params.get('paramChemin');
       this.categorieIdParam = (+categorieIdParam);
@@ -107,7 +117,33 @@ export class ListeCoursComponent implements OnInit {
     )
   }
 
+  savePost(nouveauCommentaire) {
+    // Sauvegarde du commentaire
+    this.uLEARNservice.saveCommentsUsingPOST(nouveauCommentaire).subscribe( value => {
+        console.log('lance this.saveCommentsUsingPOST()');
+        console.log('value');
+        console.log(value);
+
+        this.nouveauComSauvegarde = value;
+        this.commentaireId = this.nouveauComSauvegarde.commentaireId
+
+        this.afficheComApresSave();
+      }
+
+    );
+  }
+
+  afficheComApresSave() {
+    for (let i = 0; i < this.coursParDifficulteEtCategorie.length; i++) {
+      if (this.coursParDifficulteEtCategorie[i].coursId == this.coursIdComAMaj) {
+
+        this.coursParDifficulteEtCategorie[i].commentaires.push(this.nouveauComSauvegarde);
+      }
+    }
+  }
+
   onValiderCom(cours) {
+    console.log('lance this.onValiderCom()');
 
       const nouveauCommentaire: CommentaireDto = {
         commentaireId: 0,
@@ -119,9 +155,39 @@ export class ListeCoursComponent implements OnInit {
         afficheBooleen: true
         };
 
-      // Sauvegarde du commentaire
-      this.uLEARNservice.saveCommentsUsingPOST(nouveauCommentaire).subscribe();
+      this.valeurCours = cours.valueOf();
+      this.coursIdComAMaj = this.valeurCours.coursId;
+
+      this.savePost(nouveauCommentaire);
+      // // Sauvegarde du commentaire
+      // this.uLEARNservice.saveCommentsUsingPOST(nouveauCommentaire).subscribe( value => {
+      //   console.log('lance this.saveCommentsUsingPOST()');
+      //   console.log('value');
+      //   console.log(value);
+      //
+      //   this.nouveauComSauvegarde = value;
+      //   this.commentaireId = this.nouveauComSauvegarde.commentaireId
+      //   }
+      //
+      // );
       this.affEcritureCom = false;
+      // this.afficheComApresSave();
+
+      // for (let i = 0; i < this.coursParDifficulteEtCategorie.length; i++) {
+      //   if (this.coursParDifficulteEtCategorie[i].coursId == this.coursIdComAMaj) {
+      //     console.clear();
+      //     console.log('this.coursParDifficulteEtCategorie[i].commentaires vaut ');
+      //     console.log(this.coursParDifficulteEtCategorie[i].commentaires[this.commentaireId].titreCommentaire);
+      //     console.log(this.coursParDifficulteEtCategorie[i].commentaires[this.commentaireId].texteCommentaire);
+      //   }
+      // }
+
+      // this.uLEARNservice.getAllCommentairesByCoursIdUsingGET(this.coursIdComAMaj).subscribe(value => {
+      //   this.listeCommentairesParCoursId = value;
+      //   console.log('this.listeCommentairesParCoursId');
+      //   console.log(this.listeCommentairesParCoursId);
+      // });
+
       this.majCom(cours);
 
   }

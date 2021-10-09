@@ -42,7 +42,7 @@
   </div>
 </div>
 
-<!-- Affiche les cours en fonction de la  difficulté et de la catégorie de cours choisies -->
+<!-- Affiche les cours en fonction de la difficulté et de la catégorie de cours choisie -->
 
 <div *ngIf = "difficulteChoisie === true" class="row">
   <div class="col-xs-12">
@@ -68,6 +68,7 @@
         <div *ngIf="ligne.afficheCommentaires == 1">
           <button (click)="majCom(ligne)">{{message1}}</button>
           <div *ngFor="let ligneCom of ligne.commentaires; let nbCom = index;">
+          <!--<div *ngFor="let ligneCom of listeCommentairesParCoursId; let nbCom = index;">-->
             <p><b>Commentaire numéro {{nbCom + 1}}</b></p>
             <p>{{ligneCom.titreCommentaire}}</p>
             <p>{{ligneCom.texteCommentaire}}</p>
