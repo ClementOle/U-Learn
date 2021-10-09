@@ -379,10 +379,13 @@ export class UlearnService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getQuizByCoursIdUsingGET(coursId?: number, observe?: 'body', reportProgress?: boolean): Observable<Array<QuestionDto>>;
-    public getQuizByCoursIdUsingGET(coursId?: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<QuestionDto>>>;
-    public getQuizByCoursIdUsingGET(coursId?: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<QuestionDto>>>;
-    public getQuizByCoursIdUsingGET(coursId?: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getQuizByCoursIdUsingGET(coursId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<QuestionDto>>;
+    public getQuizByCoursIdUsingGET(coursId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<QuestionDto>>>;
+    public getQuizByCoursIdUsingGET(coursId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<QuestionDto>>>;
+    public getQuizByCoursIdUsingGET(coursId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (coursId === null || coursId === undefined) {
+            throw new Error('Required parameter coursId was null or undefined when calling getQuizByCoursIdUsingGET.');
+        }
 
         let queryParameters = new HttpParams({encoder: new CustomHttpUrlEncodingCodec()});
         if (coursId !== undefined) {
@@ -393,7 +396,7 @@ export class UlearnService {
 
         // to determine the Accept header
         let httpHeaderAccepts: string[] = [
-            'application/json'
+            '*/*'
         ];
         let httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected != undefined) {
@@ -404,7 +407,7 @@ export class UlearnService {
         let consumes: string[] = [
         ];
 
-        return this.httpClient.get<Array<QuestionDto>>(`${this.basePath}/question/quizz`,
+        return this.httpClient.get<Array<QuestionDto>>(`${this.basePath}/question/cours/${encodeURIComponent(String(coursId))}/quiz`,
             {
                 params: queryParameters,
                 withCredentials: this.configuration.withCredentials,

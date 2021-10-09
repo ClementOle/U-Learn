@@ -1,26 +1,49 @@
 package com.ipilyon.backend.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ipilyon.backend.dto.QuestionDto;
+import com.ipilyon.backend.dto.ReponseDto;
 import com.ipilyon.backend.model.Question;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Mapper
-public interface QuestionMapper {
+public abstract class QuestionMapper {
+
+	@Autowired
+	private ReponseMapper reponseMapper;
 
 	@Named("toDto")
-	QuestionDto map(Question question);
+	@Mapping(target = "reponses", ignore = true)
+	@Mapping(target = "cours.categorie.cours", ignore = true)
+	public abstract QuestionDto map(Question question);
 
 	@Named("toModel")
-	Question map(QuestionDto questionDto);
+	public abstract Question map(QuestionDto questionDto);
 
 	@IterableMapping(qualifiedByName = "toDto")
-	List<QuestionDto> mapAll(List<Question> questions);
+	public abstract List<QuestionDto> mapAll(List<Question> questions);
 
 	@IterableMapping(qualifiedByName = "toModel")
-	List<Question> map(List<QuestionDto> questions);
+	public abstract List<Question> map(List<QuestionDto> questions);
+
+	@AfterMapping
+	public void afterMap(@MappingTarget QuestionDto target, Question source) {
+		List<ReponseDto> reponseDtos = new ArrayList<>();
+		source.getReponses().forEach((reponse -> {
+			reponse.setQuestion(null);
+			reponseDtos.add(reponseMapper.map(reponse));
+		}));
+		target.setReponses(reponseDtos);
+	}
+
 
 }

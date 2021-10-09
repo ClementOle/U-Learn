@@ -1,8 +1,47 @@
-<div class="container" *ngIf="questions">
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-10 mx-auto">
-            <div class="card shadow my-5">
+<form *ngIf="form" (ngSubmit)="submitQuiz()" [formGroup]="form">
+    <div class="container" *ngIf="questions">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-10 mx-auto">
+                <div class="card shadow my-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Quiz</h3>
+                    </div>
+                    <div class="card-body">
+                        <div *ngFor="let question of questions" class="form-group">
+                            <strong>{{question.value}}</strong>
+                            <div *ngFor="let reponse of question.reponses; let index = index"
+                                 class="form-check">
+                                <input [formControlName]="question.id + ''"
+                                       class="form-check-input"
+                                       type="radio"
+                                       [value]="index"
+                                       [id]="question.id + reponse.id + ''"
+                                       [name]="question.id + ''">
+                                <label class="form-check-label" [for]="question.id + reponse.id + ''">
+                                    {{reponse.value}}
+                                </label>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button [disabled]="form.invalid" type="submit" class="btn btn-primary mr-2" data-target="#quizModalCenter"
+                                data-toggle="modal" >Envoyer les
+                            réponses
+                        </button>
+                        <button type="button" (click)="goToCours()" class="btn btn-secondary">Retourner au cours</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
+
+<app-modal
+        (onClickOne)="redoQuiz()"
+        (onClickTwo)="goToCours()"
+           [btnOneText]="'Recommencer'"
+           [btnTwoText]="'Retourner au cours'"
+           [content]="'Votre score est de ' + this.result + '/10.'"
+           [id]="'quizModalCenter'"
+           [title]="'Résultat :'"></app-modal>
