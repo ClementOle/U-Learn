@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CoursDto, UlearnService} from '../../../remote';
+import {CoursDto, UlearnService, UserDto} from '../../../remote';
 import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
     selector: 'app-cours',
@@ -10,10 +12,17 @@ import {ActivatedRoute} from '@angular/router';
 export class CoursComponent implements OnInit {
 
     cours: CoursDto;
+    commentaireForm: FormGroup;
+    currentUser: UserDto;
+
+    showAddCom: boolean = false;
 
     constructor(private uLearnService: UlearnService,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute,
+                private formBuilder: FormBuilder,
+                private authService: AuthService) {
     }
+
 
     ngOnInit() {
         this.route.paramMap.subscribe(params => {
@@ -22,20 +31,56 @@ export class CoursComponent implements OnInit {
             this.uLearnService.getCoursByCoursIdUsingGET(coursId)
                 .subscribe(cours => this.cours = cours);
         });
+        // Recherche de l'utilisateur connecté
+        this.uLearnService.getUserByUserNameUsingGET(this.authService.userNameConnected).subscribe(value => {
+            this.currentUser = value;
+        });
+
+        this.initForm();
     }
 
-    // Mise à jour du libellé du bouton commentaire et affichage ou non des commentaires
-    // Mise à jour du booléen d'affichage de commentaires en BDD
-    majCom() {
-        this.cours.afficheCommentaires = this.cours.afficheCommentaires == 1 ? 0 : 1;
+    private initForm() {
+        this.commentaireForm = this.formBuilder.group({
+            texteNouveauCom: [undefined, [Validators.required]],
+            titreNouveauCom: [undefined, [Validators.required]]
+        });
+    }
 
-        this.uLearnService.putCoursByCoursIdUsingPUT(this.cours).subscribe(value => {
-                this.cours = value;
+    commentaireBtnLabel() {
+        return this.cours.afficheCommentaires === 1 ? 'Afficher les commentaires' : 'Masquer les commentaires';
+    }
+
+    addCommentaireBtnLabel() {
+        return this.showAddCom ? 'Cacher ajout d\'un commentaire' : 'Ajouter un commentaire';
+    }
+
+
+    onSubmitFormCommentaire() {
+        this.uLearnService.saveCommentsUsingPOST({
+            commentaireId: 0,
+            user: this.currentUser,
+            cours: this.cours,
+            titreCommentaire: this.commentaireForm.value.titreNouveauCom,
+            texteCommentaire: this.commentaireForm.value.texteNouveauCom,
+            commentaireUtile: '10',
+            afficheBooleen: true
+        }).subscribe(value => {
+                this.cours.commentaires.push(value);
+                this.initForm();
             }
         );
     }
 
-    commentaireBtnLabel() {
-        return this.cours.afficheCommentaires === 1 ? "Afficher les commentaires" : "Masquer les commentaires";
+    onAnnulerCom() {
+        this.initForm();
+    }
+
+    changeCommCollaspeState() {
+        this.cours.afficheCommentaires = this.cours.afficheCommentaires == 0 ? 1 : 0;
+    }
+
+
+    changeAddCommCollaspeState() {
+        this.showAddCom = !this.showAddCom;
     }
 }

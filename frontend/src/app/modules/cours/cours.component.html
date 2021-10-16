@@ -16,19 +16,75 @@
                     <hr>
                     <ng-container *ngIf="cours.commentaires">
                         <div class="row">
-                            <div class="col-md-6">
-                                <button (click)="majCom()" type="button"
-                                        class="btn btn-primary m-1" data-toggle="collapse"
-                                        data-target="#collapse" [attr.aria-expanded]="cours.afficheCommentaires == 1"
-                                        aria-controls="collapse">{{commentaireBtnLabel()}}</button>
+                            <div class="col-md-4">
+                                <button type="button"
+                                        class="btn btn-primary m-1"
+                                        data-toggle="collapse"
+                                        data-target="#collapse"
+                                        [attr.aria-expanded]="cours.afficheCommentaires == 1"
+                                        aria-controls="collapse"
+                                        (click)="changeCommCollaspeState()">
+                                    {{commentaireBtnLabel()}}
+                                </button>
                             </div>
-                            <div *ngIf="cours" class="col-md-6 text-right">
+                            <div class="col-md-4 text-center">
+                                <button type="button"
+                                        class="btn btn-primary m-1"
+                                        data-toggle="collapse"
+                                        data-target="#addCommentaireCollapse"
+                                        aria-expanded="false"
+                                        aria-controls="collapse"
+                                        (click)="changeAddCommCollaspeState()">
+                                    {{addCommentaireBtnLabel()}}
+                                </button>
+                            </div>
+                            <div *ngIf="cours" class="col-md-4 text-right">
                                 <button class="btn btn-primary m-1"
                                         [routerLink]="['/cours', this.cours.coursId, 'quiz']">
                                     Aller au quiz
                                 </button>
                             </div>
                         </div>
+
+                        <form id="addCommentaireCollapse"
+                              class="collapse form-group"
+                              [formGroup]="commentaireForm"
+                              (ngSubmit)="onSubmitFormCommentaire()">
+                            <label for="titreCom">Titre du commentaire : </label>
+                            <input id="titreCom"
+                                   class="form-control"
+                                   type="text"
+                                   formControlName="titreNouveauCom">
+
+                            <label for="texteCom">Votre commentaire : </label>
+                            <textarea id="texteCom"
+                                      name="ecritureCom"
+                                      cols="30" rows="4"
+                                      class="form-control"
+                                      formControlName="texteNouveauCom"></textarea>
+                            <div class="col-md-12 text-center mt-2">
+                                <button type="submit"
+                                        class="btn btn-success mr-2"
+                                        data-toggle="collapse"
+                                        data-target="#addCommentaireCollapse"
+                                        aria-expanded="false"
+                                        aria-controls="collapse"
+                                        (click)="changeAddCommCollaspeState()"
+                                        [disabled]="commentaireForm.invalid">
+                                    Enregistrer le commentaire
+                                </button>
+                                <button type="button"
+                                        (click)="onAnnulerCom()"
+                                        data-toggle="collapse"
+                                        data-target="#addCommentaireCollapse"
+                                        aria-expanded="false"
+                                        aria-controls="collapse"
+                                        class="btn btn-danger">
+                                    Annuler
+                                </button>
+                            </div>
+                        </form>
+
                         <div class="collapse" id="collapse">
                             <div class="card"
                                  *ngFor="let commentaire of cours.commentaires">
