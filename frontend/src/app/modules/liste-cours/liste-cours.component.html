@@ -1,5 +1,30 @@
 <!--Menu déroulant des difficultés-->
-
+<div class="card col-sm-9 col-md-7 col-lg-10 mx-auto mt-3 shadow">
+    <div class="card-body">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button"
+                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                Choix de la difficulté
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <button type="button" class="dropdown-item"
+                        (click)="choixDifficulteEtCategorie(null)">Tout
+                </button>
+                <button type="button" class="dropdown-item"
+                        (click)="choixDifficulteEtCategorie(1)">Niveau 1
+                </button>
+                <button type="button" class="dropdown-item"
+                        (click)="choixDifficulteEtCategorie(2)">Niveau 2
+                </button>
+                <button type="button" class="dropdown-item"
+                        (click)="choixDifficulteEtCategorie(3)">Niveau 3
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <div class="maDiv">
     <ul class="niveau1">
         <li>
@@ -17,7 +42,7 @@
             </ul>
         </li>
     </ul>
-</div>
+</div>-->
 
 <!-- Affichage de tous les cours de la catégorie de cours tant qu'aucune difficulté n'a été choisie -->
 
