@@ -24,28 +24,7 @@
         </div>
     </div>
 </div>
-<!--
-<div class="maDiv">
-    <ul class="niveau1">
-        <li>
-            Choisissez votre difficulté :
-            <ul class="niveau2">
-                <li class="baliseLi">
-                    <button (click)="choixDifficulteEtCategorie(1)">Difficulté 1</button>
-                </li>
-                <li class="baliseLi">
-                    <button (click)="choixDifficulteEtCategorie(2)">Difficulté 2</button>
-                </li>
-                <li class="baliseLi">
-                    <button (click)="choixDifficulteEtCategorie(3)">Difficulté 3</button>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>-->
-
 <!-- Affichage de tous les cours de la catégorie de cours tant qu'aucune difficulté n'a été choisie -->
-
 <div class="row">
     <ul class="col-sm-9 col-md-7 col-lg-10 mx-auto">
         <li *ngFor="let ligne of coursParCategorieId;" class="card shadow">
@@ -86,46 +65,6 @@
     </ul>
 </div>
 
-<!-- Affiche les cours en fonction de la difficulté et de la catégorie de cours choisie -->
-<!--
-
-<div *ngIf="difficulteChoisie === true" class="row">
-    <div class="col-xs-12">
-        <ul class="list-group">
-            <li [ngClass]="{'list-group-item' : true}"
-                *ngFor="let ligne of coursParDifficulteEtCategorie;">
-                <h4><img src="data:image/png;base64,{{ligne.image}}"
-                         class="rounded-circle" width="70" height="70"
-                         alt="mon-image"> {{ligne.titre}}</h4>
-                <p>{{ligne.texte}}</p>
-                <p>Niveau difficulte : {{ligne.difficulte}}</p>
-
-                <p>Lien vers le <b>tutoriel vidéo : </b><a href="{{ligne.video}}"
-                                                           target="_blank"
-                > Cliquez ici</a></p>
-
-                <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
-                                                          target="_blank"
-                >Cliquez ici</a></p>
-
-                &lt;!&ndash;Changement libellé bouton commentaire et affichage des commentaires&ndash;&gt;
-                <div *ngIf="ligne.afficheCommentaires == 0">
-                    <button (click)="majCom(ligne)">{{message0}}</button>
-                </div>
-                <div *ngIf="ligne.afficheCommentaires == 1">
-                    <button (click)="majCom(ligne)">{{message1}}</button>
-                    <div *ngFor="let ligneCom of ligne.commentaires; let nbCom = index;">
-                        <p><b>Commentaire numéro {{nbCom + 1}}</b></p>
-                        <p>{{ligneCom.titreCommentaire}}</p>
-                        <p>{{ligneCom.texteCommentaire}}</p>
-                    </div>
-                </div>
-                <br>
-        </ul>
-    </div>
-</div>
-
--->
 
 
 

@@ -22,15 +22,20 @@
                                         data-toggle="collapse"
                                         data-target="#collapse"
                                         [attr.aria-expanded]="cours.afficheCommentaires == 1"
-                                        aria-controls="collapse">{{commentaireBtnLabel()}}</button>
+                                        aria-controls="collapse"
+                                        (click)="changeCommCollaspeState()">
+                                    {{commentaireBtnLabel()}}
+                                </button>
                             </div>
                             <div class="col-md-4 text-center">
                                 <button type="button"
                                         class="btn btn-primary m-1"
                                         data-toggle="collapse"
-                                        data-target="#collapseAddCommentaire"
-                                        [attr.aria-expanded]="cours.afficheCommentaires == 1"
-                                        aria-controls="collapse">Ajouter un commentaire
+                                        data-target="#addCommentaireCollapse"
+                                        aria-expanded="false"
+                                        aria-controls="collapse"
+                                        (click)="changeAddCommCollaspeState()">
+                                    {{addCommentaireBtnLabel()}}
                                 </button>
                             </div>
                             <div *ngIf="cours" class="col-md-4 text-right">
@@ -41,8 +46,8 @@
                             </div>
                         </div>
 
-                        <form id="collapseAddCommentaire"
-                              class="form-group"
+                        <form id="addCommentaireCollapse"
+                              class="collapse form-group"
                               [formGroup]="commentaireForm"
                               (ngSubmit)="onSubmitFormCommentaire()">
                             <label for="titreCom">Titre du commentaire : </label>
@@ -60,14 +65,19 @@
                             <div class="col-md-12 text-center mt-2">
                                 <button type="submit"
                                         class="btn btn-success mr-2"
+                                        data-toggle="collapse"
+                                        data-target="#addCommentaireCollapse"
+                                        aria-expanded="false"
+                                        aria-controls="collapse"
+                                        (click)="changeAddCommCollaspeState()"
                                         [disabled]="commentaireForm.invalid">
                                     Enregistrer le commentaire
                                 </button>
                                 <button type="button"
                                         (click)="onAnnulerCom()"
                                         data-toggle="collapse"
-                                        data-target="#collapseAddCommentaire"
-                                        [attr.aria-expanded]="cours.afficheCommentaires == 1"
+                                        data-target="#addCommentaireCollapse"
+                                        aria-expanded="false"
                                         aria-controls="collapse"
                                         class="btn btn-danger">
                                     Annuler

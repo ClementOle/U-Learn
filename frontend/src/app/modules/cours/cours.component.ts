@@ -15,6 +15,8 @@ export class CoursComponent implements OnInit {
     commentaireForm: FormGroup;
     currentUser: UserDto;
 
+    showAddCom: boolean = false;
+
     constructor(private uLearnService: UlearnService,
                 private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
@@ -48,6 +50,10 @@ export class CoursComponent implements OnInit {
         return this.cours.afficheCommentaires === 1 ? 'Afficher les commentaires' : 'Masquer les commentaires';
     }
 
+    addCommentaireBtnLabel() {
+        return this.showAddCom ? 'Cacher ajout d\'un commentaire' : 'Ajouter un commentaire';
+    }
+
 
     onSubmitFormCommentaire() {
         this.uLearnService.saveCommentsUsingPOST({
@@ -67,5 +73,14 @@ export class CoursComponent implements OnInit {
 
     onAnnulerCom() {
         this.initForm();
+    }
+
+    changeCommCollaspeState() {
+        this.cours.afficheCommentaires = this.cours.afficheCommentaires == 0 ? 1 : 0;
+    }
+
+
+    changeAddCommCollaspeState() {
+        this.showAddCom = !this.showAddCom;
     }
 }
