@@ -24,6 +24,7 @@ public abstract class QuestionMapper {
 	@Named("toDto")
 	@Mapping(target = "reponses", ignore = true)
 	@Mapping(target = "cours.categorie.cours", ignore = true)
+	@Mapping(target = "cours.commentaires", ignore = true)
 	public abstract QuestionDto map(Question question);
 
 	@Named("toModel")

@@ -2,11 +2,11 @@
     <div class="justify-content-center align-items-center">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="text-center display-4">Création du quizz</h3>
+                <h3 class="text-center display-4">Création du quiz</h3>
             </div>
         </div>
-        <p class="lead">Vous pouvez ici créer un quizz. Chaque question ne pourra posséder
-            qu'une seul réponse.</p>
+        <p class="lead">Vous pouvez ici créer un quiz. Chaque question ne pourra posséder
+            qu'une seule réponse.</p>
         <div class="text-body">
             <form>
                 <div class="row">
@@ -30,7 +30,8 @@
                                 </label>
                             </li>
                         </ul>
-                        <div *ngIf="isValide()">Tous les champs doivent être renseignés</div>
+                        <div *ngIf="isValide()">Tous les champs doivent être renseignés.
+                        </div>
                         <br>
                         <button type="button" (click)="clickAddReponse(question)"
                                 class="btn btn-primary w-25">Ajouter
@@ -79,9 +80,9 @@
 <app-modal (onClickTwo)="submit()"
            [btnOneText]="'Annuler'"
            [btnTwoText]="'Confirmer'"
-           [content]="'Valider l\'enregistrement de ce quizz ?'"
+           [content]="'Valider l\'enregistrement de ce quiz ?'"
            [id]="'validationModalCenter'"
-           [title]="'Enregistrement du quizz'"></app-modal>
+           [title]="'Enregistrement du quiz'"></app-modal>
 
 
 <app-loader [hidden]="!showLoader"></app-loader>

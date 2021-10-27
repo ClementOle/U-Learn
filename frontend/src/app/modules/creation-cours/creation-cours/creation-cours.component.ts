@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategorieDto, CoursDto, UlearnService} from '../../../../remote';
 import {Router} from '@angular/router';
@@ -78,13 +78,13 @@ export class CreationCoursComponent implements OnInit {
         if (categories != null && titre != null && titre.trim() != '' && this.texte != null && this.texte.trim() != '') {
             this.showLoader = true;
             this.uLEARNservice.saveUsingPOST({
-                image: null,
                 progressions: null,
                 texte: this.texte,
                 titre: titre,
                 video: null,
                 categorie: categories,
-                afficheCommentaires: 1
+                difficulte: 1,
+                afficheCommentaires: 1,
             })
                 .subscribe(value => this.savedIdCours = value.coursId, error => console.log(error), () => {
                     this.showLoader = false;

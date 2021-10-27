@@ -31,13 +31,13 @@
 
 
             <div class="card-header">
-                <h4 class="card-title"><img
-                        src="data:image/png;base64,{{ligne.image}}"
-                        class="rounded-circle" width="70" height="70"
-                        alt="mon-image"> {{ligne.titre}}</h4>
+                <h4 class="card-title"><img *ngIf="ligne.image"
+                                            src="data:image/png;base64,{{ligne.image}}"
+                                            class="rounded-circle" width="70" height="70"
+                                            alt="mon-image"/> {{ligne.titre}}</h4>
             </div>
             <div class="card-body">
-                <p class="card-text">{{ligne.texte | slice:0:300}}...</p>
+                <p class="card-text" [innerHTML]="ligne.texte?.slice(0, 300) + '...'"></p>
             </div>
             <div class="card-footer">
                 <div class="row">
@@ -54,14 +54,6 @@
                 </div>
             </div>
 
-
-            <!--<p>Lien vers le <b>tutoriel vidéo : </b><a href="{{ligne.video}}"
-                                                       target="_blank"
-            > Cliquez ici</a></p>-->
-
-            <!-- <p>Lien vers le <b>site Commerce : </b><a href="{{ligne.lienMarchand}}"
-                                                       target="_blank"
-             >Cliquez ici</a></p>-->
     </ul>
 </div>
 
