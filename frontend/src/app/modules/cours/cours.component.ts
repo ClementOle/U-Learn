@@ -3,6 +3,7 @@ import {CoursDto, UlearnService, UserDto} from '../../../remote';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-cours',
@@ -17,10 +18,13 @@ export class CoursComponent implements OnInit {
 
     showAddCom: boolean = false;
 
+    safeVideoUrl;
+
     constructor(private uLearnService: UlearnService,
                 private route: ActivatedRoute,
                 private formBuilder: FormBuilder,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private sanitizer: DomSanitizer) {
     }
 
 
@@ -29,7 +33,14 @@ export class CoursComponent implements OnInit {
             let coursId = +params.get('id');
 
             this.uLearnService.getCoursByCoursIdUsingGET(coursId)
-                .subscribe(cours => this.cours = cours);
+                .subscribe(cours => {
+                    this.cours = cours;
+                    if (this.cours.video) {
+                        this.cours.video = this.cours.video.replace('watch?v=', 'embed/');
+
+                        this.safeVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.cours.video);
+                    }
+                });
         });
         // Recherche de l'utilisateur connecté
         this.uLearnService.getUserByUserNameUsingGET(this.authService.userNameConnected).subscribe(value => {

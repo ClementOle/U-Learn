@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CategorieDto, CoursDto, UlearnService} from '../../../../remote';
 import {Router} from '@angular/router';
-import {ModalService} from '../../../component/modal/modal.service';
 
 @Component({
     selector: 'app-creation-cours',
@@ -24,14 +23,15 @@ export class CreationCoursComponent implements OnInit {
 
     constructor(public formBuilder: FormBuilder,
                 private uLEARNservice: UlearnService,
-                private route: Router,
-                private modalService: ModalService) {
+                private route: Router) {
 
         // Initialise le formulaire
         this.formGroup = this.formBuilder.group({
             content: [null, Validators.required],
             title: [null, Validators.required],
-            categorie: [null, Validators.required]
+            categorie: [null, Validators.required],
+            videoUrl: [null],
+            lienMarchand: [null]
         });
     }
 
@@ -74,6 +74,14 @@ export class CreationCoursComponent implements OnInit {
     postCours() {
         let categories = this.categories.find(value => value.titre == this.formGroup.get('categorie').value);
         let titre = this.formGroup.get('title').value;
+        let lienMarchand = null;
+        let urlVideo = null;
+        if (this.formGroup.get('lienMarchand')) {
+            lienMarchand = this.formGroup.get('lienMarchand').value;
+        }
+        if (this.formGroup.get('videoUrl')) {
+            urlVideo = this.formGroup.get('videoUrl').value;
+        }
 
         if (categories != null && titre != null && titre.trim() != '' && this.texte != null && this.texte.trim() != '') {
             this.showLoader = true;
@@ -81,10 +89,11 @@ export class CreationCoursComponent implements OnInit {
                 progressions: null,
                 texte: this.texte,
                 titre: titre,
-                video: null,
                 categorie: categories,
                 difficulte: 1,
                 afficheCommentaires: 1,
+                lienMarchand: lienMarchand,
+                video: urlVideo
             })
                 .subscribe(value => this.savedIdCours = value.coursId, error => console.log(error), () => {
                     this.showLoader = false;

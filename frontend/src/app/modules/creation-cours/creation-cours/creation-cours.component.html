@@ -20,6 +20,23 @@
                formControlName="title"
                id="titleInput" required type="text"/>
     </div>
+    <br/>
+    <div class="form-row">
+        <label class="col-form-label col-md-2 text-right" for="videoInput">Url de la
+            vidéo</label>
+        <input autocomplete="false" class="form-control input-group col-md-6"
+               formControlName="videoUrl"
+               id="videoInput" type="url"/>
+    </div>
+    <br/>
+    <div class="form-row">
+        <label class="col-form-label col-md-2 text-right" for="marchandInput">Url du site
+            marchand</label>
+        <input autocomplete="false" class="form-control input-group col-md-6"
+               formControlName="lienMarchand"
+               id="marchandInput" type="url"/>
+    </div>
+    <br/>
     <hr/>
     <ckeditor (change)="contentChanged($event)"
               [config]="ckeConfig"
