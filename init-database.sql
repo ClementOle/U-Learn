@@ -281,7 +281,7 @@ VALUES (40, 'Comment dit on boujour en Bougnat?', 42),
        (47, 'Question', 52),
        (48, 'Question', 52),
        (49, 'Question', 52),
-       (57, 'Quel outils est utilisé pour couper les planches ?', 23),
+       (57, 'Quel outil est utilisé pour couper les planches ?', 23),
        (58, 'Question 2', 23),
        (59, 'Question 3', 23);
 

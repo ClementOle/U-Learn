@@ -51,7 +51,7 @@ export class QuizComponent implements OnInit {
                 score++;
             }
         });
-        this.result = (score * 10) / this.questions.length;
+        this.result = Math.round(((score * 10) / this.questions.length) * 10) / 10;
     }
 
     redoQuiz() {
